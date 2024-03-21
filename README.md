@@ -1,20 +1,9 @@
-# wastewater-infrastructure-mapping
+# Wastewater Infrastructure Mapping
 
-ANR GIS - Vermont Wastewater Infrastructure https://accd.maps.arcgis.com/apps/webappviewer/index.html?id=efc226aa9b674e50a2fcf54f8aeeb3a4
+The ORCA Pod will address critical challenges in Vermont's development landscape by conducting a comprehensive assessment of wastewater infrastructure across towns in the state. A wastewater system, also known as a sewage or sewer system, refers to the infrastructure designed to collect, transport, treat, and dispose of wastewater generated from residential, commercial, and industrial sources. The system typically includes a network of pipes, pumps, lift stations, and treatment facilities that work together to manage and process wastewater before releasing it back into the environment.
 
+This initiative, in collaboration with the Windham Regional Commission will systematically map wastewater infrastructure data to understand its impact on economic activity and housing development. This includes finding what data is already available, working with partners to determine the format of the data to be collect, and then working with available online resources and reaching out to towns to identify and record wastewater systems.
 
-REST Endpoint links for the Stormwater Infrastructure and Drinking Water Groundwater Protection Map Services can be found on the top tab of the map. If you want to explore the data further, you can connect to the Map Service(s) and add layers into your own QGIS project via the Add ArcGIS Rest Server Layer tool.
+The UVM students will compile and publish town-level wastewater infrastructure data on a publicly accessible repository, working in tandem with state agencies like the Vermont Center for Geographic Information, the Vermont Department of Environmental Conservation, and the Vermont Agency of Commerce and Community Development. 
 
- 
-
-Josh Plaksa | GIS Professional                                      
-
-Vermont Agency of Digital Services
-
-1 National Life Drive – Montpelier, VT 05620       
-
-802-622-4126 | Joshua.Plaksa@vermont.gov                         
-
-
-erik.engstrom@vermont.gov
- 
+These efforts will be in collaboration with the Town of Jericho's efforts to pilot an outreach strategy to educate and empower stakeholders with essential information on funding pathways, resources, and planning considerations. These efforts aims not only to address immediate development challenges but also to align with broader state objectives outlined in the Vermont Climate Action Plan, Comprehensive Energy Plan, and Long-Range Transportation Plan, fostering a holistic approach to sustainable growth and resilience.
