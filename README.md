@@ -1,5 +1,7 @@
 # Wastewater Infrastructure Mapping
 
+See the project page here:[https://verso.w3.uvm.edu/orca-pod-wim/](https://verso.w3.uvm.edu/orca-pod-wim/)
+
 The ORCA Pod will address critical challenges in Vermont's development landscape by conducting a comprehensive assessment of wastewater infrastructure across towns in the state. A wastewater system, also known as a sewage or sewer system, refers to the infrastructure designed to collect, transport, treat, and dispose of wastewater generated from residential, commercial, and industrial sources. The system typically includes a network of pipes, pumps, lift stations, and treatment facilities that work together to manage and process wastewater before releasing it back into the environment.
 
 This initiative, in collaboration with the Windham Regional Commission will systematically map wastewater infrastructure data to understand its impact on economic activity and housing development. This includes finding what data is already available, working with partners to determine the format of the data to be collect, and then working with available online resources and reaching out to towns to identify and record wastewater systems.
