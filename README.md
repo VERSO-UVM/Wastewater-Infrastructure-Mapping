@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/764833070.svg)](https://zenodo.org/doi/10.5281/zenodo.11508708)
+
 # Wastewater Infrastructure Mapping
 
 See the project page here:[https://verso.w3.uvm.edu/orca-pod-wim/](https://verso.w3.uvm.edu/orca-pod-wim/)
