@@ -1,4 +1,4 @@
-## Here are some links to already existing GIS data relating to wastewater
+## Existing GIS Data Relating to Wastewater
 
 [Wastewater Facilities](https://geodata.vermont.gov/datasets/VTANR::waste-water-facilities/explore?location=44.383985%2C-72.797115%2C9.85) - Missing some facilities.
 
