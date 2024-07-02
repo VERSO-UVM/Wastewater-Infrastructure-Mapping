@@ -9,3 +9,5 @@
 [VT Sewer Service Areas](https://geodata.vermont.gov/datasets/vt-sewer-service-areas/explore?location=43.910429%2C-72.385265%2C8.00) - Can be outdated and inaccurate. Contact from each municipality.
 
 [Onsite Sewage Disposal Soil Ratings](https://geodata.vermont.gov/datasets/VCGI::vt-data-onsite-sewage-disposal-soil-ratings/about)
+
+[Town Boundary Data](https://catalog.data.gov/dataset/tiger-line-shapefile-current-state-vermont-county-subdivision)
