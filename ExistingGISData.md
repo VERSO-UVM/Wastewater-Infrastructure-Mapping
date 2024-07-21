@@ -1,6 +1,7 @@
 ## Existing GIS Data Relating to Wastewater
+[Wastewater Facilities Vermont ANR Webmap](https://experience.arcgis.com/experience/cf08a4b00dfe4d4fbae380fd82914f84/) - Up to date and accurate
 
-[Wastewater Facilities](https://geodata.vermont.gov/datasets/VTANR::waste-water-facilities/explore?location=44.383985%2C-72.797115%2C9.85) - Missing some facilities.
+[Wastewater Facilities Vermont Geodata Portal](https://geodata.vermont.gov/datasets/VTANR::waste-water-facilities/explore?location=44.383985%2C-72.797115%2C9.85) - Missing some facilities.
 
 [Wastewater Infrastructure (Linear features)](https://geodata.vermont.gov/datasets/VTANR::wastewater-infrastructure-linear-features/explore?location=44.258003%2C-72.570445%2C14.00) - Some towns are incomplete/missing.
 
