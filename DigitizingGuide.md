@@ -3,7 +3,7 @@
 ## What is Digitizing?
 ESRI’s GIS [dictionary](https://support.esri.com/en-us/gis-dictionary/digitizing) defines digitizing as “the process of converting the geographic features on an analog map into digital x,y coordinates, or spatial data.” 
 
-When looking at the existing GIS datasets (the 6 datasets linked in the workflow) for the town you are working on, compare the existing data to any maps we may have found during our research/outreach. If those maps are more recent or more complete than the existing data, you can digitize it so we can use it in our project.
+When looking at the existing GIS datasets (the datasets linked in the workflow and on the [ExistingGISData](https://github.com/VERSO-UVM/Wastewater-Infrastructure-Mapping/blob/main/ExistingGISData.md) page) for the town you are working on, compare the existing data to any maps we may have found during our research/outreach. If those maps are more recent or more complete than the existing data, you can digitize it so we can use it in our project.
 
 ## How to Digitize
 Using these videos and documentation as a guide, you can first georeference your scanned map onto your basemap, and then create the new features by tracing over the map and digitizing them.
