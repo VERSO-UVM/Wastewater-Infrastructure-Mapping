@@ -1,0 +1,4 @@
+{
+  "type" : "FeatureCollection",
+  "features" : [{"type":"Feature","id":1,"geometry":{"type":"Point","coordinates":[-73.30070569999998,44.977064600000062]},"properties":{"OBJECTID":1,"Facility ID":"3","Facility Name":"Alburgh","Design Hydraulic Capacity In MGD":"0.13","Septage Received A tThis Facility":"N","Latitude":"44.9771","Longitude":"-73.3007","Permit ID":"3-1180","Permit Record ID":"2","Permittee Name":"Village of Alburgh","Program Category":"Municipal Discharge","NPDES Permit Number":"VT0100005","Permit Link":"https://anrweb.vt.gov/DEC/IWIS/ReportViewer2.aspx?Report=WWActiveNPDESPermits&ViewParms=False#P5cbd75bc45e94f24ac14a151f0d7127d_2_29iT0"}}]
+}
