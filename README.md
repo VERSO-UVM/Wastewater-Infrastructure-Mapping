@@ -22,12 +22,28 @@ These efforts will be in collaboration with the Town of Jericho's efforts to pil
 ## Team
 Summer 2024
 * Team Lead: Emma Eash
+* Adrien Monks
+* Aleah Young
+* Fernanda De Oliveira Girelli
+* James Catanzaro
+* Jane Bregenzer
 
 Fall 2024
 * Team Lead: Emma Eash
+* Aleah Young
+* Gabe Christiansen
+* Louise Vaillancourt
+* Matthew Premysler
+* Sian Hernit
+* Sophia Miller-Grande
 
 Spring 2025
 * Team Lead: Emma Eash
+* Aleah Young
+* Louise Vaillancourt
+* Matthew Premysler
+* Sian Hernit
+* Sophie Miller-Grande
 
 ## Partnerships
 
