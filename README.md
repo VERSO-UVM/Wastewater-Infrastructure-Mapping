@@ -20,7 +20,7 @@ These efforts will be in collaboration with the Town of Jericho's efforts to pil
 4. Dataset Creation (in progress)
 
 ## Team
-Summer 2024
+### Summer 2024
 * Team Lead: Emma Eash
 * Adrien Monks
 * Aleah Young
@@ -28,7 +28,7 @@ Summer 2024
 * James Catanzaro
 * Jane Bregenzer
 
-Fall 2024
+### Fall 2024
 * Team Lead: Emma Eash
 * Aleah Young
 * Gabe Christiansen
@@ -37,7 +37,7 @@ Fall 2024
 * Sian Hernit
 * Sophia Miller-Grande
 
-Spring 2025
+### Spring 2025
 * Team Lead: Emma Eash
 * Aleah Young
 * Louise Vaillancourt
