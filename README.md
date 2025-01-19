@@ -19,6 +19,16 @@ These efforts will be in collaboration with the Town of Jericho's efforts to pil
 3. Data Architecture and Development (in progress)
 4. Dataset Creation (in progress)
 
+## Team
+Summer 2024
+* Team Lead: Emma Eash
+
+Fall 2024
+* Team Lead: Emma Eash
+
+Spring 2025
+* Team Lead: Emma Eash
+
 ## Partnerships
 
 This project is in collaboration with:
