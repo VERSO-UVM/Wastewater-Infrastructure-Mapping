@@ -14,12 +14,10 @@ These efforts will be in collaboration with the Town of Jericho's efforts to pil
 
 ## Milestones
 
-1. Exploratory Research and Cataloging
-2. Outreach to Wastewater Systems Administrators
-3. Data Architecture and Development
-4. Dataset Creation
-
-Currently working on: Exploratory Research and Cataloging
+1. Exploratory Research and Cataloging (completed)
+2. Outreach to Wastewater Systems Administrators (completed)
+3. Data Architecture and Development (in progress)
+4. Dataset Creation (in progress)
 
 ## Partnerships
 
