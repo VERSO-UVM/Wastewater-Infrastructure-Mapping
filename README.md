@@ -19,6 +19,15 @@ These efforts will be in collaboration with the Town of Jericho's efforts to pil
 3. Data Architecture and Development (in progress)
 4. Dataset Creation (in progress)
 
+## Map Layers
+
+This project consists of 5 layers to paint a picture of wastewater infrastructure in Vermont towns:
+- **Wastewater Linear Features**: Includes pipes from wastewater and combined systems
+- **Wastewater Point Features**: Includes manholes and some catchbasin locations
+- **Sewer Service Area**: Service area for wastewater treatment plants
+- **Wastewater Treatment Facilities**: Includes all municipal, industrial, and pretreatment wastewater treatment facilities and their hydraulic capacity information
+- **Onsite Sewage Disposal Soil Ratings**: Depicts onsite sewage disposal classification of Vermont soils
+
 ## Team
 ### Summer 2024
 * Team Lead: Emma Eash
@@ -44,6 +53,10 @@ These efforts will be in collaboration with the Town of Jericho's efforts to pil
 * Matthew Premysler
 * Sian Hernit
 * Sophie Miller-Grande
+
+## Data Sources
+
+Most data used is from the Vermont Agency of Natural Resources (see [Existing GIS Data](https://github.com/VERSO-UVM/Wastewater-Infrastructure-Mapping/blob/main/ExistingGISData.md)). Some new data has been digitized from town plans or documents provided by municipalities. The Onsite Sewage Disposal Soil Ratings map was prepared by the U.S. Department of Agriculture, Natural Resources Conservation Service.
 
 ## Partnerships
 
