@@ -16,15 +16,15 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>Vermont Wastewater Map</h1>\
-    </header>
     <nav>
-        <ul>
-            <li><a href="about.html">About</a></li>
-            <li><a href="data.html">Service Area</a></li>
-            <li><a href="contribute.html">Linear Features</a></li>
-        </ul>
+        <div class="nav-left">
+            <a href="index.html">Vermont Wastewater Map</a>
+        </div>
+        <div class="nav-right">
+            <a href="about.html">About</a>
+            <a href="data.html">Data</a>
+            <a href="contribute.html">Contribute</a>
+        </div>
     </nav>
 
     <main>
@@ -57,12 +57,24 @@
                 })
                 .catch(error => console.error(error));
             
-               fetch('data/VermontWWTF.geojson')
+            fetch('data/VermontWWTF.geojson')
                 .then(response => response.json())
                 .then(data => {
                     L.geoJSON(data).addTo(map);
                 })
                 .catch(error => console.error(error));
+
+            L.geoJSON(geojsonData, {
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<strong>' + feature.properties.name + '</strong><br>Capacity: ' + feature.properties.capacity);
+                    layer.on('mouseover', function (e) {
+                        this.openPopup();
+                    });
+                    layer.on('mouseout', function (e) {
+                        this.closePopup();
+                    });
+                }
+            }).addTo(map);
         </script>
         
         <h2>Introduction</h2>

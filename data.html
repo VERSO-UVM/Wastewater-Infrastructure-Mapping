@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structure, Fields, and Collection</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <a href="index.html">Vermont Wastewater Map</a>
+        </div>
+        <div class="nav-right">
+            <a href="about.html">About</a>
+            <a href="data.html">Data</a>
+            <a href="contribute.html">Contribute</a>
+        </div>
+    </nav>
+    <h1>Data Structure, Fields, and Collection</h1>
+    <h2>Overview</h2>
+    <p>The Wastewater Infrastructure Mapping project involves the systematic collection and organization of data related to wastewater systems across towns in Vermont. This section provides detailed information about the data structure, the fields included, and the methods used for data collection.</p>
+    
+    <h2>Data Structure</h2>
+    <p>The data is organized in a structured format to ensure consistency, ease of access, and usability. The primary data structure used is a relational database, which allows for efficient querying and management of the data.</p>
+    
+    <h3>Tables and Relationships</h3>
+    <ul>
+        <li><strong>Towns</strong>: Contains information about each town in Vermont.
+            <ul>
+                <li><strong>Fields</strong>: town_id, town_name, county, population, area</li>
+                <li><strong>Relationships</strong>: One-to-many relationship with Wastewater_Systems.</li>
+            </ul>
+        </li>
+        <li><strong>Wastewater_Systems</strong>: Contains detailed information about each wastewater system.
+            <ul>
+                <li><strong>Fields</strong>: system_id, town_id, system_name, type, capacity, status, installation_date</li>
+                <li><strong>Relationships</strong>: Many-to-one relationship with Towns.</li>
+            </ul>
+        </li>
+        <li><strong>Inspections</strong>: Records inspection data for each wastewater system.
+            <ul>
+                <li><strong>Fields</strong>: inspection_id, system_id, inspection_date, inspector_name, inspection_report</li>
+                <li><strong>Relationships</strong>: Many-to-one relationship with Wastewater_Systems.</li>
+            </ul>
+        </li>
+        <li><strong>Maintenance_Records</strong>: Contains maintenance history for each wastewater system.
+            <ul>
+                <li><strong>Fields</strong>: maintenance_id, system_id, maintenance_date, maintenance_type, cost, notes</li>
+                <li><strong>Relationships</strong>: Many-to-one relationship with Wastewater_Systems.</li>
+            </ul>
+        </li>
+    </ul>
+    
+    <h2>Fields</h2>
+    <p>Each table includes specific fields that capture essential data points. Below is a detailed description of the fields in each table:</p>
+    
+    <h3>Towns</h3>
+    <ul>
+        <li><strong>town_id</strong>: Unique identifier for each town.</li>
+        <
