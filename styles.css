@@ -6,12 +6,30 @@ body {
 }
 
 header {
-    background-color: grey;
-    color: white;
-    padding: 10px 0;
-    text-align: left;
-    padding-left: 20px;
+      background-color: grey;
+      padding: 20px;
+      text-align: center;
+      color: white;
 }
+        /* CSS for the map container */
+#map {
+    width: 70%;
+    height: 600px;
+    float: left;
+}
+        /* CSS for the navigation container */
+nav {
+    float: left;
+    padding: 20px;
+}
+        /* CSS for the warning message */
+.warning {
+        background-color: yellow;
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+}
+
 
 header h1 {
     margin: 0;
