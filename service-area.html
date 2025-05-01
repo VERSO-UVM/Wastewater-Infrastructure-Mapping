@@ -35,6 +35,21 @@
             <h2>Service Area</h2>
             <p>Information about the service area.</p>
         </section>
+        <div id="map" style="width: 100%; height: 600px;"></div>
+        <script>
+            var map = L.map('map').setView([44.5588, -72.5778], 8); // Centered on Vermont
+    
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+    
+            fetch('data/VermontServiceArea.geojson')
+                .then(response => response.json())
+                .then(data => {
+                    L.geoJSON(data).addTo(map);
+                })
+                .catch(error => console.error(error));
+        </script>
     </main>
 </body>
 </html>
