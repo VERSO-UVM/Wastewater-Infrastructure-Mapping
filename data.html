@@ -22,40 +22,68 @@
     <p>The Wastewater Infrastructure Mapping project involves the systematic collection and organization of data related to wastewater systems across towns in Vermont. This section provides detailed information about the data structure, the fields included, and the methods used for data collection.</p>
     
     <h2>Data Structure</h2>
-    <p>The data is organized in a structured format to ensure consistency, ease of access, and usability. The primary data structure used is a relational database, which allows for efficient querying and management of the data.</p>
-    
-    <h3>Tables and Relationships</h3>
+    <p>The data is organized in a structured format to ensure consistency, ease of access, and usability. The primary data structure used is a relational database, which allows for efficient querying and management of the data.</p>  
+
+    <h3>Sewer Service Area</h3>
     <ul>
-        <li><strong>Towns</strong>: Contains information about each town in Vermont.
-            <ul>
-                <li><strong>Fields</strong>: town_id, town_name, county, population, area</li>
-                <li><strong>Relationships</strong>: One-to-many relationship with Wastewater_Systems.</li>
-            </ul>
-        </li>
-        <li><strong>Wastewater_Systems</strong>: Contains detailed information about each wastewater system.
-            <ul>
-                <li><strong>Fields</strong>: system_id, town_id, system_name, type, capacity, status, installation_date</li>
-                <li><strong>Relationships</strong>: Many-to-one relationship with Towns.</li>
-            </ul>
-        </li>
-        <li><strong>Inspections</strong>: Records inspection data for each wastewater system.
-            <ul>
-                <li><strong>Fields</strong>: inspection_id, system_id, inspection_date, inspector_name, inspection_report</li>
-                <li><strong>Relationships</strong>: Many-to-one relationship with Wastewater_Systems.</li>
-            </ul>
-        </li>
-        <li><strong>Maintenance_Records</strong>: Contains maintenance history for each wastewater system.
-            <ul>
-                <li><strong>Fields</strong>: maintenance_id, system_id, maintenance_date, maintenance_type, cost, notes</li>
-                <li><strong>Relationships</strong>: Many-to-one relationship with Wastewater_Systems.</li>
-            </ul>
-        </li>
+        <li>System_Name - SystemName: Wastewater system name</li>
+        <li>System_Owner - SystemOwner: Wastewater system owner</li>
+        <li>TownID - TownID: Town identifier</li>
+        <li>Treatment_Facility - Treatment Facility: Treatment Facility name</li>
+        <li>GIS_Notes - GISNotes: Notes about data</li>
+        <li>GIS_Date - GISDate: When the GIS data was originally created</li>
+        <li>GIS_Update - GISUpdate: When the data was last updated</li>
+        <li>Creator - Creator: Default to VTANR, change to VERSO if we create new data</li>
     </ul>
-    
-    <h2>Fields</h2>
-    <p>Each table includes specific fields that capture essential data points. Below is a detailed description of the fields in each table:</p>
-    
-    <h3>Towns</h3>
+
+    <h3>Wastewater Infrastructure (Linear Features)</h3>
     <ul>
-        <li><strong>town_id</strong>: Unique identifier for each town.</li>
-        <
+        <li>Type - Type: Stormline, sanitary, combined sewer, etc</li>
+        <li>Status - Status: Existing, Proposed, Abandoned</li>
+        <li>Comment - Comment: Comment on the data</li>
+        <li>Source - Source: Where data was obtained from</li>
+        <li>MapDate - Map Date: Date of map where data originates</li>
+        <li>Audience - Audience: Public, private</li>
+        <li>SystemType - SystemType: Type of water system</li>
+        <li>Creator - Creator: Default to VTANR, change to VERSO if we create new data</li>
+    </ul>
+
+    <h3>Wastewater Infrastructure (Point Features)</h3>
+    <ul>
+        <li>Type - Type: Sanitary Manhole, Stormwater Manhole, Combined Sewer Manhole, CSO Outflow, etc</li>
+        <li>Status - Status: Existing, Proposed, Abandoned</li>
+        <li>Comment - Comment: Comment on the data</li>
+        <li>Source - Source: Where data was obtained from</li>
+        <li>MapDate - Map Date: Date of map where data originates</li>
+        <li>SystemType - SystemType: Type of water system</li>
+        <li>Creator - Creator: Default to VTANR, change to VERSO if we create new data</li>
+    </ul>
+
+    <h3>Wastewater Facilities</h3>
+    <ul>
+        <li>FacilityName - Facility Name: Name of facility</li>
+        <li>DesignHydraulicCapacityInMGD - Design Hydraulic Capacity In MGD: Amount of water the facility can process in a year</li>
+        <li>SeptageReceivedAtThisFacility - Septage Received At This Facility: Does this facility receive septage? (Yes or no)</li>
+        <li>PermitID - PermitID</li>
+        <li>PermitRecordID - Permit Record ID</li>
+        <li>PermitteeName - Permittee Name: Name of town served</li>
+        <li>ProgramCategory - Program Category: Municipal, industrial, or pretreatment</li>
+        <li>NPDESPermitNumber - NPDES Permit Number</li>
+        <li>PermitLink - Permit Link: Link to permit</li>
+    </ul>
+
+    <h3>Town Boundary</h3>
+    <ul>
+        <li>GEOID - GEOID</li>
+        <li>NAME - Name: Name of town</li>
+        <li>NAMELSAD - Name LSAD</li>
+        <li>LSAD - LSAD</li>
+        <li>MunicipalWastewater - Municipal Wastewater: Does the town have a municipal wastewater system? (Yes, No, or In Progress)</li>
+    </ul>
+
+    <h3>Onsite Sewage Disposal Soil Ratings</h3>
+    <ul>
+        <li>Rating - Rating: Well Suited, Moderately Suited, Marginally Suited, Not Suited, Not Rated</li>
+    </ul>
+</body>
+</html>
