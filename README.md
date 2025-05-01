@@ -2,7 +2,7 @@
 
 # Wastewater Infrastructure Mapping
 
-Learn about the Open Research Community Accelerator (ORCA) program here:[https://verso.w3.uvm.edu/orca-pod-wim/](https://verso.w3.uvm.edu/orca/)
+Learn about the Open Research Community Accelerator (ORCA) program here:[https://verso-uvm.github.io/Wastewater-Infrastructure-Mapping/](https://verso-uvm.github.io/Wastewater-Infrastructure-Mapping/)
 
 The ORCA Pod will address critical challenges in Vermont's development landscape by conducting a comprehensive assessment of wastewater infrastructure across towns in the state. A wastewater system, also known as a sewage or sewer system, refers to the infrastructure designed to collect, transport, treat, and dispose of wastewater generated from residential, commercial, and industrial sources. The system typically includes a network of pipes, pumps, lift stations, and treatment facilities that work together to manage and process wastewater before releasing it back into the environment.
 
