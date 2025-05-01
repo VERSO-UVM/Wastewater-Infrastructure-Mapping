@@ -43,22 +43,6 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
     
-            function onEachFeature(feature, layer) {
-                var popupContent = "<strong>" + feature.properties.name + "</strong><br>";
-                for (var key in feature.properties) {
-                    if (key !== "name") {
-                        popupContent += key + ": " + feature.properties[key] + "<br>";
-                    }
-                }
-                layer.bindPopup(popupContent);
-                layer.on('mouseover', function (e) {
-                    this.openPopup();
-                });
-                layer.on('mouseout', function (e) {
-                    this.closePopup();
-                });
-            }
-    
             fetch('data/VermontServiceArea.geojson')
                 .then(response => response.json())
                 .then(data => {
