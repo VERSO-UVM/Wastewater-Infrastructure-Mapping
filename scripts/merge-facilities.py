@@ -42,5 +42,5 @@ def merge_geojson_files(search_term, input_dir="GeoJSONs"):
 # merge_geojson_files("Border")
 # merge_geojson_files("LinearFeatures")
 # merge_geojson_files("PointFeatures")
-# merge_geojson_files("ServiceArea")
-merge_geojson_files("WWTF")
+merge_geojson_files("ServiceArea")
+# merge_geojson_files("WWTF")
