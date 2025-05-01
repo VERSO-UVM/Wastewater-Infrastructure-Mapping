@@ -1,28 +1,37 @@
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 
-header {
-      background-color: grey;
-      padding: 20px;
-      text-align: center;
-      color: white;
-}
-        /* CSS for the map container */
-#map {
-    width: 70%;
-    height: 600px;
-    float: left;
-}
-        /* CSS for the navigation container */
 nav {
-    float: left;
-    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
 }
-        /* CSS for the warning message */
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+nav a:hover {
+    background-color: #575757;
+}
+
+.nav-left a {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-right a {
+    margin-left: 20px;
+}
+
 .warning {
         background-color: yellow;
         padding: 10px;
@@ -36,25 +45,7 @@ header h1 {
     font-size: 24px;
 }
 
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
 
-nav ul li {
-    display: inline;
-    margin-right: 10px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-nav ul li a:hover {
-    text-decoration: underline;
-}
 
 main {
     padding: 20px;
