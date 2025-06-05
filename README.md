@@ -10,7 +10,7 @@ This initiative, in collaboration with the Windham Regional Commission will syst
 
 The UVM students will compile and publish town-level wastewater infrastructure data on a publicly accessible repository, working in tandem with state agencies like the Vermont Center for Geographic Information, the Vermont Department of Environmental Conservation, and the Vermont Agency of Commerce and Community Development. 
 
-These efforts will be in collaboration with the Town of Jericho's efforts to pilot an outreach strategy to educate and empower stakeholders with essential information on funding pathways, resources, and planning considerations. These efforts aims not only to address immediate development challenges but also to align with broader state objectives outlined in the Vermont Climate Action Plan, Comprehensive Energy Plan, and Long-Range Transportation Plan, fostering a holistic approach to sustainable growth and resilience.
+These efforts will be in collaboration with the Town of Jericho's efforts to pilot an outreach strategy to educate and empower stakeholders with essential information on funding pathways, resources, and planning considerations. They aim not only to address immediate development challenges but also to align with broader state objectives outlined in the Vermont Climate Action Plan, Comprehensive Energy Plan, and Long-Range Transportation Plan, fostering a holistic approach to sustainable growth and resilience.
 
 ## Milestones
 
