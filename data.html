@@ -23,9 +23,10 @@
         <p>The Wastewater Infrastructure Mapping project involves the systematic collection and organization of data related to wastewater systems across towns in Vermont. This section provides detailed information about the data structure, the fields included, and the methods used for data collection.</p>
         
         <h2>Data Structure</h2>
-        <p>The data is organized in a structured format to ensure consistency, ease of access, and usability. The primary data structure used is a relational database, which allows for efficient querying and management of the data.</p>  
+        <p>The data is organized in a structured format to ensure consistency, ease of access, and usability. There are five datasets covering point, line and polygon data types. Each set of data is broken into towns.</p>  
 
-        <h3>Sewer Service Area</h3>
+        <h3>Sewer Service Area (File name: <i>townname</i>ServiceArea.geojson)</h3>
+        
         <ul>
             <li>System_Name - Wastewater system name</li>
             <li>System_Owner - Wastewater system owner</li>
@@ -34,22 +35,25 @@
             <li>GIS_Notes - Notes about data</li>
             <li>GIS_Date - When the GIS data was originally created</li>
             <li>GIS_Update - When the data was last updated</li>
-            <li>Creator - Default to VTANR, change to VERSO if we create new data</li>
+            <li>Creator - Default to VTANR and it will display VERSO if new data was added</li>
         </ul>
+        <p>
+        Example: "properties":{"OBJECTID":0,"System Name":"Cold Brook Fire District","System Owner":"Cold Brook Fire District","TownID":25105,"Treatment Facility":"3-1296","GIS Notes":"interpreted from pipes, parcels, buildings, topo, as area served","GIS Date":"1993","GIS Update":"1993","Creator":"VTANR","Shape_Length":0,"Shape_Area":0}</p>
 
-        <h3>Wastewater Infrastructure (Linear Features)</h3>
+        <h3>Wastewater Infrastructure (Linear Features) (File name: <i>townname</i>LinearFeatures.geojson)</h3>
         <ul>
-            <li>Type - Stormline, sanitary, combined sewer, etc</li>
+            <li>Type - Describes the type of line, including stormline, sanitary, combined sewer, etc</li>
             <li>Status - Existing, Proposed, Abandoned</li>
             <li>Comment - Comment on the data</li>
-            <li>Source - Where data was obtained from</li>
-            <li>MapDate - Date of map where data originates</li>
-            <li>Audience - Public, private</li>
+            <li>Source - Where data originated</li>
+            <li>MapDate - Date of map where data originated</li>
+            <li>Audience - Serving public, private</li>
             <li>SystemType -  Type of water system</li>
             <li>Creator - Default to VTANR, change to VERSO if we create new data</li>
         </ul>
+        <p>Example data: "properties":{"OBJECTID":0,"Comment":"From Brattleboro Town","Map_Date":"","Audience":"Public","System_Type":"Wastewater","Type":"Sanitary Line","Status":"Existing","Source":"Contractor GIS/GPS","Creator":"VTANR","Shape_Length":0}</p>
 
-        <h3>Wastewater Infrastructure (Point Features)</h3>
+        <h3>Wastewater Infrastructure (Point Features)(File name: <i>townname</i>PointFeatures.geojson)</h3>
         <ul>
             <li>Type - Sanitary Manhole, Stormwater Manhole, Combined Sewer Manhole, CSO Outflow, etc</li>
             <li>Status - Existing, Proposed, Abandoned</li>
@@ -59,8 +63,9 @@
             <li>SystemType - Type of water system</li>
             <li>Creator - Default to VTANR, change to VERSO if we create new data</li>
         </ul>
+        <p>Example data: "properties":{"OBJECTID":0,"Comment":"From Brattleboro","Map_Date":"","System_Type":"Wastewater","Type":"Sanitary Manhole","Source":"Contractor GIS/GPS","Status":"Existing","Creator":"VTANR"}</p>
 
-        <h3>Wastewater Facilities</h3>
+        <h3>Wastewater Facilities (File name: <i>townname</i>WWTF.geojson)</h3>
         <ul>
             <li>FacilityName - Name of facility</li>
             <li>DesignHydraulicCapacityInMGD - Amount of water the facility can process in a year</li>
@@ -72,8 +77,9 @@
             <li>NPDESPermitNumber - NPDES Permit Number</li>
             <li>PermitLink - Link to permit</li>
         </ul>
+        <p>Example data: "properties":{"OBJECTID":0,"FacilityID":"174","FacilityName":"FiberMark North America Inc","DesignHydraulicCapacityInMGD":"2.00","SeptageReceivedAtThisFacility":"N","PermitID":"3-1136","PermitRecordID":"85","PermitteeName":"FiberMark North America Inc","ProgramCategory":"Industrial Discharge","NPDESPermitNumber":"VT0000248","PermitLink":"https://anrweb.vt.gov/ANR/vtANR/DocBrowser.aspx?Directory=DEC/WSMD/Wastewater/permits/3-1136/"}</p>
 
-        <h3>Town Boundary</h3>
+        <h3>Town Boundary (File name: <i>townname</i>Border.geojson)</h3>
         <ul>
             <li>GEOID - GEOID</li>
             <li>NAME - Name of town</li>
@@ -81,6 +87,9 @@
             <li>LSAD - LSAD</li>
             <li>MunicipalWastewater - Does the town have a municipal wastewater system? (Yes, No, or In Progress)</li>
         </ul>
+        <p>Example data: "properties":{"OBJECTID":223,"GEOID":"5002507900","Name":"Brattleboro","Name_LSAD":"Brattleboro town","LSAD":"43","Municipal_Wastewater":"Yes","Shape_Length":0,"Shape_Area":0}</p>
+
+        </p>
 
         <h3>Onsite Sewage Disposal Soil Ratings</h3>
         <ul>
