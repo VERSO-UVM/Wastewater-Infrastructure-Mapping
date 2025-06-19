@@ -1,23 +1,26 @@
 [![DOI](https://zenodo.org/badge/764833070.svg)](https://zenodo.org/doi/10.5281/zenodo.11508708)
 
-# Wastewater Infrastructure Mapping
+# Wastewater Infrastructure Map
 
-Learn about the Open Research Community Accelerator (ORCA) program here:[https://verso-uvm.github.io/Wastewater-Infrastructure-Mapping/](https://verso-uvm.github.io/Wastewater-Infrastructure-Mapping/)
+Explore the informational website [https://verso-uvm.github.io/Wastewater-Infrastructure-Mapping/index.html](https://verso-uvm.github.io/Wastewater-Infrastructure-Mapping/index.html)
 
-The ORCA Pod will address critical challenges in Vermont's development landscape by conducting a comprehensive assessment of wastewater infrastructure across towns in the state. A wastewater system, also known as a sewage or sewer system, refers to the infrastructure designed to collect, transport, treat, and dispose of wastewater generated from residential, commercial, and industrial sources. The system typically includes a network of pipes, pumps, lift stations, and treatment facilities that work together to manage and process wastewater before releasing it back into the environment.
+The Wastewater Infrastructure Map is a collaborative effort led by the Vermont Research Open Source Program Office (VERSO) at the University of Vermont, supported by the Windham Regional Commission, Vermont state agencies, and funded by the Leahy Institute. The goal was to map and analyze wastewater infrastructure across every town in Vermont. Developed with 15 undergraduate interns (through UVM’s Open Research Community Accelerator (ORCA) student intership program from Fall 2024 to June 2025, this project delivers comprehensive geospatial datasets aimed at informing regional planning, economic development, and housing growth 
 
-This initiative, in collaboration with the Windham Regional Commission will systematically map wastewater infrastructure data to understand its impact on economic activity and housing development. This includes finding what data is already available, working with partners to determine the format of the data to be collect, and then working with available online resources and reaching out to towns to identify and record wastewater systems.
+Learn more about the project [here](https://verso-uvm.github.io/Wastewater-Infrastructure-Mapping/about.html)
 
-The UVM students will compile and publish town-level wastewater infrastructure data on a publicly accessible repository, working in tandem with state agencies like the Vermont Center for Geographic Information, the Vermont Department of Environmental Conservation, and the Vermont Agency of Commerce and Community Development. 
+## Objectives
+* Thoroughly map sewer systems (pipes, manholes, outflows), treatment facilities, service areas, and onsite soil suitability.
+* Fill in missing infrastructure data gaps left by existing Vermont GIS resources,
+* Produce user-friendly, public-domain datasets that support infrastructure planning and align with broader Vermont Climate, Energy, and Transportation plans .
 
-These efforts will be in collaboration with the Town of Jericho's efforts to pilot an outreach strategy to educate and empower stakeholders with essential information on funding pathways, resources, and planning considerations. They aim not only to address immediate development challenges but also to align with broader state objectives outlined in the Vermont Climate Action Plan, Comprehensive Energy Plan, and Long-Range Transportation Plan, fostering a holistic approach to sustainable growth and resilience.
+## Project Timeline & Scope
+Initiated: Fall 2024 under Chris Campany (Windham Regional Commission), funded by UVM’s Leahy Institute 
 
-## Milestones
-
-1. Exploratory Research and Cataloging (completed)
-2. Outreach to Wastewater Systems Administrators (completed)
-3. Data Architecture and Development (in progress)
-4. Dataset Creation (in progress)
+### Milestones:
+* Exploratory research & cataloging — Nov 2024
+* Outreach to local system managers — Feb 2025
+* Data architecture development — Feb 2025
+* Statewide dataset completion — June 2025
 
 ## Map Layers
 
@@ -27,6 +30,8 @@ This project consists of 5 layers to paint a picture of wastewater infrastructur
 - **Sewer Service Area**: Service area for wastewater treatment plants
 - **Wastewater Treatment Facilities**: Includes all municipal, industrial, and pretreatment wastewater treatment facilities and their hydraulic capacity information
 - **Onsite Sewage Disposal Soil Ratings**: Depicts onsite sewage disposal classification of Vermont soils
+
+Learn more about the data [here](https://verso-uvm.github.io/Wastewater-Infrastructure-Mapping/data.html)
 
 ## Team
 ### Summer 2024
@@ -54,16 +59,28 @@ This project consists of 5 layers to paint a picture of wastewater infrastructur
 * Sian Hernit
 * Sophie Miller-Grande
 
+### Summer 2025
+* Gabe Christiansen (Lead)
+* Andrew Chen
+* Duncan Niess
+* Harrison Taylor
+* Julianna Elton
+* Lily Fitzpatrick
+* Louise Vaillancourt
+
 ## Data Sources
 
 Most data used is from the Vermont Agency of Natural Resources (see [Existing GIS Data](https://github.com/VERSO-UVM/Wastewater-Infrastructure-Mapping/blob/main/ExistingGISData.md)). Some new data has been digitized from town plans or documents provided by municipalities. The Onsite Sewage Disposal Soil Ratings map was prepared by the U.S. Department of Agriculture, Natural Resources Conservation Service.
+
+## Funding
+
+This project was made possible with a grant from the [Leahy Institute for Rural Partnerships](https://www.uvm.edu/ruralpartnerships).
 
 ## Partnerships
 
 This project is in collaboration with:
 
 - [Windham Regional Commission](http://www.windhamregional.org/)
-- Town of Jericho
 - [Vermont Center for Geographic Information](https://vcgi.vermont.gov/)
 - [Vermont Department of Environmental Conservation](https://dec.vermont.gov/)
 - [Vermont Agency of Commerce and Community Development](https://accd.vermont.gov/)
