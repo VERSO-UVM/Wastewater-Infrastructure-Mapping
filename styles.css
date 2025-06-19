@@ -45,10 +45,9 @@ header h1 {
     font-size: 24px;
 }
 
-
-
 main {
     padding: 20px;
+    padding-left: 40px;
 }
 
 main h2 {
@@ -56,11 +55,11 @@ main h2 {
 }
 
 main p {
-    color: #666;
+    color: #333;
 }
 
 main ul {
-    list-style-type: none;
+    display: list-item;
     padding: 0;
 }
 
