@@ -59,6 +59,7 @@ main p {
 
 main ul {
     display: list-item;
+    padding-left: 10px;
 }
 
 main ul li a:hover {
