@@ -2,7 +2,7 @@
 body {
     font-family: Verdana, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 20;
 }
 
 nav {
@@ -46,30 +46,19 @@ header h1 {
 }
 
 main {
-    padding: 20px;
-    padding-left: 40px;
+    padding: 10px;
 }
 
 main h2 {
-    color: #333;
+    color: #1e1e1e;
 }
 
 main p {
-    color: #333;
+    color: #1e1e1e;
 }
 
 main ul {
     display: list-item;
-    padding: 0;
-}
-
-main ul li {
-    margin-bottom: 10px;
-}
-
-main ul li a {
-    color: #4CAF50;
-    text-decoration: none;
 }
 
 main ul li a:hover {
