@@ -2,11 +2,11 @@
 
 # Wastewater Infrastructure Map
 
-Explore the informational website [https://verso-uvm.github.io/Wastewater-Infrastructure-Mapping/index.html](https://verso-uvm.github.io/Wastewater-Infrastructure-Mapping/index.html)
+This project was completed in June of 2025, this repo is archived and will not be used for further data development, please reach out to the Vermont Agency of Natural Resources about any updates.
 
-Here is a link to the ANR webmap [https://vtanr.maps.arcgis.com/apps/mapviewer/index.html?webmap=de7e8f0627b5482a851b379e29200a74](https://vtanr.maps.arcgis.com/apps/mapviewer/index.html?webmap=de7e8f0627b5482a851b379e29200a74)
-
-Here is a link to the current water infrastrcture on the Geodata portal [https://geodata.vermont.gov/maps/01210da4457d42a1bbcc43f7e54cbad6/about](https://geodata.vermont.gov/maps/01210da4457d42a1bbcc43f7e54cbad6/about)
+* Explore the informational website [https://verso-uvm.github.io/Wastewater-Infrastructure-Mapping/index.html](https://verso-uvm.github.io/Wastewater-Infrastructure-Mapping/index.html)
+* Here is a link to the ANR webmap [https://vtanr.maps.arcgis.com/apps/mapviewer/index.html?webmap=de7e8f0627b5482a851b379e29200a74](https://vtanr.maps.arcgis.com/apps/mapviewer/index.html?webmap=de7e8f0627b5482a851b379e29200a74)
+* Here is a link to the current water infrastrcture on the Geodata portal [https://geodata.vermont.gov/maps/01210da4457d42a1bbcc43f7e54cbad6/about](https://geodata.vermont.gov/maps/01210da4457d42a1bbcc43f7e54cbad6/about)
 
 The Wastewater Infrastructure Map is a collaborative effort led by the Vermont Research Open Source Program Office (VERSO) at the University of Vermont, supported by the Windham Regional Commission, Vermont state agencies, and funded by the Leahy Institute. The goal was to map and analyze wastewater infrastructure across every town in Vermont. Developed with 15 undergraduate interns (through UVM’s Open Research Community Accelerator (ORCA) student intership program from Fall 2024 to June 2025, this project delivers comprehensive geospatial datasets aimed at informing regional planning, economic development, and housing growth 
 
