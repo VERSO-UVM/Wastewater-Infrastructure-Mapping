@@ -1,0 +1,212 @@
+file,Municipal_Name,GEO_ID,County,RPC_Name,RPC,FIPS6
+Addison_Addison.geojson,Addison,5000100325,Addison,Addison County Regional Planning Commission,ACRPC,1005
+Addison_Bridport.geojson,Bridport,5000108575,Addison,Addison County Regional Planning Commission,ACRPC,1010
+Addison_Bristol.geojson,Bristol,5000109025,Addison,Addison County Regional Planning Commission,ACRPC,1015
+Addison_Cornwall.geojson,Cornwall,5000116000,Addison,Addison County Regional Planning Commission,ACRPC,1020
+Addison_Ferrisburgh.geojson,Ferrisburgh,5000126300,Addison,Addison County Regional Planning Commission,ACRPC,1025
+Addison_Goshen.geojson,Goshen,5000128600,Addison,Addison County Regional Planning Commission,ACRPC,1030
+Addison_Leicester.geojson,Leicester,5000139325,Addison,Addison County Regional Planning Commission,ACRPC,1045
+Addison_Lincoln.geojson,Lincoln,5000140075,Addison,Addison County Regional Planning Commission,ACRPC,1050
+Addison_Middlebury.geojson,Middlebury,5000144350,Addison,Addison County Regional Planning Commission,ACRPC,1055
+Addison_Monkton.geojson,Monkton,5000145550,Addison,Addison County Regional Planning Commission,ACRPC,1060
+Addison_New Haven.geojson,New Haven,5000148700,Addison,Addison County Regional Planning Commission,ACRPC,1065
+Addison_Orwell.geojson,Orwell,5000153725,Addison,Addison County Regional Planning Commission,ACRPC,1070
+Addison_Panton.geojson,Panton,5000153950,Addison,Addison County Regional Planning Commission,ACRPC,1075
+Addison_Ripton.geojson,Ripton,5000159650,Addison,Addison County Regional Planning Commission,ACRPC,1080
+Addison_Salisbury.geojson,Salisbury,5000162575,Addison,Addison County Regional Planning Commission,ACRPC,1085
+Addison_Shoreham.geojson,Shoreham,5000165050,Addison,Addison County Regional Planning Commission,ACRPC,1090
+Addison_Starksboro.geojson,Starksboro,5000170075,Addison,Addison County Regional Planning Commission,ACRPC,1095
+Addison_Vergennes.geojson,Vergennes,5000174650,Addison,Addison County Regional Planning Commission,ACRPC,1100
+Addison_Weybridge.geojson,Weybridge,5000183275,Addison,Addison County Regional Planning Commission,ACRPC,1110
+Addison_Whiting.geojson,Whiting,5000183800,Addison,Addison County Regional Planning Commission,ACRPC,
+Addison_waltham.geojson,Waltham,5000176075,Addison,Addison County Regional Planning Commission,ACRPC,1105
+Addison_whiting.geojson,whiting,5000183800,Addison,Addison County Regional Planning Commission,ACRPC,1115
+Bennington_Arlington.geojson,Arlington,5000301450,Bennington,Bennington County Regional Commission,BCRC,3005
+Bennington_Bennington.geojson,Bennington,5000304825,Bennington,Bennington County Regional Commission,BCRC,3010
+Bennington_Dorset.geojson,Dorset,5000317725,Bennington,Bennington County Regional Commission,BCRC,3015
+Bennington_Glastenbury.geojson,Glastenbury,5000327962,Bennington,Bennington County Regional Commission,BCRC,3018
+Bennington_Landgrove.geojson,Landgrove,5000339025,Bennington,Bennington County Regional Commission,BCRC,3020
+Bennington_Manchester.geojson,Manchester,5000342850,Bennington,Bennington County Regional Commission,BCRC,3025
+Bennington_ManchesterVillage.geojson,ManchesterVillage,5000342850,Bennington,Bennington County Regional Commission,BCRC,3025
+Bennington_Peru.geojson,Peru,5000355000,Bennington,Bennington County Regional Commission,BCRC,3030
+Bennington_Pownal.geojson,Pownal,5000357025,Bennington,Bennington County Regional Commission,BCRC,3035
+Bennington_Readsboro.geojson,Readsboro,5000358600,Bennington,Windham Regional Commission,WRC,3040
+Bennington_Rupert.geojson,Rupert,5000361000,Bennington,Bennington County Regional Commission,BCRC,3045
+Bennington_Sandgate.geojson,Sandgate,5000362875,Bennington,Bennington County Regional Commission,BCRC,3050
+Bennington_Shaftsbury.geojson,Shaftsbury,5000363550,Bennington,Bennington County Regional Commission,BCRC,3060
+Bennington_Stamford.geojson,Stamford,5000369775,Bennington,Bennington County Regional Commission,BCRC,3065
+Bennington_Sunderland.geojson,Sunderland,5000371425,Bennington,Bennington County Regional Commission,BCRC,3070
+Bennington_Winhall.geojson,Winhall,5000385075,Bennington,Windham Regional Commission,WRC,
+Bennington_Woodford.geojson,Woodford,5000385675,Bennington,Bennington County Regional Commission,BCRC,3080
+Bennington_winhall.geojson,winhall,5000385075,Bennington,Windham Regional Commission,WRC,3075
+Caledonia_Barnet.geojson,Barnet,5000502875,Caledonia,Northeastern Vermont Development Association,NVDA,5005
+Caledonia_Burke.geojson,Burke,5000510450,Caledonia,Northeastern Vermont Development Association,NVDA,5010
+Caledonia_Danville.geojson,Danville,5000517125,Caledonia,Northeastern Vermont Development Association,NVDA,5015
+Caledonia_Groton.geojson,Groton,5000530550,Caledonia,Northeastern Vermont Development Association,NVDA,5020
+Caledonia_Hardwick.geojson,Hardwick,5000531825,Caledonia,Northeastern Vermont Development Association,NVDA,5025
+Caledonia_Kirby.geojson,Kirby,5000537900,Caledonia,Northeastern Vermont Development Association,NVDA,5030
+Caledonia_Lyndon.geojson,Lyndon,5000541725,Caledonia,Northeastern Vermont Development Association,NVDA,5035
+Caledonia_Peacham.geojson,Peacham,5000554400,Caledonia,Northeastern Vermont Development Association,NVDA,5045
+Caledonia_Ryegate.geojson,Ryegate,5000561525,Caledonia,Northeastern Vermont Development Association,NVDA,5050
+Caledonia_SaintJohnsbury.geojson,Saint Johnsbury,5000562200,Caledonia,Northeastern Vermont Development Association,NVDA,5055
+Caledonia_Stannard.geojson,Stannard,5000569925,Caledonia,Northeastern Vermont Development Association,NVDA,5065
+Caledonia_Sutton.geojson,Sutton,5000571575,Caledonia,Northeastern Vermont Development Association,NVDA,5070
+Caledonia_Waterford.geojson,Waterford,5000577125,Caledonia,Northeastern Vermont Development Association,NVDA,5080
+Chittenden_Bolton.geojson,Bolton,5000706550,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7005
+Chittenden_BuelsGore.geojson,BuelsGore,5000710300,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7010
+Chittenden_Burlington.geojson,Burlington,5000710675,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7015
+Chittenden_Charlotte.geojson,Charlotte,5000713300,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7020
+Chittenden_Colchester.geojson,Colchester,5000714875,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7025
+Chittenden_Essex.geojson,Essex,5000724175,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7030
+Chittenden_EssexJunction.geojson,Essex Junction,5000724400,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7035
+Chittenden_Hinesburg.geojson,Hinesburg,5000733475,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7040
+Chittenden_Huntington.geojson,Huntington,5000734600,Chittenden,Chittenden County Regional Planning Commission,CCRPC,
+Chittenden_Jericho.geojson,Jericho,5000736700,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7045
+Chittenden_Milton.geojson,Milton,5000745250,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7050
+Chittenden_Richmond.geojson,Richmond,5000759275,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7055
+Chittenden_SaintGeorge.geojson,Saint George,5000762050,Chittenden,Chittenden County Regional Planning Commission,CCRPC,
+Chittenden_Shelburne.geojson,Shelburne,5000764300,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7065
+Chittenden_SouthBurlington.geojson,South Burlington,5000766175,Chittenden,Chittenden County Regional Planning Commission,CCRPC,
+Chittenden_Underhill.geojson,Underhill,5000773975,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7075
+Chittenden_Westford.geojson,Westford,5000780350,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7080
+Chittenden_Williston.geojson,Williston,5000784475,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7085
+Chittenden_Winooski.geojson,Winooski,5000785150,Chittenden,Chittenden County Regional Planning Commission,CCRPC,7090
+Essex_Averill.geojson,Averill,5000902125,Essex,Northeastern Vermont Development Association,NVDA,9005
+Essex_AverysGore.geojson,Averys Gore,5000902162,Essex,Northeastern Vermont Development Association,NVDA,9010
+Essex_Brighton.geojson,Brighton,5000908725,Essex,Northeastern Vermont Development Association,NVDA,9020
+Essex_Brunswick.geojson,Brunswick,5000910075,Essex,Northeastern Vermont Development Association,NVDA,9025
+Essex_Canaan.geojson,Canaan,5000911800,Essex,Northeastern Vermont Development Association,NVDA,9030
+Essex_Concord.geojson,Concord,5000915250,Essex,Northeastern Vermont Development Association,NVDA,9035
+Essex_Ferdinand.geojson,Ferdinand,5000925975,Essex,Northeastern Vermont Development Association,NVDA,9045
+Essex_Granby.geojson,Granby,5000929125,Essex,Northeastern Vermont Development Association,NVDA,9050
+Essex_Guildhall.geojson,Guildhall,5000930775,Essex,Northeastern Vermont Development Association,NVDA,9055
+Essex_Lemington.geojson,Lemington,5000939700,Essex,Northeastern Vermont Development Association,NVDA,9060
+Essex_Lewis.geojson,Lewis,5000939775,Essex,Northeastern Vermont Development Association,NVDA,9065
+Essex_Maidstone.geojson,Maidstone,5000942475,Essex,Northeastern Vermont Development Association,NVDA,9075
+Essex_Norton.geojson,Norton,5000952750,Essex,Northeastern Vermont Development Association,NVDA,9080
+Essex_WarnersGrant.geojson,WarnersGrant,5000976337,Essex,Northeastern Vermont Development Association,NVDA,9090
+Essex_WarrenGore.geojson,Warren Gore,5000976562,Essex,Northeastern Vermont Development Association,NVDA,
+Essex_WarrensGore.geojson,Warrens Gore,5000976562,Essex,Northeastern Vermont Development Association,NVDA,9095
+Franklin_Bakersfield.geojson,Bakersfield,5001102500,Franklin,Northwest Regional Planning Commission,NRPC,11010
+Franklin_Berkshire.geojson,Berkshire,5001105425,Franklin,Northwest Regional Planning Commission,NRPC,11015
+Franklin_Enosburgh.geojson,Enosburgh,5001124050,Franklin,Northwest Regional Planning Commission,NRPC,11020
+Franklin_Enosburghfalls.geojson,Enosburgh Falls,5001124050,Franklin,Northwest Regional Planning Commission,NRPC,11020
+Franklin_Fairfax.geojson,Fairfax,5001124925,Franklin,Northwest Regional Planning Commission,NRPC,11025
+Franklin_Fairfield.geojson,Fairfield,5001125225,Franklin,Northwest Regional Planning Commission,NRPC,11030
+Franklin_Fletcher.geojson,Fletcher,5001126500,Franklin,Northwest Regional Planning Commission,NRPC,11035
+Franklin_Franklin.geojson,Franklin,5001127100,Franklin,Northwest Regional Planning Commission,NRPC,11040
+Franklin_Georgia.geojson,Georgia,5001127700,Franklin,Northwest Regional Planning Commission,NRPC,11045
+Franklin_Highgate.geojson,Highgate,5001133025,Franklin,Northwest Regional Planning Commission,NRPC,11050
+Franklin_Montgomery.geojson,Montgomery,5001145850,Franklin,Northwest Regional Planning Commission,NRPC,11055
+Franklin_Richford.geojson,Richford,5001159125,Franklin,Northwest Regional Planning Commission,NRPC,11060
+Franklin_SaintAlbansCity.geojson,Saint Albans City,5001161750,Franklin,Northwest Regional Planning Commission,NRPC,11070
+Franklin_SaintAlbansTown.geojson,Saint AlbansTown,5001161750,Franklin,Northwest Regional Planning Commission,NRPC,11070
+Franklin_Sheldon.geojson,Sheldon,5001164600,Franklin,Northwest Regional Planning Commission,NRPC,11075
+Franklin_Swanton.geojson,Swanton,5001171725,Franklin,Northwest Regional Planning Commission,NRPC,11080
+Grand Isle_GrandIsle.geojson,Grand Isle,5001329275,Grand Isle,Northwest Regional Planning Commission,NRPC,13010
+Grand Isle_NorthHero.geojson,North Hero,5001350650,Grand Isle,Northwest Regional Planning Commission,NRPC,13020
+Grand Isle_SouthHero.geojson,South Hero,5001367000,Grand Isle,Northwest Regional Planning Commission,NRPC,13025
+Lamoille_Elmore.geojson,Elmore,5001523725,Lamoille,Lamoille County Planning Commission,LCPC,15020
+Lamoille_HydeParkTown.geojson,Hyde Park Town,5001535050,Lamoille,Lamoille County Planning Commission,LCPC,15025
+Lamoille_HydeParkVillage.geojson,Hyde Park Village,5001535050,Lamoille,Lamoille County Planning Commission,LCPC,15025
+Lamoille_JohnsonTown.geojson,Johnson,5001537075,Lamoille,Lamoille County Planning Commission,LCPC,15030
+Lamoille_Morristown.geojson,Morristown,5001546675,Lamoille,Lamoille County Planning Commission,LCPC,
+Lamoille_Stowe.geojson,Stowe,5001570525,Lamoille,Lamoille County Planning Commission,LCPC,
+Lamoille_Wolcott.geojson,Wolcott,5001585375,Lamoille,Lamoille County Planning Commission,LCPC,15050
+Orange_BradfordTown.geojson,BradfordTown,5001707375,Orange,Two Rivers Ottauquechee Regional Commission,TRORC,17005
+Orange_Braintree.geojson,Braintree,5001707600,Orange,Two Rivers Ottauquechee Regional Commission,TRORC,17010
+Orange_Brookfield.geojson,Brookfield,5001709325,Orange,Two Rivers Ottauquechee Regional Commission,TRORC,17015
+Orange_Chelsea.geojson,Chelsea,5001713525,Orange,Two Rivers Ottauquechee Regional Commission,TRORC,17020
+Orange_Fairlee.geojson,Fairlee,5001725675,Orange,Two Rivers Ottauquechee Regional Commission,TRORC,17030
+Orange_Newbury.geojson,Newbury,5001748175,Orange,Two Rivers Ottauquechee Regional Commission,TRORC,17035
+Orange_Randolph.geojson,Randolph,5001758075,Orange,Two Rivers Ottauquechee Regional Commission,TRORC,17045
+Orange_Strafford.geojson,Strafford,5001770675,Orange,Two Rivers Ottauquechee Regional Commission,TRORC,17050
+Orange_Thetford.geojson,Thetford,5001772400,Orange,Two Rivers Ottauquechee Regional Commission,TRORC,17055
+Orange_Vershire.geojson,Vershire,5001774950,Orange,Two Rivers Ottauquechee Regional Commission,TRORC,17070
+Orange_Washington.geojson,Washington,5001776750,Orange,Central Vermont Regional Planning Commission,CVRPC,17075
+Orleans_Barton.geojson,Barton,5001903550,Orleans,Northeastern Vermont Development Association,NVDA,19010
+Orleans_Derby.geojson,Derby,5001917350,Orleans,Northeastern Vermont Development Association,NVDA,19035
+Orleans_Greensboro.geojson,Greensboro,5001930175,Orleans,Northeastern Vermont Development Association,NVDA,19045
+Orleans_Jay.geojson,Jay,5001936325,Orleans,Northeastern Vermont Development Association,NVDA,19060
+Orleans_Lowell.geojson,Lowell,5001940525,Orleans,Northeastern Vermont Development Association,NVDA,19065
+Orleans_Morgan.geojson,Morgan,5001946450,Orleans,Northeastern Vermont Development Association,NVDA,19070
+Orleans_NewportCity.geojson,NewportCity,5001948925,Orleans,Northeastern Vermont Development Association,NVDA,19080
+Orleans_NewportTown.geojson,NewportTown,5001948925,Orleans,Northeastern Vermont Development Association,NVDA,19080
+Orleans_Troy.geojson,Troy,5001973525,Orleans,Northeastern Vermont Development Association,NVDA,19085
+Orleans_Westfield.geojson,Westfield,5001980200,Orleans,Northeastern Vermont Development Association,NVDA,19090
+Orleans_Westmore.geojson,Westmore,5001981700,Orleans,Northeastern Vermont Development Association,NVDA,19095
+Rutland_Benson.geojson,Benson,5002105200,Rutland,Rutland Regional Planning Commission,RRPC,21005
+Rutland_Brandon.geojson,Brandon,5002107750,Rutland,Rutland Regional Planning Commission,RRPC,21010
+Rutland_Castleton.geojson,Castleton,5002111950,Rutland,Rutland Regional Planning Commission,RRPC,21015
+Rutland_Clarendon.geojson,Clarendon,5002114500,Rutland,Rutland Regional Planning Commission,RRPC,21025
+Rutland_FairHaven.geojson,FairHaven,5002125375,Rutland,Rutland Regional Planning Commission,RRPC,21035
+Rutland_Hubbardton.geojson,Hubbardton,5002134450,Rutland,Rutland Regional Planning Commission,RRPC,21040
+Rutland_Killington.geojson,Killington,5002137685,Rutland,Rutland Regional Planning Commission,RRPC,21047
+Rutland_Mendon.geojson,Mendon,5002144125,Rutland,Rutland Regional Planning Commission,RRPC,21050
+Rutland_Pawlet.geojson,Pawlet,5002154250,Rutland,Rutland Regional Planning Commission,RRPC,21070
+Rutland_Pittsford.geojson,Pittsford,5002155600,Rutland,Rutland Regional Planning Commission,RRPC,21080
+Rutland_Poultney.geojson,Poultney,5002156875,Rutland,Rutland Regional Planning Commission,RRPC,21085
+Rutland_Proctor.geojson,Proctor,5002157250,Rutland,Rutland Regional Planning Commission,RRPC,21090
+Rutland_RutlandCity.geojson,RutlandCity,5002161300,Rutland,Rutland Regional Planning Commission,RRPC,21100
+Rutland_Shrewsbury.geojson,Shrewsbury,5002165275,Rutland,Rutland Regional Planning Commission,RRPC,21110
+Rutland_Sudbury.geojson,Sudbury,5002171050,Rutland,Rutland Regional Planning Commission,RRPC,21115
+Rutland_Tinmouth.geojson,Tinmouth,5002172925,Rutland,Rutland Regional Planning Commission,RRPC,21120
+Rutland_Wallingford.geojson,Wallingford,5002175925,Rutland,Rutland Regional Planning Commission,RRPC,21125
+Rutland_WestHaven.geojson,WestHaven,5002180875,Rutland,Rutland Regional Planning Commission,RRPC,21135
+Rutland_WestRutland.geojson,WestRutland,5002182300,Rutland,Rutland Regional Planning Commission,RRPC,21140
+Washington_BarreCity.geojson,BarreCity,5002303250,Washington,Central Vermont Regional Planning Commission,CVRPC,23010
+Washington_BarreTown.geojson,BarreTown,5002303250,Washington,Central Vermont Regional Planning Commission,CVRPC,23010
+Washington_Berlin.geojson,Berlin,5002305650,Washington,Central Vermont Regional Planning Commission,CVRPC,23015
+Washington_Cabot.geojson,Cabot,5002311125,Washington,Central Vermont Regional Planning Commission,CVRPC,23020
+Washington_Calais.geojson,Calais,5002311350,Washington,Central Vermont Regional Planning Commission,CVRPC,23025
+Washington_Duxbury.geojson,Duxbury,5002318550,Washington,Central Vermont Regional Planning Commission,CVRPC,23030
+Washington_EastMontpelier.geojson,East Montpelier,5002321925,Washington,Central Vermont Regional Planning Commission,CVRPC,23035
+Washington_Fayston.geojson,Fayston,5002325825,Washington,Central Vermont Regional Planning Commission,CVRPC,23040
+Washington_Marshfield.geojson,Marshfield,5002343600,Washington,Central Vermont Regional Planning Commission,CVRPC,23045
+Washington_Middlesex.geojson,Middlesex,5002344500,Washington,Central Vermont Regional Planning Commission,CVRPC,23050
+Washington_Montpelier.geojson,Montpelier,5002346000,Washington,Central Vermont Regional Planning Commission,CVRPC,23055
+Washington_Moretown.geojson,Moretown,5002346225,Washington,Central Vermont Regional Planning Commission,CVRPC,23060
+Washington_Northfield.geojson,Northfield,5002350275,Washington,Central Vermont Regional Planning Commission,CVRPC,23065
+Washington_Plainfield.geojson,Plainfield,5002355825,Washington,Central Vermont Regional Planning Commission,CVRPC,23070
+Washington_Waitsfield.geojson,Waitsfield,5002375325,Washington,Central Vermont Regional Planning Commission,CVRPC,23080
+Washington_Warren.geojson,Warren,5002376525,Washington,Central Vermont Regional Planning Commission,CVRPC,23085
+Washington_Warren_Flood.geojson,Warren_Flood,5002376525,Washington,Central Vermont Regional Planning Commission,CVRPC,23085
+Washington_Warren_Meadow.geojson,Warren_Meadow,5002376525,Washington,Central Vermont Regional Planning Commission,CVRPC,23085
+Washington_Waterbury.geojson,Waterbury,5002376975,Washington,Central Vermont Regional Planning Commission,CVRPC,23090
+Washington_Woodbury.geojson,Woodbury,5002385525,Washington,Central Vermont Regional Planning Commission,CVRPC,23095
+Windham_Brattleboro.geojson,Brattleboro,5002507900,Windham,Windham Regional Commission,WRC,25010
+Windham_Dover.geojson,Dover,5002517875,Windham,Windham Regional Commission,WRC,25020
+Windham_Dummerston.geojson,Dummerston,5002518325,Windham,Windham Regional Commission,WRC,25025
+Windham_Halifax.geojson,Halifax,5002531150,Windham,Windham Regional Commission,WRC,25040
+Windham_Londonderry.geojson,Londonderry,5002540225,Windham,Windham Regional Commission,WRC,25050
+Windham_Marlboro.geojson,Marlboro,5002543375,Windham,Windham Regional Commission,WRC,25055
+Windham_Newfane.geojson,Newfane,5002548400,Windham,Windham Regional Commission,WRC,25060
+Windham_Putney.geojson,Putney,5002557700,Windham,Windham Regional Commission,WRC,25065
+Windham_Rockingham.geojson,Rockingham,5002560250,Windham,Windham Regional Commission,WRC,25070
+Windham_Stratton.geojson,Stratton,5002570750,Windham,Windham Regional Commission,WRC,25075
+Windham_Wardsboro.geojson,Wardsboro,5002576225,Windham,Windham Regional Commission,WRC,25090
+Windham_Westminster.geojson,Westminster,5002581400,Windham,Windham Regional Commission,WRC,25095
+Windham_Whitingham.geojson,Whitingham,5002583950,Windham,Windham Regional Commission,WRC,25100
+Windham_Wilmington.geojson,Wilmington,5002584700,Windham,Windham Regional Commission,WRC,25105
+Windham_Windham.geojson,Windham,5002584850,Windham,Windham Regional Commission,WRC,25110
+Windsor_Andover.geojson,Andover,5002701300,Windsor,Mount Ascutney Regional Commission,MARC,27005
+Windsor_Baltimore.geojson,Baltimore,5002702575,Windsor,Mount Ascutney Regional Commission,MARC,27011
+Windsor_Barnard.geojson,Barnard,5002702725,Windsor,Two Rivers Ottauquechee Regional Commission,TRORC,27015
+Windsor_Bethel.geojson,Bethel,5002705800,Windsor,Two Rivers Ottauquechee Regional Commission,TRORC,27020
+Windsor_Chester.geojson,Chester,5002713675,Windsor,Mount Ascutney Regional Commission,MARC,27035
+Windsor_Hartford.geojson,Hartford,5002732275,Windsor,Two Rivers Ottauquechee Regional Commission,TRORC,27040
+Windsor_LudlowTown.geojson,Ludlow Town,5002741275,Windsor,Mount Ascutney Regional Commission,MARC,27050
+Windsor_LudlowVillage.geojson,Ludlow Village,5002741275,Windsor,Mount Ascutney Regional Commission,MARC,27050
+Windsor_Norwich.geojson,Norwich,5002752900,Windsor,Two Rivers Ottauquechee Regional Commission,TRORC,27055
+Windsor_Plymouth.geojson,Plymouth,5002756050,Windsor,Two Rivers Ottauquechee Regional Commission,TRORC,27060
+Windsor_Pomfret.geojson,Pomfret,5002756350,Windsor,Two Rivers Ottauquechee Regional Commission,TRORC,27065
+Windsor_Reading.geojson,Reading,5002758375,Windsor,Mount Ascutney Regional Commission,MARC,27070
+Windsor_Rochester.geojson,Rochester,5002760100,Windsor,Two Rivers Ottauquechee Regional Commission,TRORC,27075
+Windsor_Springfield.geojson,Springfield,5002769550,Windsor,Mount Ascutney Regional Commission,MARC,27090
+Windsor_Stockbridge.geojson,Stockbridge,5002770375,Windsor,Two Rivers Ottauquechee Regional Commission,TRORC,27095
+Windsor_Weathersfield.geojson,Weathersfield,5002777500,Windsor,Mount Ascutney Regional Commission,MARC,27100
+Windsor_WestWindsor.geojson,West Windsor,5002783050,Windsor,Two Rivers Ottauquechee Regional Commission,TRORC,27110
+Windsor_Weston.geojson,Weston,5002782000,Windsor,Windham Regional Commission,WRC,27105
+Windsor_Windsor.geojson,Windsor,5002784925,Windsor,Mount Ascutney Regional Commission,MARC,27115
+Windsor_WoodstockTown.geojson,Woodstock Town,5002785975,Windsor,Two Rivers Ottauquechee Regional Commission,TRORC,27120
+Windsor_WoodstockVillage.geojson,Woodstock Village,5002785975,Windsor,Two Rivers Ottauquechee Regional Commission,TRORC,27120
