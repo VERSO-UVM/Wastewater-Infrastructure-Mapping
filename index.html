@@ -108,11 +108,6 @@
             <span class="legend-line" style="background:#8e44ad;"></span>
             Combined Sewer
           </label>
-          <label class="layer-toggle">
-            <input type="checkbox" id="toggle-unknown" checked>
-            <span class="legend-line" style="background:#95a5a6;"></span>
-            Unknown
-          </label>
         </div>
       </div>
 
@@ -140,6 +135,28 @@
           <li><strong>Stormwater Basins</strong> — Retention ponds, detention basins, bioretention areas, and other stormwater management infrastructure</li>
         </ul>
         <a href="data.html" class="text-link">Explore the data schema →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATEWIDE LINEAR SUMMARY -->
+  <section class="statewide-summary-section" id="statewide-summary">
+    <div class="rpc-explorer-inner">
+      <h2>Linear Feature Length by System Type — Vermont Statewide</h2>
+      <p>Total length of mapped linear infrastructure across all 11 regional planning commissions.</p>
+      <div id="statewide-chart-wrap">
+        <div class="rpc-loading-row" id="statewide-loading">
+          <span class="spinner"></span> Loading statewide data…
+        </div>
+        <div id="statewide-chart"></div>
+      </div>
+
+      <h3 class="statewide-subheading">Treatment Facilities by Regional Planning Commission</h3>
+      <div id="wwtf-rpc-chart-wrap">
+        <div class="rpc-loading-row" id="wwtf-rpc-loading">
+          <span class="spinner"></span> Loading facility data…
+        </div>
+        <div id="wwtf-rpc-chart"></div>
       </div>
     </div>
   </section>
@@ -253,11 +270,6 @@
                 <input type="checkbox" id="rpc-lt-combined" checked>
                 <span class="legend-line" style="background:#8e44ad;"></span>
                 Combined Sewer
-              </label>
-              <label class="layer-toggle">
-                <input type="checkbox" id="rpc-lt-unknown" checked>
-                <span class="legend-line" style="background:#95a5a6;"></span>
-                Unknown
               </label>
             </div>
 
@@ -455,6 +467,33 @@
             );
           }
         }).addTo(map);
+
+        // ── WWTF by RPC chart ─────────────────────────────────────────
+        const RPC_LABELS = {
+          ACRPC: 'ACRPC', BCRC: 'BCRC', CCRPC: 'CCRPC', CVRPC: 'CVRPC',
+          LCPC: 'LCPC', MARC: 'MARC', NRPC: 'NRPC', NVDA: 'NVDA',
+          RRPC: 'RRPC', TRORC: 'TRORC', WRC: 'WRC'
+        };
+        const wwtfByRpc = {};
+        Object.keys(RPC_LABELS).forEach(k => { wwtfByRpc[k] = 0; });
+        data.features.forEach(feat => {
+          const rpc = feat.properties.RPC;
+          if (wwtfByRpc[rpc] !== undefined) wwtfByRpc[rpc]++;
+        });
+        const wwtfRpcOrder = Object.keys(RPC_LABELS).sort((a, b) => wwtfByRpc[b] - wwtfByRpc[a]);
+        const wwtfMax = Math.max(...wwtfRpcOrder.map(r => wwtfByRpc[r]), 1);
+        document.getElementById('wwtf-rpc-chart').innerHTML = wwtfRpcOrder.map(rpc => {
+          const count = wwtfByRpc[rpc];
+          const pct = (count / wwtfMax * 100).toFixed(1);
+          return `<div class="chart-bar-row">
+            <span class="chart-bar-label">${rpc}</span>
+            <div class="chart-bar-track">
+              <div class="chart-bar-fill" style="width:${pct}%;background:#f39c12;"></div>
+            </div>
+            <span class="chart-bar-value">${count}</span>
+          </div>`;
+        }).join('');
+        document.getElementById('wwtf-rpc-loading').style.display = 'none';
       });
 
     // ── Linear features — load all RPCs at once ───────────────────────
@@ -468,12 +507,11 @@
         fetch(`data/linear_by_rpc/Vermont_Linear_${rpc}.geojson`).then(r => r.json())
       )
     ).then(datasets => {
-      const byType = { Wastewater: [], Stormwater: [], Water: [], Combined: [], Unknown: [] };
+      const byType = { Wastewater: [], Stormwater: [], Water: [], Combined: [] };
       datasets.forEach(data => {
         data.features.forEach(feat => {
           const st = feat.properties.SystemType;
-          const key = byType[st] !== undefined ? st : 'Unknown';
-          byType[key].push(feat);
+          if (byType[st] !== undefined) byType[st].push(feat);
         });
       });
 
@@ -499,8 +537,32 @@
       });
 
       document.getElementById('linear-loading').style.display = 'none';
+
+      // ── Statewide length chart ────────────────────────────────────────
+      const statewideLen = { Wastewater: 0, Stormwater: 0, Water: 0, Combined: 0 };
+      datasets.forEach(data => {
+        data.features.forEach(feat => {
+          const st = feat.properties.SystemType;
+          if (statewideLen[st] !== undefined) statewideLen[st] += geomLength(feat.geometry);
+        });
+      });
+      const swOrder = ['Wastewater', 'Stormwater', 'Water', 'Combined'];
+      const swMax = Math.max(...swOrder.map(t => statewideLen[t]), 1);
+      document.getElementById('statewide-chart').innerHTML = swOrder.map(type => {
+        const len = statewideLen[type];
+        const pct = (len / swMax * 100).toFixed(1);
+        return `<div class="chart-bar-row">
+          <span class="chart-bar-label">${type === 'Water' ? 'Water Supply' : type}</span>
+          <div class="chart-bar-track">
+            <div class="chart-bar-fill" style="width:${pct}%;background:${systemColor(type)};"></div>
+          </div>
+          <span class="chart-bar-value">${fmtKm(len)}</span>
+        </div>`;
+      }).join('');
+      document.getElementById('statewide-loading').style.display = 'none';
     }).catch(() => {
       document.getElementById('linear-loading').style.display = 'none';
+      document.getElementById('statewide-loading').style.display = 'none';
     });
 
     // ── Layer toggle checkboxes ───────────────────────────────────────
@@ -525,8 +587,7 @@
       'toggle-wastewater': 'Wastewater',
       'toggle-stormwater': 'Stormwater',
       'toggle-water':      'Water',
-      'toggle-combined':   'Combined',
-      'toggle-unknown':    'Unknown'
+      'toggle-combined':   'Combined'
     };
     Object.entries(LINEAR_TYPE_MAP).forEach(([id, type]) => {
       document.getElementById(id).addEventListener('change', function () {
@@ -582,7 +643,7 @@
     function fmtKm(m) { return (m / 1000).toFixed(1) + ' km'; }
 
     function renderRpcChart(byType) {
-      const order = ['Wastewater', 'Stormwater', 'Water', 'Combined', 'Unknown'];
+      const order = ['Wastewater', 'Stormwater', 'Water', 'Combined'];
       const max = Math.max(...order.map(t => byType[t] || 0), 1);
       document.getElementById('rpc-chart').innerHTML = order.map(type => {
         const len = byType[type] || 0;
@@ -619,14 +680,14 @@
 
       // Master linear toggle — shows/hides all type sub-layers
       document.getElementById('rpc-tog-linear').addEventListener('change', function () {
-        const keys = ['linear_Wastewater','linear_Stormwater','linear_Water','linear_Combined','linear_Unknown'];
+        const keys = ['linear_Wastewater','linear_Stormwater','linear_Water','linear_Combined'];
         keys.forEach(k => {
           if (!rpcMapLayers[k]) return;
           if (this.checked) rpcMap.addLayer(rpcMapLayers[k]);
           else rpcMap.removeLayer(rpcMapLayers[k]);
         });
         // Keep sub-checkboxes in sync visually
-        ['rpc-lt-wastewater','rpc-lt-stormwater','rpc-lt-water','rpc-lt-combined','rpc-lt-unknown']
+        ['rpc-lt-wastewater','rpc-lt-stormwater','rpc-lt-water','rpc-lt-combined']
           .forEach(id => { document.getElementById(id).checked = this.checked; });
       });
 
@@ -635,8 +696,7 @@
         'rpc-lt-wastewater': 'linear_Wastewater',
         'rpc-lt-stormwater': 'linear_Stormwater',
         'rpc-lt-water':      'linear_Water',
-        'rpc-lt-combined':   'linear_Combined',
-        'rpc-lt-unknown':    'linear_Unknown'
+        'rpc-lt-combined':   'linear_Combined'
       };
       Object.entries(LINEAR_TYPE_IDS).forEach(([id, key]) => {
         document.getElementById(id).addEventListener('change', function () {
@@ -738,11 +798,10 @@
       ).addTo(rpcMap);
 
       // Linear features — split by system type for per-type toggling
-      const linearByType = { Wastewater: [], Stormwater: [], Water: [], Combined: [], Unknown: [] };
+      const linearByType = { Wastewater: [], Stormwater: [], Water: [], Combined: [] };
       linearData.features.forEach(feat => {
         const st = feat.properties.SystemType;
-        const key = linearByType[st] !== undefined ? st : 'Unknown';
-        linearByType[key].push(feat);
+        if (linearByType[st] !== undefined) linearByType[st].push(feat);
       });
       Object.entries(linearByType).forEach(([type, features]) => {
         rpcMapLayers['linear_' + type] = L.geoJSON(
@@ -799,11 +858,10 @@
       document.getElementById('stat-linear').textContent  = linearData.features.length.toLocaleString();
 
       // ── Chart: length by system type ──────────────────────────────
-      const lengthByType = { Wastewater: 0, Stormwater: 0, Water: 0, Combined: 0, Unknown: 0 };
+      const lengthByType = { Wastewater: 0, Stormwater: 0, Water: 0, Combined: 0 };
       linearData.features.forEach(feat => {
         const st = feat.properties.SystemType;
-        const key = lengthByType[st] !== undefined ? st : 'Unknown';
-        lengthByType[key] += geomLength(feat.geometry);
+        if (lengthByType[st] !== undefined) lengthByType[st] += geomLength(feat.geometry);
       });
       renderRpcChart(lengthByType);
     }

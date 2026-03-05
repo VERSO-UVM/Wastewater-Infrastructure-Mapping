@@ -533,6 +533,18 @@ pre code {
 .page-main ol li { margin-bottom: 0.5rem; }
 
 /* ── RPC Explorer Section ────────────────────────────────────────── */
+.statewide-summary-section {
+  background: var(--bg-light);
+  border-top: 3px solid var(--teal-light);
+}
+
+.statewide-subheading {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--teal-dark);
+  margin: 2.5rem 0 0.75rem;
+}
+
 .rpc-explorer-section {
   background: var(--white);
   border-top: 3px solid var(--teal-light);
