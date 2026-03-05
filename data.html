@@ -5,6 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Structure, Fields, and Collection</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 12px 0 24px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 7px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-size: 13px;
+        }
+        .file-section {
+            border-left: 4px solid #336699;
+            padding-left: 16px;
+            margin-bottom: 40px;
+        }
+        .file-section h3 {
+            margin-top: 0;
+        }
+        .note {
+            background: #fffbe6;
+            border: 1px solid #e0d000;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+        .toc {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 14px 20px;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+        .toc ul {
+            margin: 6px 0 0 0;
+        }
+        .toc li {
+            margin: 4px 0;
+        }
+        h2 {
+            border-bottom: 2px solid #336699;
+            padding-bottom: 4px;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -19,82 +78,324 @@
     </nav>
     <main>
         <h1>Data Structure, Fields, and Collection</h1>
-        <h2>Overview</h2>
-        <p>The Wastewater Infrastructure Mapping project involves the systematic collection and organization of data related to wastewater systems across towns in Vermont. This section provides detailed information about the data structure, the fields included, and the methods used for data collection.</p>
-        
-        <h2>Data Structure</h2>
-        <p>The data is organized in a structured format to ensure consistency, ease of access, and usability. There are five datasets covering point, line and polygon data types. Each set of data is broken into towns.</p>  
 
-        <h3>Sewer Service Area (File name: <i>townname</i>ServiceArea.geojson)</h3>
-        
+        <p>This page documents the six statewide GeoJSON files that make up the Vermont Wastewater Infrastructure dataset. These files were produced by merging and standardizing town-level municipal data with the State of Vermont Agency of Natural Resources (ANR/DEC) authoritative dataset.</p>
+
+        <div class="toc">
+            <strong>Files in this dataset</strong>
+            <ul>
+                <li><a href="#linear">Vermont_Linear_Features.geojson</a> — pipes, culverts, channels (222,766 features)</li>
+                <li><a href="#points">Vermont_Point_Features.geojson</a> — manholes, catch basins, outfalls (185,223 features)</li>
+                <li><a href="#water">Vermont_Water_Features.geojson</a> — stormwater management areas (3,807 features)</li>
+                <li><a href="#service">Vermont_ServiceAreas.geojson</a> — sewer service boundaries (186 features)</li>
+                <li><a href="#wwtf">Vermont_Treatment_Facilities.geojson</a> — WWTF permit records (179 features)</li>
+                <li><a href="#towns">Vermont_Town_GEOID_RPC_County.geojson</a> — municipal boundaries and FIPS codes (256 features)</li>
+            </ul>
+        </div>
+
+        <h2>Shared Administrative Fields</h2>
+        <p>The following four fields appear in every file except the town boundaries file. They enable consistent filtering and joining across datasets.</p>
+        <table>
+            <tr><th>Field</th><th>Type</th><th>Description</th><th>Example</th></tr>
+            <tr><td><code>GEOIDTXT</code></td><td>String</td><td>10-digit FIPS place code — primary join key to town boundaries</td><td><code>"5002303250"</code></td></tr>
+            <tr><td><code>Municipal_Name</code></td><td>String</td><td>Town or city name</td><td><code>"Burlington"</code></td></tr>
+            <tr><td><code>County</code></td><td>String</td><td>Vermont county (14 counties)</td><td><code>"Chittenden"</code></td></tr>
+            <tr><td><code>RPC</code></td><td>String</td><td>Regional Planning Commission abbreviation (11 RPCs)</td><td><code>"CCRPC"</code></td></tr>
+        </table>
+        <p><strong>County values:</strong> Addison, Bennington, Caledonia, Chittenden, Essex, Franklin, Grand Isle, Lamoille, Orange, Orleans, Rutland, Washington, Windham, Windsor</p>
+        <p><strong>RPC values:</strong> ACRPC, BCRC, CCRPC, CVRPC, LCPC, MARC, NRPC, NVDA, RRPC, TRORC, WRC</p>
+
+        <h2>Shared Infrastructure Fields</h2>
+        <p>The three infrastructure files (Linear Features, Point Features, Water Features) share this base schema, in addition to the administrative fields above.</p>
+        <table>
+            <tr><th>Field</th><th>Type</th><th>Nullable</th><th>Description</th></tr>
+            <tr><td><code>GlobalID</code></td><td>String (UUID)</td><td>No</td><td>Globally unique feature identifier</td></tr>
+            <tr><td><code>SystemType</code></td><td>String</td><td>Yes</td><td>High-level infrastructure category: <code>Stormwater</code>, <code>Wastewater</code>, <code>Water</code>, <code>Combined</code></td></tr>
+            <tr><td><code>Type</code></td><td>Integer</td><td>Yes</td><td>Feature type code within SystemType — see domain tables per file below</td></tr>
+            <tr><td><code>Status</code></td><td>String</td><td>Yes</td><td><code>Existing</code>, <code>Proposed</code>, <code>Abandoned</code>, <code>Potential</code>, <code>Absent</code></td></tr>
+            <tr><td><code>Owner</code></td><td>String</td><td>Yes</td><td>Owner of the feature (mostly null in current data)</td></tr>
+            <tr><td><code>PermitNo</code></td><td>String</td><td>Yes</td><td>Regulatory permit number, if applicable</td></tr>
+            <tr><td><code>Audience</code></td><td>String</td><td>No</td><td>Data access level — always <code>"Public"</code></td></tr>
+            <tr><td><code>Source</code></td><td>Integer</td><td>Yes</td><td>Data source code — see source code table below</td></tr>
+            <tr><td><code>SourceDate</code></td><td>String / Number</td><td>Yes</td><td>Date of original source data (format inconsistent — may be ISO string or millisecond epoch)</td></tr>
+            <tr><td><code>SourceNotes</code></td><td>String</td><td>Yes</td><td>Free-text notes about the data source</td></tr>
+            <tr><td><code>Notes</code></td><td>String</td><td>Yes</td><td>General feature notes or comments</td></tr>
+            <tr><td><code>Creator</code></td><td>String</td><td>Yes</td><td>Username of the person who created the record</td></tr>
+            <tr><td><code>CreateDate</code></td><td>String</td><td>Yes</td><td>Date the record was created (ISO 8601)</td></tr>
+            <tr><td><code>Editor</code></td><td>String</td><td>Yes</td><td>Username of the last editor</td></tr>
+            <tr><td><code>EditDate</code></td><td>String</td><td>Yes</td><td>Date of the last edit (ISO 8601)</td></tr>
+        </table>
+
+        <h3>Source Code Reference</h3>
+        <p>The <code>Source</code> field is an integer code used across all three infrastructure files.</p>
+        <table>
+            <tr><th>Code</th><th>Meaning</th></tr>
+            <tr><td>1</td><td>As-built plan interpretation</td></tr>
+            <tr><td>2</td><td>Municipality member knowledge</td></tr>
+            <tr><td>3</td><td>Data from municipality</td></tr>
+            <tr><td>4</td><td>Stormwater / Act 250 permit plan interpretation</td></tr>
+            <tr><td>5</td><td>Orthophotography interpretation</td></tr>
+            <tr><td>6</td><td>Wastewater division plans</td></tr>
+            <tr><td>7</td><td>Mapping-grade GPS / contractor GIS</td></tr>
+            <tr><td>8</td><td>Data collected in field</td></tr>
+            <tr><td>10</td><td>ANR dataset</td></tr>
+            <tr><td>11</td><td>Town plan interpretation</td></tr>
+            <tr><td>12</td><td>LiDAR / remote sensing</td></tr>
+            <tr><td>13</td><td>Engineering report</td></tr>
+            <tr><td>14</td><td>Survey-grade GPS</td></tr>
+            <tr><td>15</td><td>Other</td></tr>
+        </table>
+
+        <!-- LINEAR FEATURES -->
+        <h2 id="linear">Vermont_Linear_Features.geojson</h2>
+        <div class="file-section">
+            <p><strong>222,766 features &middot; LineString / MultiLineString</strong><br>
+            Pipes, culverts, open channels, ditches, and other linear wastewater and stormwater infrastructure.</p>
+
+            <h3>SystemType Values</h3>
+            <table>
+                <tr><th>Value</th><th>Count</th></tr>
+                <tr><td>Stormwater</td><td>149,345</td></tr>
+                <tr><td>Wastewater</td><td>60,612</td></tr>
+                <tr><td>Water</td><td>10,616</td></tr>
+                <tr><td>Combined</td><td>2,048</td></tr>
+                <tr><td>null</td><td>145</td></tr>
+            </table>
+
+            <h3>Type Codes</h3>
+            <table>
+                <tr><th>Code</th><th>Label</th><th>SystemType</th><th>Count</th></tr>
+                <tr><td>2</td><td>Storm Sewer / Drain Pipe</td><td>Stormwater</td><td>74,883</td></tr>
+                <tr><td>3</td><td>Sanitary Sewer Pipe</td><td>Wastewater</td><td>60,301</td></tr>
+                <tr><td>4</td><td>Culvert</td><td>Stormwater</td><td>32,243</td></tr>
+                <tr><td>5</td><td>Open Channel / Ditch</td><td>Stormwater</td><td>27,346</td></tr>
+                <tr><td>19</td><td>Water Main</td><td>Water</td><td>10,613</td></tr>
+                <tr><td>7</td><td>Swale</td><td>Stormwater</td><td>3,976</td></tr>
+                <tr><td>6</td><td>Wet Swale</td><td>Stormwater</td><td>3,557</td></tr>
+                <tr><td>10</td><td>Roadside Ditch</td><td>Stormwater</td><td>3,341</td></tr>
+                <tr><td>8</td><td>Grass-Lined Channel</td><td>Stormwater</td><td>2,983</td></tr>
+                <tr><td>13</td><td>Combined Sewer</td><td>Combined</td><td>2,343</td></tr>
+                <tr><td>16</td><td>Subsurface Drain</td><td>Stormwater</td><td>321</td></tr>
+                <tr><td>17</td><td>Other / Unknown</td><td>—</td><td>255</td></tr>
+                <tr><td>12</td><td>French Drain</td><td>Stormwater</td><td>208</td></tr>
+                <tr><td>18</td><td>Force Main</td><td>Wastewater</td><td>181</td></tr>
+                <tr><td>14</td><td>Pervious Pavement Underdrain</td><td>Stormwater</td><td>56</td></tr>
+                <tr><td>15</td><td>Filter Strip</td><td>Stormwater</td><td>12</td></tr>
+            </table>
+        </div>
+
+        <!-- POINT FEATURES -->
+        <h2 id="points">Vermont_Point_Features.geojson</h2>
+        <div class="file-section">
+            <p><strong>185,223 features &middot; Point</strong><br>
+            Manholes, catch basins, outfalls, pump stations, valves, and other point infrastructure.</p>
+
+            <h3>SystemType Values</h3>
+            <table>
+                <tr><th>Value</th><th>Count</th></tr>
+                <tr><td>Stormwater</td><td>133,919</td></tr>
+                <tr><td>Wastewater</td><td>46,183</td></tr>
+                <tr><td>Combined</td><td>2,714</td></tr>
+                <tr><td>Water</td><td>2,406</td></tr>
+            </table>
+
+            <h3>Type Codes</h3>
+            <table>
+                <tr><th>Code</th><th>Label</th><th>SystemType</th><th>Count</th></tr>
+                <tr><td>2</td><td>Catch Basin / Inlet</td><td>Stormwater / Combined</td><td>45,430</td></tr>
+                <tr><td>3</td><td>Culvert Inlet / Outlet</td><td>Stormwater</td><td>5,092</td></tr>
+                <tr><td>4</td><td>Sanitary / Wastewater Manhole</td><td>Wastewater / Combined</td><td>45,637</td></tr>
+                <tr><td>5</td><td>Storm Structure / Junction Box</td><td>Stormwater</td><td>10,445</td></tr>
+                <tr><td>6</td><td>Wet Pond Outlet Structure</td><td>Stormwater</td><td>1,033</td></tr>
+                <tr><td>7</td><td>Dry Detention Outlet</td><td>Stormwater</td><td>129</td></tr>
+                <tr><td>8</td><td>Storm Manhole</td><td>Stormwater</td><td>32,108</td></tr>
+                <tr><td>9</td><td>Detention / Retention Outlet</td><td>Stormwater</td><td>31,457</td></tr>
+                <tr><td>11</td><td>Cleanout</td><td>Wastewater</td><td>218</td></tr>
+                <tr><td>12</td><td>Grease Trap / Interceptor</td><td>Wastewater</td><td>1,268</td></tr>
+                <tr><td>14</td><td>Pervious Pavement Feature</td><td>Stormwater</td><td>933</td></tr>
+                <tr><td>15</td><td>Outlet / Outfall</td><td>Stormwater</td><td>3,279</td></tr>
+                <tr><td>16</td><td>Underdrain Outlet</td><td>Stormwater</td><td>595</td></tr>
+                <tr><td>17</td><td>Other / Unknown</td><td>—</td><td>2,955</td></tr>
+                <tr><td>19</td><td>Water Service Connection</td><td>Water</td><td>262</td></tr>
+                <tr><td>22</td><td>Sewer Lateral Connection</td><td>Wastewater</td><td>1,340</td></tr>
+                <tr><td>23</td><td>CSO Outfall</td><td>Combined</td><td>167</td></tr>
+                <tr><td>24</td><td>Stormwater Outfall</td><td>Stormwater</td><td>428</td></tr>
+                <tr><td>25</td><td>Pump Station</td><td>Wastewater / Stormwater</td><td>1,124</td></tr>
+                <tr><td>27</td><td>Valve / Gate</td><td>Water / Wastewater</td><td>1,121</td></tr>
+                <tr><td>28</td><td>Meter / Monitoring Point</td><td>Various</td><td>202</td></tr>
+            </table>
+        </div>
+
+        <!-- WATER FEATURES -->
+        <h2 id="water">Vermont_Water_Features.geojson</h2>
+        <div class="file-section">
+            <p><strong>3,807 features &middot; Polygon / MultiPolygon</strong><br>
+            Stormwater management areas: wet ponds, dry detention basins, bioretention areas, infiltration basins, and similar green/grey infrastructure polygons from the ANR/DEC dataset.</p>
+            <div class="note">These are stormwater infrastructure polygons, not sewer service boundaries. See Vermont_ServiceAreas.geojson for service area polygons.</div>
+
+            <h3>Type Codes</h3>
+            <table>
+                <tr><th>Code</th><th>Label</th><th>Count</th></tr>
+                <tr><td>13</td><td>Extended Detention Basin</td><td>568</td></tr>
+                <tr><td>6</td><td>Wet Pond</td><td>475</td></tr>
+                <tr><td>8</td><td>Infiltration Basin (Shallow)</td><td>435</td></tr>
+                <tr><td>19</td><td>Infiltration Basin / Trench</td><td>420</td></tr>
+                <tr><td>2</td><td>Bioretention / Rain Garden</td><td>334</td></tr>
+                <tr><td>14</td><td>Pervious Pavement Area</td><td>278</td></tr>
+                <tr><td>10</td><td>Roadside Ditch / Buffer Strip</td><td>276</td></tr>
+                <tr><td>17</td><td>Other / Unknown</td><td>207</td></tr>
+                <tr><td>20</td><td>Sand Filter</td><td>195</td></tr>
+                <tr><td>7</td><td>Dry Detention Pond</td><td>171</td></tr>
+                <tr><td>16</td><td>Grass Swale</td><td>167</td></tr>
+                <tr><td>15</td><td>Filter Strip</td><td>101</td></tr>
+                <tr><td>21</td><td>Constructed Wetland</td><td>64</td></tr>
+                <tr><td>9</td><td>Detention Basin (General)</td><td>63</td></tr>
+                <tr><td>18</td><td>Cistern / Underground Storage</td><td>52</td></tr>
+            </table>
+            <p>All features have <code>SystemType = "Stormwater"</code> (4 null).</p>
+        </div>
+
+        <!-- SERVICE AREAS -->
+        <h2 id="service">Vermont_ServiceAreas.geojson</h2>
+        <div class="file-section">
+            <p><strong>186 features &middot; Polygon / MultiPolygon</strong><br>
+            The geographic extent of each municipal sewer or stormwater collection system.</p>
+
+            <h3>Fields</h3>
+            <table>
+                <tr><th>Field</th><th>Type</th><th>Nullable</th><th>Description</th></tr>
+                <tr><td><code>TownID</code></td><td>Integer</td><td>No</td><td>Internal ANR town identifier</td></tr>
+                <tr><td><code>SystemName</code></td><td>String</td><td>Yes</td><td>Name of the collection system</td></tr>
+                <tr><td><code>SystemOwner</code></td><td>String</td><td>Yes</td><td>Entity responsible for the system (null for 23 features)</td></tr>
+                <tr><td><code>TownName</code></td><td>String</td><td>No</td><td>Municipality name from source file</td></tr>
+                <tr><td><code>TreatmentFacility</code></td><td>String</td><td>Yes</td><td>ANR permit ID or name of the receiving treatment facility (null for 37 features)</td></tr>
+                <tr><td><code>GISDate</code></td><td>String</td><td>Yes</td><td>Date GIS data was originally created (format varies: year, ISO date, or MM/DD/YY)</td></tr>
+                <tr><td><code>GISUpdate</code></td><td>String</td><td>Yes</td><td>Date GIS data was last updated (same format variation)</td></tr>
+                <tr><td><code>GISNotes</code></td><td>String</td><td>Yes</td><td>Free-text notes about the GIS data</td></tr>
+                <tr><td><code>Creator</code></td><td>String</td><td>Yes</td><td>Record creator identifier</td></tr>
+                <tr><td><code>SourceFile</code></td><td>String</td><td>No</td><td>Original source filename</td></tr>
+                <tr><td><code>GEOIDTXT</code></td><td>String</td><td>No</td><td>10-digit FIPS code (shared admin field)</td></tr>
+                <tr><td><code>Municipal_Name</code></td><td>String</td><td>No</td><td>Municipality name (shared admin field)</td></tr>
+                <tr><td><code>County</code></td><td>String</td><td>No</td><td>County name (shared admin field)</td></tr>
+                <tr><td><code>RPC</code></td><td>String</td><td>No</td><td>Regional Planning Commission (shared admin field)</td></tr>
+            </table>
+        </div>
+
+        <!-- TREATMENT FACILITIES -->
+        <h2 id="wwtf">Vermont_Treatment_Facilities.geojson</h2>
+        <div class="file-section">
+            <p><strong>179 features &middot; Point</strong><br>
+            Wastewater treatment facilities sourced from the ANR NPDES permit database. These are permit-level records linked to a geographic point location.</p>
+
+            <h3>Fields</h3>
+            <table>
+                <tr><th>Field</th><th>Type</th><th>Nullable</th><th>Description</th></tr>
+                <tr><td><code>FacilityID</code></td><td>String</td><td>Yes</td><td>ANR internal facility identifier</td></tr>
+                <tr><td><code>FacilityName</code></td><td>String</td><td>Yes</td><td>Name of the treatment facility</td></tr>
+                <tr><td><code>PermitID</code></td><td>String</td><td>Yes</td><td>ANR permit record ID (format: <code>N-NNNN</code>)</td></tr>
+                <tr><td><code>NPDESPermitNumber</code></td><td>String</td><td>Yes</td><td>Federal NPDES permit number</td></tr>
+                <tr><td><code>PermitRecordID</code></td><td>String</td><td>Yes</td><td>Additional ANR permit tracking ID</td></tr>
+                <tr><td><code>PermitteeName</code></td><td>String</td><td>Yes</td><td>Legal name of the permit holder</td></tr>
+                <tr><td><code>ProgramCategory</code></td><td>String</td><td>Yes</td><td>Type of discharge permit — see domain below</td></tr>
+                <tr><td><code>DesignHydraulicCapacityInMGD</code></td><td>String*</td><td>Yes</td><td>Design flow capacity in million gallons per day (*stored as string — convert to float for analysis)</td></tr>
+                <tr><td><code>SeptageReceivedAtThisFacility</code></td><td>String</td><td>Yes</td><td><code>"Y"</code> or <code>"N"</code> — whether the facility accepts septage</td></tr>
+                <tr><td><code>PermitLink</code></td><td>String</td><td>Yes</td><td>URL to the ANR permit record</td></tr>
+                <tr><td><code>Latitude</code></td><td>String*</td><td>Yes</td><td>Facility latitude, WGS 84 (*stored as string)</td></tr>
+                <tr><td><code>Longitude</code></td><td>String*</td><td>Yes</td><td>Facility longitude, WGS 84 (*stored as string)</td></tr>
+                <tr><td><code>TownName</code></td><td>String</td><td>Yes</td><td>Municipality name from source file</td></tr>
+                <tr><td><code>SourceFile</code></td><td>String</td><td>Yes</td><td>Original source filename</td></tr>
+                <tr><td><code>GEOIDTXT</code></td><td>String</td><td>Yes</td><td>10-digit FIPS code (shared admin field)</td></tr>
+                <tr><td><code>Municipal_Name</code></td><td>String</td><td>No</td><td>Municipality name (shared admin field)</td></tr>
+                <tr><td><code>County</code></td><td>String</td><td>No</td><td>County name (shared admin field)</td></tr>
+                <tr><td><code>RPC</code></td><td>String</td><td>No</td><td>Regional Planning Commission (shared admin field)</td></tr>
+            </table>
+
+            <h3>ProgramCategory Values</h3>
+            <table>
+                <tr><th>Value</th><th>Count</th></tr>
+                <tr><td>Municipal Discharge</td><td>79</td></tr>
+                <tr><td>Industrial Discharge</td><td>65</td></tr>
+                <tr><td>Pretreatment Discharge</td><td>16</td></tr>
+                <tr><td>null</td><td>19</td></tr>
+            </table>
+        </div>
+
+        <!-- TOWN BOUNDARIES -->
+        <h2 id="towns">Vermont_Town_GEOID_RPC_County.geojson</h2>
+        <div class="file-section">
+            <p><strong>256 features &middot; Polygon</strong><br>
+            Vermont municipal boundaries with FIPS codes, county, and RPC assignments. This is the reference file for administrative joins across the entire dataset.</p>
+
+            <h3>Fields</h3>
+            <table>
+                <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>OBJECTID</code></td><td>Integer</td><td>Sequential record identifier</td></tr>
+                <tr><td><code>TOWNGEOID</code></td><td>String</td><td>10-digit FIPS place code — matches <code>GEOIDTXT</code> in all other files</td></tr>
+                <tr><td><code>FIPS6</code></td><td>Integer</td><td>6-digit county+place FIPS numeric code</td></tr>
+                <tr><td><code>CNTY</code></td><td>Integer</td><td>County numeric code</td></tr>
+                <tr><td><code>TOWNNAME</code></td><td>String</td><td>Town name in ALL CAPS</td></tr>
+                <tr><td><code>TOWNNAMEMC</code></td><td>String</td><td>Town name in mixed case</td></tr>
+                <tr><td><code>Municipal_Name</code></td><td>String</td><td>Normalized town name — consistent with all other files</td></tr>
+                <tr><td><code>County</code></td><td>String</td><td>County name</td></tr>
+                <tr><td><code>RPC</code></td><td>String</td><td>Regional Planning Commission abbreviation</td></tr>
+            </table>
+
+            <p><strong>Primary join key:</strong> <code>Vermont_Town_GEOID_RPC_County.TOWNGEOID</code> = <code>[any other file].GEOIDTXT</code></p>
+        </div>
+
+        <!-- EXISTING GIS DATA -->
+        <h2>Existing GIS Data Sources</h2>
+        <p>The following publicly available datasets were used as source data or reference for this project.</p>
         <ul>
-            <li>System_Name - Wastewater system name</li>
-            <li>System_Owner - Wastewater system owner</li>
-            <li>TownID - Town identifier</li>
-            <li>Treatment_Facility - Treatment Facility name</li>
-            <li>GIS_Notes - Notes about data</li>
-            <li>GIS_Date - When the GIS data was originally created</li>
-            <li>GIS_Update - When the data was last updated</li>
-            <li>Creator - Default to VTANR and it will display VERSO if new data was added</li>
+            <li><a href="https://experience.arcgis.com/experience/cf08a4b00dfe4d4fbae380fd82914f84/" target="_blank">Wastewater Facilities Vermont ANR Webmap</a> — Up to date and accurate</li>
+            <li><a href="https://geodata.vermont.gov/maps/01210da4457d42a1bbcc43f7e54cbad6/about" target="_blank">VT Water Infrastructure</a> — Most up to date water infrastructure data from ANR</li>
+            <li><a href="https://geodata.vermont.gov/datasets/VTANR::waste-water-facilities/explore?location=44.383985%2C-72.797115%2C9.85" target="_blank">Wastewater Facilities Vermont Geodata Portal</a> — Missing some facilities</li>
+            <li><a href="https://geodata.vermont.gov/datasets/VTANR::wastewater-infrastructure-linear-features/explore?location=44.258003%2C-72.570445%2C14.00" target="_blank">Wastewater Infrastructure (Linear Features)</a> — Some towns are incomplete/missing</li>
+            <li><a href="https://geodata.vermont.gov/datasets/4f3c7a243e73435f90778ad1f88f6c1d_166/explore?location=43.821343%2C-72.452600%2C8.00" target="_blank">Wastewater Infrastructure (Point Features)</a> — Some towns are incomplete/missing</li>
+            <li><a href="https://geodata.vermont.gov/datasets/vt-sewer-service-areas/explore?location=43.910429%2C-72.385265%2C8.00" target="_blank">VT Sewer Service Areas</a> — Can be outdated and inaccurate; contact each municipality for verification</li>
+            <li><a href="https://geodata.vermont.gov/datasets/VCGI::vt-data-onsite-sewage-disposal-soil-ratings/about" target="_blank">Onsite Sewage Disposal Soil Ratings</a></li>
+            <li><a href="https://catalog.data.gov/dataset/tiger-line-shapefile-current-state-vermont-county-subdivision" target="_blank">Town Boundary Data</a></li>
         </ul>
-        <p>
-        Example: "properties":{"OBJECTID":0,"System Name":"Cold Brook Fire District","System Owner":"Cold Brook Fire District","TownID":25105,"Treatment Facility":"3-1296","GIS Notes":"interpreted from pipes, parcels, buildings, topo, as area served","GIS Date":"1993","GIS Update":"1993","Creator":"VTANR","Shape_Length":0,"Shape_Area":0}</p>
 
-        <h3>Wastewater Infrastructure (Linear Features) (File name: <i>townname</i>LinearFeatures.geojson)</h3>
+        <!-- FACILITY INFO -->
+        <h2>Available Wastewater Treatment Facility Information</h2>
         <ul>
-            <li>Type - Describes the type of line, including stormline, sanitary, combined sewer, etc</li>
-            <li>Status - Existing, Proposed, Abandoned</li>
-            <li>Comment - Comment on the data</li>
-            <li>Source - Where data originated</li>
-            <li>MapDate - Date of map where data originated</li>
-            <li>Audience - Serving public, private</li>
-            <li>SystemType -  Type of water system</li>
-            <li>Creator - Default to VTANR, change to VERSO if we create new data</li>
+            <li>
+                <a href="https://anrweb.vt.gov/DEC/IWIS/ReportViewer2.aspx?Report=WWActiveNPDESPermits&ViewParms=False" target="_blank">National Pollutant Discharge Elimination System (NPDES) Permits</a><br>
+                All municipal, industrial, and commercial facilities that discharge wastewater directly from a point source into a receiving waterbody are issued a NPDES permit, which are listed here. Contains effluent limitations, capacity information, history, and more.
+            </li>
+            <li>
+                <a href="https://anrweb.vt.gov/DEC/IWIS/ReportViewer2.aspx?Report=WWActivePretreatmentPermits&ViewParms=False" target="_blank">National Pretreatment Permits</a><br>
+                Facilities that discharge wastewater into a publicly owned treatment works are issued a pretreatment permit, which are listed here. Contains similar information to NPDES permits.
+            </li>
+            <li>
+                <a href="https://echo.epa.gov/detailed-facility-report?fid=110039942015" target="_blank">Environmental Protection Agency ICIS-NPDES Database</a><br>
+                Search for a wastewater facility or geographic area to view detailed facility reports and summaries.
+            </li>
+            <li>
+                <a href="https://anrweb.vt.gov/DEC/WWInventory/Default.aspx" target="_blank">Vermont Wastewater Inventory</a><br>
+                Search for a wastewater facility and view its data.
+            </li>
+            <li>
+                <a href="https://experience.arcgis.com/experience/cf08a4b00dfe4d4fbae380fd82914f84/" target="_blank">Vermont Agency of Natural Resources Map of Wastewater Facilities and Outfall Locations</a><br>
+                Interactive map of permitted direct discharge and pretreatment wastewater facilities in Vermont. Also contains capacity information and users of each treatment facility.
+            </li>
         </ul>
-        <p>Example data: "properties":{"OBJECTID":0,"Comment":"From Brattleboro Town","Map_Date":"","Audience":"Public","System_Type":"Wastewater","Type":"Sanitary Line","Status":"Existing","Source":"Contractor GIS/GPS","Creator":"VTANR","Shape_Length":0}</p>
 
-        <h3>Wastewater Infrastructure (Point Features)(File name: <i>townname</i>PointFeatures.geojson)</h3>
-        <ul>
-            <li>Type - Sanitary Manhole, Stormwater Manhole, Combined Sewer Manhole, CSO Outflow, etc</li>
-            <li>Status - Existing, Proposed, Abandoned</li>
-            <li>Comment - Comment on the data</li>
-            <li>Source -  Where data was obtained from</li>
-            <li>MapDate - Date of map where data originates</li>
-            <li>SystemType - Type of water system</li>
-            <li>Creator - Default to VTANR, change to VERSO if we create new data</li>
-        </ul>
-        <p>Example data: "properties":{"OBJECTID":0,"Comment":"From Brattleboro","Map_Date":"","System_Type":"Wastewater","Type":"Sanitary Manhole","Source":"Contractor GIS/GPS","Status":"Existing","Creator":"VTANR"}</p>
+        <!-- DATA QUALITY -->
+        <h2>Known Data Quality Issues</h2>
+        <table>
+            <tr><th>Issue</th><th>Affected Files</th><th>Notes</th></tr>
+            <tr><td><code>SourceDate</code> format inconsistency</td><td>Linear, Point</td><td>Some values are ISO date strings; others are millisecond epoch integers carried over from town source data</td></tr>
+            <tr><td><code>GISDate</code> / <code>GISUpdate</code> format inconsistency</td><td>ServiceAreas</td><td>Mix of bare years, ISO dates, and MM/DD/YY strings</td></tr>
+            <tr><td>Numeric fields stored as strings</td><td>Treatment Facilities</td><td><code>DesignHydraulicCapacityInMGD</code>, <code>Latitude</code>, <code>Longitude</code> — cast to float before numeric analysis</td></tr>
+            <tr><td>Null <code>Status</code></td><td>Linear (28,096 features), Point (178)</td><td>Assume <code>Existing</code> for infrastructure-era features where null</td></tr>
+            <tr><td>Null <code>Type</code></td><td>Linear (147), Water (1)</td><td>Unclassifiable features from source data — retained as-is</td></tr>
+            <tr><td>Null <code>GEOIDTXT</code></td><td>Linear (small number)</td><td>Windsor town features — source border file was empty; cannot be spatially linked to municipality</td></tr>
+            <tr><td><code>Owner</code> field nearly empty</td><td>Linear, Point, Water</td><td>Field is present in schema but almost entirely null in current data</td></tr>
+            <tr><td><code>Creator</code> username variants</td><td>Point</td><td><code>"DA"</code>, <code>"DAVIDA"</code>, <code>"DAVID.AINLEY"</code> are the same person; <code>"CS"</code>, <code>"JIMP"</code>, <code>"JP"</code> are initials — not normalized</td></tr>
+        </table>
 
-        <h3>Wastewater Facilities (File name: <i>townname</i>WWTF.geojson)</h3>
-        <ul>
-            <li>FacilityName - Name of facility</li>
-            <li>DesignHydraulicCapacityInMGD - Amount of water the facility can process in a year</li>
-            <li>SeptageReceivedAtThisFacility -  Does this facility receive septage? (Yes or no)</li>
-            <li>PermitID - PermitID</li>
-            <li>PermitRecordID - Permit Record ID</li>
-            <li>PermitteeName - Name of town served</li>
-            <li>ProgramCategory -  Municipal, industrial, or pretreatment</li>
-            <li>NPDESPermitNumber - NPDES Permit Number</li>
-            <li>PermitLink - Link to permit</li>
-        </ul>
-        <p>Example data: "properties":{"OBJECTID":0,"FacilityID":"174","FacilityName":"FiberMark North America Inc","DesignHydraulicCapacityInMGD":"2.00","SeptageReceivedAtThisFacility":"N","PermitID":"3-1136","PermitRecordID":"85","PermitteeName":"FiberMark North America Inc","ProgramCategory":"Industrial Discharge","NPDESPermitNumber":"VT0000248","PermitLink":"https://anrweb.vt.gov/ANR/vtANR/DocBrowser.aspx?Directory=DEC/WSMD/Wastewater/permits/3-1136/"}</p>
-
-        <h3>Town Boundary (File name: <i>townname</i>Border.geojson)</h3>
-        <ul>
-            <li>GEOID - GEOID</li>
-            <li>NAME - Name of town</li>
-            <li>NAMELSAD - Name LSAD</li>
-            <li>LSAD - LSAD</li>
-            <li>MunicipalWastewater - Does the town have a municipal wastewater system? (Yes, No, or In Progress)</li>
-        </ul>
-        <p>Example data: "properties":{"OBJECTID":223,"GEOID":"5002507900","Name":"Brattleboro","Name_LSAD":"Brattleboro town","LSAD":"43","Municipal_Wastewater":"Yes","Shape_Length":0,"Shape_Area":0}</p>
-
-        </p>
-
-        <h3>Onsite Sewage Disposal Soil Ratings</h3>
-        <ul>
-            <li>Rating - Well Suited, Moderately Suited, Marginally Suited, Not Suited, Not Rated</li>
-        </ul>
     </main>
 </body>
 </html>
