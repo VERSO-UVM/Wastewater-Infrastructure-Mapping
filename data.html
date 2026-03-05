@@ -5,78 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Structure, Fields, and Collection</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 12px 0 24px 0;
-            font-size: 14px;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 7px 10px;
-            text-align: left;
-            vertical-align: top;
-        }
-        th {
-            background-color: #f0f0f0;
-            font-weight: bold;
-        }
-        tr:nth-child(even) {
-            background-color: #fafafa;
-        }
-        code {
-            background: #f4f4f4;
-            padding: 1px 4px;
-            border-radius: 3px;
-            font-size: 13px;
-        }
-        .file-section {
-            border-left: 4px solid #336699;
-            padding-left: 16px;
-            margin-bottom: 40px;
-        }
-        .file-section h3 {
-            margin-top: 0;
-        }
-        .note {
-            background: #fffbe6;
-            border: 1px solid #e0d000;
-            padding: 8px 12px;
-            margin-bottom: 12px;
-            font-size: 13px;
-        }
-        .toc {
-            background: #f8f8f8;
-            border: 1px solid #ddd;
-            padding: 14px 20px;
-            display: inline-block;
-            margin-bottom: 30px;
-        }
-        .toc ul {
-            margin: 6px 0 0 0;
-        }
-        .toc li {
-            margin: 4px 0;
-        }
-        h2 {
-            border-bottom: 2px solid #336699;
-            padding-bottom: 4px;
-        }
-    </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-left">
-            <a href="index.html">Vermont Wastewater Map</a>
-        </div>
-        <div class="nav-right">
+    <nav class="site-nav">
+        <a class="nav-brand" href="index.html">Vermont Wastewater Infrastructure</a>
+        <div class="nav-links">
+            <a href="index.html">Map</a>
             <a href="about.html">About</a>
-            <a href="data.html">Data</a>
+            <a href="data.html" class="active">Data</a>
             <a href="contribute.html">Contribute</a>
         </div>
     </nav>
-    <main>
+    <main class="page-main">
         <h1>Data Structure, Fields, and Collection</h1>
 
         <p>This page documents the six statewide GeoJSON files that make up the Vermont Wastewater Infrastructure dataset. These files were produced by merging and standardizing town-level municipal data with the State of Vermont Agency of Natural Resources (ANR/DEC) authoritative dataset.</p>
@@ -397,5 +337,21 @@
         </table>
 
     </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div>
+                <strong>Vermont Wastewater Infrastructure Map</strong><br>
+                A project of the <a href="https://verso.w3.uvm.edu/" target="_blank">Vermont Research Open Source Program Office (VERSO)</a> at the University of Vermont.
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Map</a>
+                <a href="about.html">About</a>
+                <a href="data.html">Data</a>
+                <a href="contribute.html">Contribute</a>
+                <a href="https://github.com/VERSO-UVM/Wastewater-Infrastructure-Mapping" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

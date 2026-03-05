@@ -1,79 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vermont Wastewater Map</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <style>
-        /* Additional CSS for customizing the map container */
-        #map {
-            width: 100%;
-            height: 600px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vermont Wastewater Infrastructure Map</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
-    <nav>
-        <div class="nav-left">
-            <a href="index.html">Vermont Wastewater Map</a>
-        </div>
-        <div class="nav-right">
-            <a href="about.html">About</a>
-            <a href="data.html">Data</a>
-            <a href="contribute.html">Contribute</a>
-        </div>
-    </nav>
 
-    <main>
-        <section>
-            <h2>Welcome to the Vermont Wastewater Infrastructure Map Project</h2>
-            <div class="warning">
-                Warning: This is a project in progress. The data is not complete, check with local treatment fascilities.
-            </div>
-            <p>The Wastewater Infrastructure Map was the collective effort in 2024-2025 of University of Vermont student interns in the Open Research Community Accelerator program. The goal was to create a state-wide map for Vermont of wastewater sewage lines, treatment facilities, service areas and access points. Funded by the Leahy Institute for Rural Partnerships in partnership with the Widnham Regional Commsions, the students combined current data from multiple sources to make the map below. Learn more about the <a href="about.html" target="_blank">Project</a>, or explore the format of the <a href="data.html" target="_blank">Data</a> or understand how to <a href="contribute.html" target="_blank">Contribute</a> Here is a link to the ANR webmap <a href="https://vtanr.maps.arcgis.com/apps/mapviewer/index.html?webmap=de7e8f0627b5482a851b379e29200a74" target="_blank">https://vtanr.maps.arcgis.com/apps/mapviewer/index.html?webmap=de7e8f0627b5482a851b379e29200a74</a> and a link to the current water infrastrcture on the Geodata portal <a href="https://geodata.vermont.gov/maps/01210da4457d42a1bbcc43f7e54cbad6/about" target="_blank">https://geodata.vermont.gov/maps/01210da4457d42a1bbcc43f7e54cbad6/about</a>
-</p>
-        </section>
-        <div id="map" style="width: 100%; height: 600px;"></div>
-        <script>
-            var map = L.map('map').setView([44.5588, -72.5778], 8); // Centered on Vermont
-    
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-    
-            fetch('data/VermontServiceArea.geojson')
-                .then(response => response.json())
-                .then(data => {
-                    L.geoJSON(data).addTo(map);
-                })
-                .catch(error => console.error(error));
-            
-            fetch('data/VermontLinearFeatures.geojson')
-                .then(response => response.json())
-                .then(data => {
-                    L.geoJSON(data).addTo(map);
-                })
-                .catch(error => console.error(error));
-            
-            fetch('data/VermontWWTF.geojson')
-                .then(response => response.json())
-                .then(data => {
-                    L.geoJSON(data).addTo(map);
-                })
-                .catch(error => console.error(error));
-        </script>
-        <section>
-        <p>
-         This map attempts to address critical challenges in Vermont's development landscape by conducting a comprehensive assessment of wastewater infrastructure across towns in the state. A wastewater system, also known as a sewage or sewer system, refers to the infrastructure designed to collect, transport, treat, and dispose of wastewater generated from residential, commercial, and industrial sources. The system typically includes a network of pipes, pumps, lift stations, and treatment facilities that work together to manage and process wastewater before releasing it back into the environment.
-        </p>
-        <p>
-        This initiative, in collaboration with the Windham Regional Commission, the State of Vermont Agency of Natural Resources and the Department of Environmental Conservation, we attempt to systematically map wastewater infrastructure data to understand its impact on economic activity and housing development. This includes finding what data is already available, working with partners to determine the format of the data to be collected, and then working with available online resources and reaching out to towns to identify and record wastewater systems.
-        </p>
-    </section>
-    </main>
+  <nav class="site-nav">
+    <a class="nav-brand" href="index.html">Vermont Wastewater Infrastructure</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Map</a>
+      <a href="about.html">About</a>
+      <a href="data.html">Data</a>
+      <a href="contribute.html">Contribute</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Vermont Wastewater Infrastructure Map</h1>
+      <p>A statewide open dataset of wastewater and stormwater infrastructure — pipes, manholes, treatment facilities, and service areas — built by UVM students in partnership with the Vermont Agency of Natural Resources.</p>
+      <div class="stat-row">
+        <div class="stat-card">
+          <span class="stat-number">222,766</span>
+          <span class="stat-label">Linear Features</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">179</span>
+          <span class="stat-label">Treatment Facilities</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">186</span>
+          <span class="stat-label">Service Areas</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">256</span>
+          <span class="stat-label">Municipalities</span>
+        </div>
+      </div>
+      <a href="#map-section" class="hero-cta">Explore the Map ↓</a>
+    </div>
+  </section>
+
+  <!-- DATA NOTICE -->
+  <div class="data-notice">
+    <strong>Note:</strong> This dataset is a work in progress. Always verify infrastructure details with local treatment facilities and municipal authorities before making planning decisions.
+  </div>
+
+  <!-- MAP SECTION -->
+  <section id="map-section" class="map-section">
+    <div class="map-layout">
+
+      <!-- Controls panel -->
+      <div class="map-controls">
+        <h3>Layers</h3>
+
+        <div class="control-group">
+          <label class="layer-toggle">
+            <input type="checkbox" id="toggle-towns" checked>
+            <span class="toggle-swatch" style="background:#c8d8e0;border:2px solid #7aacbf;"></span>
+            Town Boundaries
+          </label>
+          <label class="layer-toggle">
+            <input type="checkbox" id="toggle-service-areas" checked>
+            <span class="toggle-swatch" style="background:rgba(142,68,173,0.25);border:2px solid #8e44ad;"></span>
+            Service Areas
+          </label>
+          <label class="layer-toggle">
+            <input type="checkbox" id="toggle-water-features" checked>
+            <span class="toggle-swatch" style="background:rgba(52,152,219,0.35);border:2px solid #2980b9;"></span>
+            Stormwater Basins
+          </label>
+          <label class="layer-toggle">
+            <input type="checkbox" id="toggle-wwtf" checked>
+            <span class="toggle-swatch circle"></span>
+            Treatment Facilities
+          </label>
+        </div>
+
+        <div class="control-group">
+          <h4>Linear Features by RPC</h4>
+          <p class="control-hint">Select a regional planning commission to load pipe and channel data.</p>
+          <select id="rpc-selector">
+            <option value="">— Select an RPC —</option>
+            <option value="ACRPC">Addison County (ACRPC)</option>
+            <option value="BCRC">Bennington County (BCRC)</option>
+            <option value="CCRPC">Chittenden County (CCRPC)</option>
+            <option value="CVRPC">Central Vermont (CVRPC)</option>
+            <option value="LCPC">Lamoille County (LCPC)</option>
+            <option value="MARC">Marble Valley (MARC)</option>
+            <option value="NRPC">Northwestern Vermont (NRPC)</option>
+            <option value="NVDA">Northeastern VT Dev. (NVDA)</option>
+            <option value="RRPC">Rutland Region (RRPC)</option>
+            <option value="TRORC">Two Rivers-Ottauquechee (TRORC)</option>
+            <option value="WRC">Windham Region (WRC)</option>
+          </select>
+          <div id="rpc-loading" class="rpc-loading" style="display:none;">
+            <span class="spinner"></span> Loading features…
+          </div>
+        </div>
+
+        <div class="control-group legend">
+          <h4>System Type</h4>
+          <div class="legend-item"><span class="legend-line" style="background:#c0392b;"></span> Wastewater</div>
+          <div class="legend-item"><span class="legend-line" style="background:#2980b9;"></span> Stormwater</div>
+          <div class="legend-item"><span class="legend-line" style="background:#27ae60;"></span> Water Supply</div>
+          <div class="legend-item"><span class="legend-line" style="background:#8e44ad;"></span> Combined Sewer</div>
+          <div class="legend-item"><span class="legend-line" style="background:#95a5a6;"></span> Unknown</div>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div id="map"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="about-section">
+    <div class="content-grid">
+      <div>
+        <h2>About the Project</h2>
+        <p>The Vermont Wastewater Infrastructure Mapping project was initiated by Chris Campany of the <a href="http://www.windhamregional.org/" target="_blank">Windham Regional Commission</a> and funded by the <a href="https://www.uvm.edu/ruralpartnerships" target="_blank">Leahy Institute for Rural Partnerships</a> at the University of Vermont.</p>
+        <p>From September 2024 to June 2025, 15 undergraduate students working through the <a href="https://verso.w3.uvm.edu/orca/" target="_blank">Open Research Community Accelerator (ORCA)</a> program contributed over 2,000 hours to create a comprehensive statewide dataset of wastewater and stormwater infrastructure, filling gaps in the Vermont ANR's existing atlas.</p>
+        <a href="about.html" class="text-link">Full project history and contributors →</a>
+      </div>
+      <div>
+        <h2>Five Data Layers</h2>
+        <ul class="layer-list">
+          <li><strong>Linear Features</strong> — Pipes, culverts, and open channels from wastewater, stormwater, water supply, and combined systems (222,766 features)</li>
+          <li><strong>Point Features</strong> — Manholes, catch basins, outfalls, and pump stations</li>
+          <li><strong>Service Areas</strong> — Geographic boundaries of municipal sewer service coverage (186 areas)</li>
+          <li><strong>Treatment Facilities</strong> — Municipal, industrial, and pretreatment facilities with NPDES permit records (179 facilities)</li>
+          <li><strong>Stormwater Basins</strong> — Retention ponds, detention basins, bioretention areas, and other stormwater management infrastructure</li>
+        </ul>
+        <a href="data.html" class="text-link">Explore the data schema →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXTERNAL RESOURCES -->
+  <section class="resources-section">
+    <div class="resources-inner">
+      <h2>Related Resources</h2>
+      <div class="resource-cards">
+        <a class="resource-card" href="https://vtanr.maps.arcgis.com/apps/mapviewer/index.html?webmap=de7e8f0627b5482a851b379e29200a74" target="_blank">
+          <h4>ANR ArcGIS Webmap</h4>
+          <p>Vermont Agency of Natural Resources — official water infrastructure viewer</p>
+        </a>
+        <a class="resource-card" href="https://geodata.vermont.gov/maps/01210da4457d42a1bbcc43f7e54cbad6/about" target="_blank">
+          <h4>Vermont Geodata Portal</h4>
+          <p>Official state geodata portal with current water infrastructure layers</p>
+        </a>
+        <a class="resource-card" href="https://verso-uvm.github.io/Vermont-Zoning-Atlas/" target="_blank">
+          <h4>Vermont Zoning Atlas</h4>
+          <p>Zoning regulations mapped across all 255 Vermont municipalities — related VERSO project</p>
+        </a>
+        <a class="resource-card" href="https://github.com/VERSO-UVM/Wastewater-Infrastructure-Mapping" target="_blank">
+          <h4>GitHub Repository</h4>
+          <p>Source data, scripts, and documentation — open for contributions</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>Vermont Wastewater Infrastructure Map</strong><br>
+        A project of the <a href="https://verso.w3.uvm.edu/" target="_blank">Vermont Research Open Source Program Office (VERSO)</a> at the University of Vermont, in partnership with the Windham Regional Commission and the Vermont Agency of Natural Resources.
+      </div>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="data.html">Data</a>
+        <a href="contribute.html">Contribute</a>
+        <a href="https://github.com/VERSO-UVM/Wastewater-Infrastructure-Mapping" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Type code labels ──────────────────────────────────────────────
+    const LINEAR_TYPES = {
+      2: 'Storm Sewer / Drain Pipe', 3: 'Sanitary Sewer Pipe', 4: 'Culvert',
+      5: 'Open Channel / Ditch', 6: 'Wet Swale', 7: 'Swale', 8: 'Grass-Lined Channel',
+      10: 'Roadside Ditch', 12: 'French Drain', 13: 'Combined Sewer',
+      14: 'Pervious Pavement Underdrain', 15: 'Filter Strip', 16: 'Subsurface Drain',
+      17: 'Other / Unknown', 18: 'Force Main', 19: 'Water Main'
+    };
+    const POINT_TYPES = {
+      2: 'Catch Basin / Inlet', 3: 'Culvert Inlet/Outlet', 4: 'Sanitary Manhole',
+      5: 'Storm Structure / Junction', 6: 'Wet Pond Outlet', 7: 'Dry Detention Outlet',
+      8: 'Storm Manhole', 9: 'Detention Outlet', 11: 'Cleanout',
+      12: 'Grease Trap', 14: 'Pervious Pavement Feature', 15: 'Outfall',
+      16: 'Underdrain Outlet', 17: 'Other / Unknown', 19: 'Water Service Connection',
+      22: 'Sewer Lateral', 23: 'CSO Outfall', 24: 'Stormwater Outfall',
+      25: 'Pump Station', 27: 'Valve / Gate', 28: 'Monitoring Point'
+    };
+    const SYSTEM_COLORS = {
+      'Stormwater': '#2980b9',
+      'Wastewater': '#c0392b',
+      'Water':      '#27ae60',
+      'Combined':   '#8e44ad'
+    };
+    function systemColor(st) { return SYSTEM_COLORS[st] || '#95a5a6'; }
+
+    // ── Map init ──────────────────────────────────────────────────────
+    const map = L.map('map', { zoomControl: true }).setView([44.0, -72.7], 8);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+      maxZoom: 19
+    }).addTo(map);
+
+    // ── Layer registry ────────────────────────────────────────────────
+    const layers = {};
+
+    // Town boundaries
+    fetch('data/Vermont_Town_GEOID_RPC_County.geojson')
+      .then(r => r.json())
+      .then(data => {
+        layers.towns = L.geoJSON(data, {
+          style: { color: '#7aacbf', weight: 1, fillOpacity: 0, opacity: 0.6 }
+        }).addTo(map);
+      });
+
+    // Service areas
+    fetch('data/Vermont_Service_Areas.geojson')
+      .then(r => r.json())
+      .then(data => {
+        layers.serviceAreas = L.geoJSON(data, {
+          style: { color: '#8e44ad', weight: 1.5, fillColor: '#8e44ad', fillOpacity: 0.15 },
+          onEachFeature(feat, layer) {
+            const p = feat.properties;
+            layer.bindPopup(
+              `<strong>${p.SystemName || 'Service Area'}</strong><br>` +
+              `Owner: ${p.SystemOwner || '—'}<br>` +
+              `Municipality: ${p.Municipal_Name || '—'}, ${p.County || '—'}<br>` +
+              `Treatment Facility: ${p.TreatmentFacility || '—'}`
+            );
+          }
+        }).addTo(map);
+      });
+
+    // Stormwater basins / water features
+    fetch('data/Vermont_Water_Features.geojson')
+      .then(r => r.json())
+      .then(data => {
+        layers.waterFeatures = L.geoJSON(data, {
+          style: { color: '#2980b9', weight: 1, fillColor: '#2980b9', fillOpacity: 0.25 },
+          onEachFeature(feat, layer) {
+            const p = feat.properties;
+            layer.bindPopup(
+              `<strong>Stormwater Basin</strong><br>` +
+              `Status: ${p.Status || '—'}<br>` +
+              `Municipality: ${p.Municipal_Name || '—'}`
+            );
+          }
+        }).addTo(map);
+      });
+
+    // Treatment facilities
+    fetch('data/Vermont_Treatment_Facilities.geojson')
+      .then(r => r.json())
+      .then(data => {
+        layers.wwtf = L.geoJSON(data, {
+          pointToLayer(feat, latlng) {
+            return L.circleMarker(latlng, {
+              radius: 6, color: '#1a3a4a', weight: 1.5,
+              fillColor: '#f39c12', fillOpacity: 0.9
+            });
+          },
+          onEachFeature(feat, layer) {
+            const p = feat.properties;
+            layer.bindPopup(
+              `<strong>${p.FacilityName || 'Treatment Facility'}</strong><br>` +
+              `Permit: ${p.NPDESPermitNumber || p.PermitID || '—'}<br>` +
+              `Category: ${p.ProgramCategory || '—'}<br>` +
+              `Capacity: ${p.DesignHydraulicCapacityInMGD ? p.DesignHydraulicCapacityInMGD + ' MGD' : '—'}<br>` +
+              `Septage: ${p.SeptageReceivedAtThisFacility || '—'}<br>` +
+              `Municipality: ${p.Municipal_Name || '—'}`
+            );
+          }
+        }).addTo(map);
+      });
+
+    // ── RPC linear features (on-demand) ──────────────────────────────
+    let rpcLayer = null;
+
+    document.getElementById('rpc-selector').addEventListener('change', function () {
+      const rpc = this.value;
+      if (rpcLayer) { map.removeLayer(rpcLayer); rpcLayer = null; }
+      if (!rpc) return;
+
+      const loading = document.getElementById('rpc-loading');
+      loading.style.display = 'flex';
+
+      fetch(`data/linear_by_rpc/Vermont_Linear_${rpc}.geojson`)
+        .then(r => r.json())
+        .then(data => {
+          loading.style.display = 'none';
+          rpcLayer = L.geoJSON(data, {
+            style(feat) {
+              return {
+                color: systemColor(feat.properties.SystemType),
+                weight: 2, opacity: 0.8
+              };
+            },
+            onEachFeature(feat, layer) {
+              const p = feat.properties;
+              layer.bindPopup(
+                `<strong>${LINEAR_TYPES[p.Type] || 'Linear Feature'}</strong><br>` +
+                `System: ${p.SystemType || '—'}<br>` +
+                `Status: ${p.Status || '—'}<br>` +
+                `Municipality: ${p.Municipal_Name || '—'}<br>` +
+                (p.Notes ? `Notes: ${p.Notes}` : '')
+              );
+            }
+          }).addTo(map);
+        })
+        .catch(() => { loading.style.display = 'none'; });
+    });
+
+    // ── Layer toggle checkboxes ───────────────────────────────────────
+    function bindToggle(id, layerKey) {
+      document.getElementById(id).addEventListener('change', function () {
+        if (!layers[layerKey]) return;
+        if (this.checked) map.addLayer(layers[layerKey]);
+        else map.removeLayer(layers[layerKey]);
+      });
+    }
+    bindToggle('toggle-towns',         'towns');
+    bindToggle('toggle-service-areas', 'serviceAreas');
+    bindToggle('toggle-water-features','waterFeatures');
+    bindToggle('toggle-wwtf',          'wwtf');
+
+    // ── Smooth scroll for hero CTA ────────────────────────────────────
+    document.querySelector('.hero-cta').addEventListener('click', function (e) {
+      e.preventDefault();
+      document.getElementById('map-section').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Fix map tile rendering after layout settles
+    window.addEventListener('load', () => map.invalidateSize());
+  </script>
 
 </body>
 </html>
