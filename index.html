@@ -72,46 +72,47 @@
             Service Areas
           </label>
           <label class="layer-toggle">
-            <input type="checkbox" id="toggle-water-features" checked>
-            <span class="toggle-swatch" style="background:rgba(52,152,219,0.35);border:2px solid #2980b9;"></span>
-            Stormwater Basins
-          </label>
-          <label class="layer-toggle">
             <input type="checkbox" id="toggle-wwtf" checked>
             <span class="toggle-swatch circle"></span>
             Treatment Facilities
           </label>
+          <label class="layer-toggle">
+            <input type="checkbox" id="toggle-points">
+            <span class="toggle-swatch circle" style="background:#e67e22;border:2px solid #d35400;"></span>
+            Point Features
+          </label>
         </div>
 
         <div class="control-group">
-          <h4>Linear Features by RPC</h4>
-          <p class="control-hint">Select a regional planning commission to load pipe and channel data.</p>
-          <select id="rpc-selector">
-            <option value="">— Select an RPC —</option>
-            <option value="ACRPC">Addison County (ACRPC)</option>
-            <option value="BCRC">Bennington County (BCRC)</option>
-            <option value="CCRPC">Chittenden County (CCRPC)</option>
-            <option value="CVRPC">Central Vermont (CVRPC)</option>
-            <option value="LCPC">Lamoille County (LCPC)</option>
-            <option value="MARC">Marble Valley (MARC)</option>
-            <option value="NRPC">Northwestern Vermont (NRPC)</option>
-            <option value="NVDA">Northeastern VT Dev. (NVDA)</option>
-            <option value="RRPC">Rutland Region (RRPC)</option>
-            <option value="TRORC">Two Rivers-Ottauquechee (TRORC)</option>
-            <option value="WRC">Windham Region (WRC)</option>
-          </select>
-          <div id="rpc-loading" class="rpc-loading" style="display:none;">
+          <h4>Linear Features</h4>
+          <div id="linear-loading" class="rpc-loading" style="display:none;">
             <span class="spinner"></span> Loading features…
           </div>
-        </div>
-
-        <div class="control-group legend">
-          <h4>System Type</h4>
-          <div class="legend-item"><span class="legend-line" style="background:#c0392b;"></span> Wastewater</div>
-          <div class="legend-item"><span class="legend-line" style="background:#2980b9;"></span> Stormwater</div>
-          <div class="legend-item"><span class="legend-line" style="background:#27ae60;"></span> Water Supply</div>
-          <div class="legend-item"><span class="legend-line" style="background:#8e44ad;"></span> Combined Sewer</div>
-          <div class="legend-item"><span class="legend-line" style="background:#95a5a6;"></span> Unknown</div>
+          <label class="layer-toggle">
+            <input type="checkbox" id="toggle-wastewater" checked>
+            <span class="legend-line" style="background:#c0392b;"></span>
+            Wastewater
+          </label>
+          <label class="layer-toggle">
+            <input type="checkbox" id="toggle-stormwater" checked>
+            <span class="legend-line" style="background:#2980b9;"></span>
+            Stormwater
+          </label>
+          <label class="layer-toggle">
+            <input type="checkbox" id="toggle-water" checked>
+            <span class="legend-line" style="background:#27ae60;"></span>
+            Water Supply
+          </label>
+          <label class="layer-toggle">
+            <input type="checkbox" id="toggle-combined" checked>
+            <span class="legend-line" style="background:#8e44ad;"></span>
+            Combined Sewer
+          </label>
+          <label class="layer-toggle">
+            <input type="checkbox" id="toggle-unknown" checked>
+            <span class="legend-line" style="background:#95a5a6;"></span>
+            Unknown
+          </label>
         </div>
       </div>
 
@@ -140,6 +141,141 @@
         </ul>
         <a href="data.html" class="text-link">Explore the data schema →</a>
       </div>
+    </div>
+  </section>
+
+  <!-- RPC EXPLORER -->
+  <section class="rpc-explorer-section" id="rpc-explorer">
+    <div class="rpc-explorer-inner">
+      <h2>Regional Planning Commission Explorer</h2>
+      <p>Select a regional planning commission to view infrastructure and zoning data for that region alongside summary statistics.</p>
+
+      <select id="rpc-explorer-select">
+        <option value="">— Select an RPC —</option>
+        <option value="ACRPC">Addison County (ACRPC)</option>
+        <option value="BCRC">Bennington County (BCRC)</option>
+        <option value="CCRPC">Chittenden County (CCRPC)</option>
+        <option value="CVRPC">Central Vermont (CVRPC)</option>
+        <option value="LCPC">Lamoille County (LCPC)</option>
+        <option value="MARC">Marble Valley (MARC)</option>
+        <option value="NRPC">Northwestern Vermont (NRPC)</option>
+        <option value="NVDA">Northeastern VT Dev. (NVDA)</option>
+        <option value="RRPC">Rutland Region (RRPC)</option>
+        <option value="TRORC">Two Rivers-Ottauquechee (TRORC)</option>
+        <option value="WRC">Windham Region (WRC)</option>
+      </select>
+
+      <div class="rpc-loading-row" id="rpc-explorer-loading" style="display:none;">
+        <span class="spinner"></span> Loading RPC data…
+      </div>
+
+      <div id="rpc-explorer-body" style="display:none;">
+
+        <!-- Map + controls -->
+        <div class="rpc-explorer-map-wrap">
+          <div class="rpc-map-controls">
+
+            <div class="control-group">
+              <h4>Layers</h4>
+              <label class="layer-toggle">
+                <input type="checkbox" id="rpc-tog-towns" checked>
+                <span class="toggle-swatch" style="background:#c8d8e0;border:2px solid #7aacbf;"></span>
+                Town Boundaries
+              </label>
+              <label class="layer-toggle">
+                <input type="checkbox" id="rpc-tog-service" checked>
+                <span class="toggle-swatch" style="background:rgba(142,68,173,0.25);border:2px solid #8e44ad;"></span>
+                Service Areas
+              </label>
+              <label class="layer-toggle">
+                <input type="checkbox" id="rpc-tog-wwtf" checked>
+                <span class="toggle-swatch circle"></span>
+                Treatment Facilities
+              </label>
+              <label class="layer-toggle">
+                <input type="checkbox" id="rpc-tog-linear" checked>
+                <span class="toggle-swatch" style="background:#555;"></span>
+                Linear Features
+              </label>
+              <label class="layer-toggle">
+                <input type="checkbox" id="rpc-tog-zoning" checked>
+                <span class="toggle-swatch" style="background:rgba(46,204,113,0.4);border:2px solid #27ae60;"></span>
+                Zoning Districts
+              </label>
+            </div>
+
+            <div class="control-group">
+              <h4>Zoning — Housing Allowance</h4>
+              <div class="rpc-radio-group">
+                <label class="rpc-radio-label">
+                  <input type="radio" name="zoning-field" value="F1F_Allowance" checked>
+                  F1F — Single Family
+                </label>
+                <label class="rpc-radio-label">
+                  <input type="radio" name="zoning-field" value="F2F_Allowance">
+                  F2F — Duplex
+                </label>
+                <label class="rpc-radio-label">
+                  <input type="radio" name="zoning-field" value="F3F_Allowance">
+                  F3F — Triplex
+                </label>
+                <label class="rpc-radio-label">
+                  <input type="radio" name="zoning-field" value="F4F_Allowance">
+                  F4F — Multi-Family (4+)
+                </label>
+              </div>
+              <div class="zoning-legend">
+                <div class="zoning-legend-item"><span class="zoning-swatch" style="background:#2ecc71;"></span> Permitted</div>
+                <div class="zoning-legend-item"><span class="zoning-swatch" style="background:#f39c12;"></span> Public Hearing</div>
+                <div class="zoning-legend-item"><span class="zoning-swatch" style="background:#e74c3c;"></span> Prohibited</div>
+                <div class="zoning-legend-item"><span class="zoning-swatch" style="background:#bdc3c7;"></span> No Data</div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <h4>Linear System Type</h4>
+              <div class="legend-item"><span class="legend-line" style="background:#c0392b;"></span> Wastewater</div>
+              <div class="legend-item"><span class="legend-line" style="background:#2980b9;"></span> Stormwater</div>
+              <div class="legend-item"><span class="legend-line" style="background:#27ae60;"></span> Water Supply</div>
+              <div class="legend-item"><span class="legend-line" style="background:#8e44ad;"></span> Combined Sewer</div>
+              <div class="legend-item"><span class="legend-line" style="background:#95a5a6;"></span> Unknown</div>
+            </div>
+
+          </div>
+          <div id="rpc-map"></div>
+        </div>
+
+        <!-- Stat cards -->
+        <div class="rpc-stats-row">
+          <div class="rpc-stat-card">
+            <div class="rpc-stat-label">Treatment Facilities</div>
+            <div class="rpc-stat-value" id="stat-wwtf">—</div>
+          </div>
+          <div class="rpc-stat-card">
+            <div class="rpc-stat-label">Service Areas</div>
+            <div class="rpc-stat-value" id="stat-service">—</div>
+          </div>
+          <div class="rpc-stat-card">
+            <div class="rpc-stat-label">Zoning Districts</div>
+            <div class="rpc-stat-value" id="stat-zoning">—</div>
+          </div>
+          <div class="rpc-stat-card">
+            <div class="rpc-stat-label">Linear Features</div>
+            <div class="rpc-stat-value" id="stat-linear">—</div>
+          </div>
+          <div class="rpc-stat-card">
+            <div class="rpc-stat-label">Town Boundaries</div>
+            <div class="rpc-stat-value" id="stat-towns">—</div>
+          </div>
+        </div>
+
+        <!-- Length chart -->
+        <div class="rpc-chart-wrap">
+          <h4>Linear Feature Length by System Type</h4>
+          <div id="rpc-chart"></div>
+        </div>
+
+      </div><!-- /rpc-explorer-body -->
     </div>
   </section>
 
@@ -219,11 +355,13 @@
 
     // ── Layer registry ────────────────────────────────────────────────
     const layers = {};
+    const rawData = {};
 
     // Town boundaries
     fetch('data/Vermont_Town_GEOID_RPC_County.geojson')
       .then(r => r.json())
       .then(data => {
+        rawData.towns = data;
         layers.towns = L.geoJSON(data, {
           style: { color: '#7aacbf', weight: 1, fillOpacity: 0, opacity: 0.6 }
         }).addTo(map);
@@ -233,6 +371,7 @@
     fetch('data/Vermont_Service_Areas.geojson')
       .then(r => r.json())
       .then(data => {
+        rawData.serviceAreas = data;
         layers.serviceAreas = L.geoJSON(data, {
           style: { color: '#8e44ad', weight: 1.5, fillColor: '#8e44ad', fillOpacity: 0.15 },
           onEachFeature(feat, layer) {
@@ -247,27 +386,36 @@
         }).addTo(map);
       });
 
-    // Stormwater basins / water features
-    fetch('data/Vermont_Water_Features.geojson')
+    // Point features (off by default — file added when data is ready)
+    fetch('data/Vermont_Point_Features.geojson')
       .then(r => r.json())
       .then(data => {
-        layers.waterFeatures = L.geoJSON(data, {
-          style: { color: '#2980b9', weight: 1, fillColor: '#2980b9', fillOpacity: 0.25 },
+        layers.points = L.geoJSON(data, {
+          pointToLayer(feat, latlng) {
+            return L.circleMarker(latlng, {
+              radius: 4, color: '#d35400', weight: 1,
+              fillColor: '#e67e22', fillOpacity: 0.8
+            });
+          },
           onEachFeature(feat, layer) {
             const p = feat.properties;
             layer.bindPopup(
-              `<strong>Stormwater Basin</strong><br>` +
+              `<strong>${POINT_TYPES[p.Type] || 'Point Feature'}</strong><br>` +
+              `System: ${p.SystemType || '—'}<br>` +
               `Status: ${p.Status || '—'}<br>` +
-              `Municipality: ${p.Municipal_Name || '—'}`
+              `Municipality: ${p.Municipal_Name || '—'}<br>` +
+              (p.Notes ? `Notes: ${p.Notes}` : '')
             );
           }
-        }).addTo(map);
-      });
+        }); // not added to map — toggle starts off
+      })
+      .catch(() => {}); // point data file not yet available
 
     // Treatment facilities
     fetch('data/Vermont_Treatment_Facilities.geojson')
       .then(r => r.json())
       .then(data => {
+        rawData.wwtf = data;
         layers.wwtf = L.geoJSON(data, {
           pointToLayer(feat, latlng) {
             return L.circleMarker(latlng, {
@@ -289,27 +437,32 @@
         }).addTo(map);
       });
 
-    // ── RPC linear features (on-demand) ──────────────────────────────
-    let rpcLayer = null;
+    // ── Linear features — load all RPCs at once ───────────────────────
+    const RPC_LIST = ['ACRPC','BCRC','CCRPC','CVRPC','LCPC','MARC','NRPC','NVDA','RRPC','TRORC','WRC'];
+    const linearLayers = {};
 
-    document.getElementById('rpc-selector').addEventListener('change', function () {
-      const rpc = this.value;
-      if (rpcLayer) { map.removeLayer(rpcLayer); rpcLayer = null; }
-      if (!rpc) return;
+    document.getElementById('linear-loading').style.display = 'flex';
 
-      const loading = document.getElementById('rpc-loading');
-      loading.style.display = 'flex';
+    Promise.all(
+      RPC_LIST.map(rpc =>
+        fetch(`data/linear_by_rpc/Vermont_Linear_${rpc}.geojson`).then(r => r.json())
+      )
+    ).then(datasets => {
+      const byType = { Wastewater: [], Stormwater: [], Water: [], Combined: [], Unknown: [] };
+      datasets.forEach(data => {
+        data.features.forEach(feat => {
+          const st = feat.properties.SystemType;
+          const key = byType[st] !== undefined ? st : 'Unknown';
+          byType[key].push(feat);
+        });
+      });
 
-      fetch(`data/linear_by_rpc/Vermont_Linear_${rpc}.geojson`)
-        .then(r => r.json())
-        .then(data => {
-          loading.style.display = 'none';
-          rpcLayer = L.geoJSON(data, {
+      Object.entries(byType).forEach(([type, features]) => {
+        linearLayers[type] = L.geoJSON(
+          { type: 'FeatureCollection', features },
+          {
             style(feat) {
-              return {
-                color: systemColor(feat.properties.SystemType),
-                weight: 2, opacity: 0.8
-              };
+              return { color: systemColor(feat.properties.SystemType), weight: 2, opacity: 0.8 };
             },
             onEachFeature(feat, layer) {
               const p = feat.properties;
@@ -321,9 +474,13 @@
                 (p.Notes ? `Notes: ${p.Notes}` : '')
               );
             }
-          }).addTo(map);
-        })
-        .catch(() => { loading.style.display = 'none'; });
+          }
+        ).addTo(map);
+      });
+
+      document.getElementById('linear-loading').style.display = 'none';
+    }).catch(() => {
+      document.getElementById('linear-loading').style.display = 'none';
     });
 
     // ── Layer toggle checkboxes ───────────────────────────────────────
@@ -336,8 +493,266 @@
     }
     bindToggle('toggle-towns',         'towns');
     bindToggle('toggle-service-areas', 'serviceAreas');
-    bindToggle('toggle-water-features','waterFeatures');
     bindToggle('toggle-wwtf',          'wwtf');
+
+    document.getElementById('toggle-points').addEventListener('change', function () {
+      if (!layers.points) return;
+      if (this.checked) map.addLayer(layers.points);
+      else map.removeLayer(layers.points);
+    });
+
+    const LINEAR_TYPE_MAP = {
+      'toggle-wastewater': 'Wastewater',
+      'toggle-stormwater': 'Stormwater',
+      'toggle-water':      'Water',
+      'toggle-combined':   'Combined',
+      'toggle-unknown':    'Unknown'
+    };
+    Object.entries(LINEAR_TYPE_MAP).forEach(([id, type]) => {
+      document.getElementById(id).addEventListener('change', function () {
+        if (!linearLayers[type]) return;
+        if (this.checked) map.addLayer(linearLayers[type]);
+        else map.removeLayer(linearLayers[type]);
+      });
+    });
+
+    // ── RPC Explorer ──────────────────────────────────────────────────
+    let rpcMap = null;
+    const rpcMapLayers = {};
+
+    function zoningColor(val) {
+      if (!val) return '#bdc3c7';
+      const v = String(val).toLowerCase();
+      if (v.includes('permit') || v === 'by right') return '#2ecc71';
+      if (v.includes('hearing') || v.includes('conditional')) return '#f39c12';
+      if (v.includes('prohibit')) return '#e74c3c';
+      return '#bdc3c7';
+    }
+
+    function activeZoningField() {
+      return document.querySelector('input[name="zoning-field"]:checked').value;
+    }
+
+    function zoningStyle(feat) {
+      const color = zoningColor(feat.properties[activeZoningField()]);
+      return { color: '#666', weight: 0.5, fillColor: color, fillOpacity: 0.55 };
+    }
+
+    // Haversine length in metres
+    function segLen([lon1, lat1], [lon2, lat2]) {
+      const R = 6371000, toR = Math.PI / 180;
+      const φ1 = lat1 * toR, φ2 = lat2 * toR;
+      const Δφ = (lat2 - lat1) * toR, Δλ = (lon2 - lon1) * toR;
+      const a = Math.sin(Δφ/2)**2 + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ/2)**2;
+      return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+    function geomLength(geom) {
+      if (!geom) return 0;
+      const lines = geom.type === 'LineString' ? [geom.coordinates]
+                  : geom.type === 'MultiLineString' ? geom.coordinates : [];
+      return lines.reduce((s, pts) => {
+        for (let i = 1; i < pts.length; i++) s += segLen(pts[i-1], pts[i]);
+        return s;
+      }, 0);
+    }
+
+    function fmtKm(m) { return (m / 1000).toFixed(1) + ' km'; }
+
+    function renderRpcChart(byType) {
+      const order = ['Wastewater', 'Stormwater', 'Water', 'Combined', 'Unknown'];
+      const max = Math.max(...order.map(t => byType[t] || 0), 1);
+      document.getElementById('rpc-chart').innerHTML = order.map(type => {
+        const len = byType[type] || 0;
+        const pct = (len / max * 100).toFixed(1);
+        return `<div class="chart-bar-row">
+          <span class="chart-bar-label">${type === 'Water' ? 'Water Supply' : type}</span>
+          <div class="chart-bar-track">
+            <div class="chart-bar-fill" style="width:${pct}%;background:${systemColor(type)};"></div>
+          </div>
+          <span class="chart-bar-value">${fmtKm(len)}</span>
+        </div>`;
+      }).join('');
+    }
+
+    function rpcToggleBind(id, key) {
+      document.getElementById(id).addEventListener('change', function () {
+        if (!rpcMapLayers[key]) return;
+        if (this.checked) rpcMap.addLayer(rpcMapLayers[key]);
+        else rpcMap.removeLayer(rpcMapLayers[key]);
+      });
+    }
+
+    function initRpcMap() {
+      rpcMap = L.map('rpc-map', { zoomControl: true }).setView([44.0, -72.7], 9);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+        maxZoom: 19
+      }).addTo(rpcMap);
+
+      rpcToggleBind('rpc-tog-towns',   'towns');
+      rpcToggleBind('rpc-tog-service', 'serviceAreas');
+      rpcToggleBind('rpc-tog-wwtf',    'wwtf');
+      rpcToggleBind('rpc-tog-linear',  'linear');
+      rpcToggleBind('rpc-tog-zoning',  'zoning');
+
+      document.querySelectorAll('input[name="zoning-field"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+          if (rpcMapLayers.zoning) rpcMapLayers.zoning.setStyle(zoningStyle);
+        });
+      });
+    }
+
+    function clearRpcLayers() {
+      Object.values(rpcMapLayers).forEach(l => { if (rpcMap.hasLayer(l)) rpcMap.removeLayer(l); });
+      Object.keys(rpcMapLayers).forEach(k => delete rpcMapLayers[k]);
+    }
+
+    async function loadRpcExplorer(rpc) {
+      const loading = document.getElementById('rpc-explorer-loading');
+      const body    = document.getElementById('rpc-explorer-body');
+
+      loading.style.display = 'flex';
+      body.style.display = 'none';
+
+      // Fetch linear + zoning in parallel
+      const [linearData, zoningData] = await Promise.all([
+        fetch(`data/linear_by_rpc/Vermont_Linear_${rpc}.geojson`).then(r => r.json()),
+        fetch(`data/Zoning Data/${rpc}.geojson`).then(r => r.json())
+      ]);
+
+      // Show body so map container exists in the DOM with dimensions
+      body.style.display = 'block';
+      loading.style.display = 'none';
+
+      // Wait one frame for the browser to paint the container before Leaflet measures it
+      await new Promise(r => setTimeout(r, 0));
+
+      if (!rpcMap) {
+        initRpcMap();
+      } else {
+        clearRpcLayers();
+        // re-check all toggles since they reset per-load
+        ['rpc-tog-towns','rpc-tog-service','rpc-tog-wwtf','rpc-tog-linear','rpc-tog-zoning']
+          .forEach(id => { document.getElementById(id).checked = true; });
+      }
+
+      const bounds = [];
+
+      // Towns (filtered)
+      const townFeats = rawData.towns
+        ? rawData.towns.features.filter(f => f.properties.RPC === rpc) : [];
+      rpcMapLayers.towns = L.geoJSON(
+        { type: 'FeatureCollection', features: townFeats },
+        { style: { color: '#7aacbf', weight: 1, fillOpacity: 0, opacity: 0.7 } }
+      ).addTo(rpcMap);
+      if (townFeats.length) bounds.push(...rpcMapLayers.towns.getBounds().toBBoxString().split(',').map(Number));
+
+      // Service areas (filtered)
+      const saFeats = rawData.serviceAreas
+        ? rawData.serviceAreas.features.filter(f => f.properties.RPC === rpc) : [];
+      rpcMapLayers.serviceAreas = L.geoJSON(
+        { type: 'FeatureCollection', features: saFeats },
+        {
+          style: { color: '#8e44ad', weight: 1.5, fillColor: '#8e44ad', fillOpacity: 0.15 },
+          onEachFeature(feat, layer) {
+            const p = feat.properties;
+            layer.bindPopup(`<strong>${p.SystemName || 'Service Area'}</strong><br>
+              Owner: ${p.SystemOwner || '—'}<br>
+              Municipality: ${p.Municipal_Name || '—'}`);
+          }
+        }
+      ).addTo(rpcMap);
+
+      // Treatment facilities (filtered)
+      const wwtfFeats = rawData.wwtf
+        ? rawData.wwtf.features.filter(f => f.properties.RPC === rpc) : [];
+      rpcMapLayers.wwtf = L.geoJSON(
+        { type: 'FeatureCollection', features: wwtfFeats },
+        {
+          pointToLayer(feat, latlng) {
+            return L.circleMarker(latlng, {
+              radius: 6, color: '#1a3a4a', weight: 1.5,
+              fillColor: '#f39c12', fillOpacity: 0.9
+            });
+          },
+          onEachFeature(feat, layer) {
+            const p = feat.properties;
+            layer.bindPopup(`<strong>${p.FacilityName || 'Treatment Facility'}</strong><br>
+              Permit: ${p.NPDESPermitNumber || p.PermitID || '—'}<br>
+              Category: ${p.ProgramCategory || '—'}<br>
+              Capacity: ${p.DesignHydraulicCapacityInMGD ? p.DesignHydraulicCapacityInMGD + ' MGD' : '—'}<br>
+              Municipality: ${p.Municipal_Name || '—'}`);
+          }
+        }
+      ).addTo(rpcMap);
+
+      // Linear features
+      rpcMapLayers.linear = L.geoJSON(linearData, {
+        style(feat) {
+          return { color: systemColor(feat.properties.SystemType), weight: 2, opacity: 0.8 };
+        },
+        onEachFeature(feat, layer) {
+          const p = feat.properties;
+          layer.bindPopup(`<strong>${LINEAR_TYPES[p.Type] || 'Linear Feature'}</strong><br>
+            System: ${p.SystemType || '—'}<br>
+            Status: ${p.Status || '—'}<br>
+            Municipality: ${p.Municipal_Name || '—'}<br>
+            ${p.Notes ? 'Notes: ' + p.Notes : ''}`);
+        }
+      }).addTo(rpcMap);
+
+      // Zoning layer
+      rpcMapLayers.zoning = L.geoJSON(zoningData, {
+        style: zoningStyle,
+        onEachFeature(feat, layer) {
+          const p = feat.properties;
+          const field = activeZoningField();
+          const label = { F1F_Allowance: 'Single Family', F2F_Allowance: 'Duplex',
+                          F3F_Allowance: 'Triplex', F4F_Allowance: 'Multi-Family (4+)' };
+          layer.bindPopup(`<strong>${p.District_Name || 'Zoning District'}</strong><br>
+            Municipality: ${p.Municipal_Name || '—'}<br>
+            Type: ${p.District_Type || '—'}<br>
+            <hr style="margin:4px 0;">
+            F1F (Single Family): ${p.F1F_Allowance || '—'}<br>
+            F2F (Duplex): ${p.F2F_Allowance || '—'}<br>
+            F3F (Triplex): ${p.F3F_Allowance || '—'}<br>
+            F4F (Multi-Family): ${p.F4F_Allowance || '—'}`);
+        }
+      }).addTo(rpcMap);
+
+      // Fit map to town bounds (most reliable extent)
+      try {
+        const fitLayer = townFeats.length ? rpcMapLayers.towns : rpcMapLayers.linear;
+        rpcMap.fitBounds(fitLayer.getBounds(), { padding: [20, 20] });
+      } catch(e) {}
+
+      // Delay invalidateSize so tiles load after the container is fully painted
+      setTimeout(() => rpcMap.invalidateSize(), 150);
+
+      // ── Stats ──────────────────────────────────────────────────────
+      document.getElementById('stat-wwtf').textContent    = wwtfFeats.length;
+      document.getElementById('stat-service').textContent = saFeats.length;
+      document.getElementById('stat-towns').textContent   = townFeats.length;
+      document.getElementById('stat-zoning').textContent  = zoningData.features.length;
+      document.getElementById('stat-linear').textContent  = linearData.features.length.toLocaleString();
+
+      // ── Chart: length by system type ──────────────────────────────
+      const lengthByType = { Wastewater: 0, Stormwater: 0, Water: 0, Combined: 0, Unknown: 0 };
+      linearData.features.forEach(feat => {
+        const st = feat.properties.SystemType;
+        const key = lengthByType[st] !== undefined ? st : 'Unknown';
+        lengthByType[key] += geomLength(feat.geometry);
+      });
+      renderRpcChart(lengthByType);
+    }
+
+    document.getElementById('rpc-explorer-select').addEventListener('change', function () {
+      if (!this.value) return;
+      loadRpcExplorer(this.value).catch(err => {
+        document.getElementById('rpc-explorer-loading').style.display = 'none';
+        console.error('RPC Explorer load error:', err);
+      });
+    });
 
     // ── Smooth scroll for hero CTA ────────────────────────────────────
     document.querySelector('.hero-cta').addEventListener('click', function (e) {
