@@ -228,17 +228,37 @@
                 <div class="zoning-legend-item"><span class="zoning-swatch" style="background:#2ecc71;"></span> Permitted</div>
                 <div class="zoning-legend-item"><span class="zoning-swatch" style="background:#f39c12;"></span> Public Hearing</div>
                 <div class="zoning-legend-item"><span class="zoning-swatch" style="background:#e74c3c;"></span> Prohibited</div>
-                <div class="zoning-legend-item"><span class="zoning-swatch" style="background:#bdc3c7;"></span> No Data</div>
+                <div class="zoning-legend-item"><span class="zoning-swatch" style="background:#bdc3c7;"></span> No Data / Non-Residential</div>
               </div>
             </div>
 
             <div class="control-group">
               <h4>Linear System Type</h4>
-              <div class="legend-item"><span class="legend-line" style="background:#c0392b;"></span> Wastewater</div>
-              <div class="legend-item"><span class="legend-line" style="background:#2980b9;"></span> Stormwater</div>
-              <div class="legend-item"><span class="legend-line" style="background:#27ae60;"></span> Water Supply</div>
-              <div class="legend-item"><span class="legend-line" style="background:#8e44ad;"></span> Combined Sewer</div>
-              <div class="legend-item"><span class="legend-line" style="background:#95a5a6;"></span> Unknown</div>
+              <label class="layer-toggle">
+                <input type="checkbox" id="rpc-lt-wastewater" checked>
+                <span class="legend-line" style="background:#c0392b;"></span>
+                Wastewater
+              </label>
+              <label class="layer-toggle">
+                <input type="checkbox" id="rpc-lt-stormwater" checked>
+                <span class="legend-line" style="background:#2980b9;"></span>
+                Stormwater
+              </label>
+              <label class="layer-toggle">
+                <input type="checkbox" id="rpc-lt-water" checked>
+                <span class="legend-line" style="background:#27ae60;"></span>
+                Water Supply
+              </label>
+              <label class="layer-toggle">
+                <input type="checkbox" id="rpc-lt-combined" checked>
+                <span class="legend-line" style="background:#8e44ad;"></span>
+                Combined Sewer
+              </label>
+              <label class="layer-toggle">
+                <input type="checkbox" id="rpc-lt-unknown" checked>
+                <span class="legend-line" style="background:#95a5a6;"></span>
+                Unknown
+              </label>
             </div>
 
           </div>
@@ -534,8 +554,11 @@
     }
 
     function zoningStyle(feat) {
-      const color = zoningColor(feat.properties[activeZoningField()]);
-      return { color: '#666', weight: 0.5, fillColor: color, fillOpacity: 0.55 };
+      const dt = feat.properties.District_Type;
+      const nonResidential = dt === 'Nonresidential' || dt === 'Overlay';
+      const color = nonResidential ? '#bdc3c7' : zoningColor(feat.properties[activeZoningField()]);
+      const opacity = nonResidential ? 0.3 : 0.55;
+      return { color: '#888', weight: 0.5, fillColor: color, fillOpacity: opacity };
     }
 
     // Haversine length in metres
@@ -592,8 +615,36 @@
       rpcToggleBind('rpc-tog-towns',   'towns');
       rpcToggleBind('rpc-tog-service', 'serviceAreas');
       rpcToggleBind('rpc-tog-wwtf',    'wwtf');
-      rpcToggleBind('rpc-tog-linear',  'linear');
       rpcToggleBind('rpc-tog-zoning',  'zoning');
+
+      // Master linear toggle — shows/hides all type sub-layers
+      document.getElementById('rpc-tog-linear').addEventListener('change', function () {
+        const keys = ['linear_Wastewater','linear_Stormwater','linear_Water','linear_Combined','linear_Unknown'];
+        keys.forEach(k => {
+          if (!rpcMapLayers[k]) return;
+          if (this.checked) rpcMap.addLayer(rpcMapLayers[k]);
+          else rpcMap.removeLayer(rpcMapLayers[k]);
+        });
+        // Keep sub-checkboxes in sync visually
+        ['rpc-lt-wastewater','rpc-lt-stormwater','rpc-lt-water','rpc-lt-combined','rpc-lt-unknown']
+          .forEach(id => { document.getElementById(id).checked = this.checked; });
+      });
+
+      // Per-type linear toggles
+      const LINEAR_TYPE_IDS = {
+        'rpc-lt-wastewater': 'linear_Wastewater',
+        'rpc-lt-stormwater': 'linear_Stormwater',
+        'rpc-lt-water':      'linear_Water',
+        'rpc-lt-combined':   'linear_Combined',
+        'rpc-lt-unknown':    'linear_Unknown'
+      };
+      Object.entries(LINEAR_TYPE_IDS).forEach(([id, key]) => {
+        document.getElementById(id).addEventListener('change', function () {
+          if (!rpcMapLayers[key]) return;
+          if (this.checked) rpcMap.addLayer(rpcMapLayers[key]);
+          else rpcMap.removeLayer(rpcMapLayers[key]);
+        });
+      });
 
       document.querySelectorAll('input[name="zoning-field"]').forEach(radio => {
         radio.addEventListener('change', () => {
@@ -686,20 +737,31 @@
         }
       ).addTo(rpcMap);
 
-      // Linear features
-      rpcMapLayers.linear = L.geoJSON(linearData, {
-        style(feat) {
-          return { color: systemColor(feat.properties.SystemType), weight: 2, opacity: 0.8 };
-        },
-        onEachFeature(feat, layer) {
-          const p = feat.properties;
-          layer.bindPopup(`<strong>${LINEAR_TYPES[p.Type] || 'Linear Feature'}</strong><br>
-            System: ${p.SystemType || '—'}<br>
-            Status: ${p.Status || '—'}<br>
-            Municipality: ${p.Municipal_Name || '—'}<br>
-            ${p.Notes ? 'Notes: ' + p.Notes : ''}`);
-        }
-      }).addTo(rpcMap);
+      // Linear features — split by system type for per-type toggling
+      const linearByType = { Wastewater: [], Stormwater: [], Water: [], Combined: [], Unknown: [] };
+      linearData.features.forEach(feat => {
+        const st = feat.properties.SystemType;
+        const key = linearByType[st] !== undefined ? st : 'Unknown';
+        linearByType[key].push(feat);
+      });
+      Object.entries(linearByType).forEach(([type, features]) => {
+        rpcMapLayers['linear_' + type] = L.geoJSON(
+          { type: 'FeatureCollection', features },
+          {
+            style(feat) {
+              return { color: systemColor(feat.properties.SystemType), weight: 2, opacity: 0.8 };
+            },
+            onEachFeature(feat, layer) {
+              const p = feat.properties;
+              layer.bindPopup(`<strong>${LINEAR_TYPES[p.Type] || 'Linear Feature'}</strong><br>
+                System: ${p.SystemType || '—'}<br>
+                Status: ${p.Status || '—'}<br>
+                Municipality: ${p.Municipal_Name || '—'}<br>
+                ${p.Notes ? 'Notes: ' + p.Notes : ''}`);
+            }
+          }
+        ).addTo(rpcMap);
+      });
 
       // Zoning layer
       rpcMapLayers.zoning = L.geoJSON(zoningData, {
