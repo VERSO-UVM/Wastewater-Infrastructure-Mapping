@@ -27,10 +27,6 @@
       <p>A statewide open dataset of wastewater and stormwater infrastructure — pipes, manholes, treatment facilities, and service areas — built by UVM students in partnership with the Vermont Agency of Natural Resources.</p>
       <div class="stat-row">
         <div class="stat-card">
-          <span class="stat-number">222,766</span>
-          <span class="stat-label">Linear Features</span>
-        </div>
-        <div class="stat-card">
           <span class="stat-number">179</span>
           <span class="stat-label">Treatment Facilities</span>
         </div>
@@ -78,9 +74,18 @@
           </label>
           <label class="layer-toggle">
             <input type="checkbox" id="toggle-points">
-            <span class="toggle-swatch circle" style="background:#e67e22;border:2px solid #d35400;"></span>
-            Point Features
+            Manholes
           </label>
+          <div class="point-legend">
+            <span class="point-legend-item">
+              <span class="toggle-swatch circle" style="background:#c0392b;border:2px solid #922b21;"></span>
+              Sanitary (Type 4)
+            </span>
+            <span class="point-legend-item">
+              <span class="toggle-swatch circle" style="background:#2980b9;border:2px solid #1a5276;"></span>
+              Storm (Type 8)
+            </span>
+          </div>
         </div>
 
         <div class="control-group">
@@ -143,13 +148,14 @@
   <section class="statewide-summary-section" id="statewide-summary">
     <div class="rpc-explorer-inner">
       <h2>Linear Feature Length by System Type — Vermont Statewide</h2>
-      <p>Total length of mapped linear infrastructure across all 11 regional planning commissions.</p>
+      <p>Total length of mapped linear infrastructure across all of Vermont. This data provides a overview of the state's wastewater and stormwater infrastructure but does not include all private infrastructure nor some towns may be missing data.</p>
       <div id="statewide-chart-wrap">
         <div class="rpc-loading-row" id="statewide-loading">
           <span class="spinner"></span> Loading statewide data…
         </div>
         <div id="statewide-chart"></div>
       </div>
+      <div id="statewide-linear-summary" class="wwtf-summary-text"></div>
 
       <h3 class="statewide-subheading">Treatment Facilities by Regional Planning Commission</h3>
       <div id="wwtf-rpc-chart-wrap">
@@ -158,6 +164,7 @@
         </div>
         <div id="wwtf-rpc-chart"></div>
       </div>
+      <div id="wwtf-summary-text" class="wwtf-summary-text"></div>
     </div>
   </section>
 
@@ -169,17 +176,17 @@
 
       <select id="rpc-explorer-select">
         <option value="">— Select an RPC —</option>
-        <option value="ACRPC">Addison County (ACRPC)</option>
-        <option value="BCRC">Bennington County (BCRC)</option>
-        <option value="CCRPC">Chittenden County (CCRPC)</option>
-        <option value="CVRPC">Central Vermont (CVRPC)</option>
-        <option value="LCPC">Lamoille County (LCPC)</option>
-        <option value="MARC">Marble Valley (MARC)</option>
-        <option value="NRPC">Northwestern Vermont (NRPC)</option>
-        <option value="NVDA">Northeastern VT Dev. (NVDA)</option>
-        <option value="RRPC">Rutland Region (RRPC)</option>
-        <option value="TRORC">Two Rivers-Ottauquechee (TRORC)</option>
-        <option value="WRC">Windham Region (WRC)</option>
+        <option value="ACRPC">Addison County Regional Planning Commission — ACRPC (21 towns)</option>
+        <option value="BCRC">Bennington County Regional Commission — BCRC (14 towns)</option>
+        <option value="CCRPC">Chittenden County Regional Planning Commission — CCRPC (19 towns)</option>
+        <option value="CVRPC">Central Vermont Regional Planning Commission — CVRPC (23 towns)</option>
+        <option value="LCPC">Lamoille County Planning Commission — LCPC (10 towns)</option>
+        <option value="MARC">Marble Valley Regional Planning Commission — MARC (9 towns)</option>
+        <option value="NRPC">Northwestern Vermont Regional Planning Commission — NRPC (20 towns)</option>
+        <option value="NVDA">Northeastern Vermont Development Association — NVDA (55 towns)</option>
+        <option value="RRPC">Rutland Region Planning Commission — RRPC (27 towns)</option>
+        <option value="TRORC">Two Rivers-Ottauquechee Regional Commission — TRORC (31 towns)</option>
+        <option value="WRC">Windham Regional Commission — WRC (27 towns)</option>
       </select>
 
       <div class="rpc-loading-row" id="rpc-explorer-loading" style="display:none;">
@@ -292,12 +299,12 @@
             <div class="rpc-stat-value" id="stat-zoning">—</div>
           </div>
           <div class="rpc-stat-card">
-            <div class="rpc-stat-label">Linear Features</div>
-            <div class="rpc-stat-value" id="stat-linear">—</div>
-          </div>
-          <div class="rpc-stat-card">
             <div class="rpc-stat-label">Town Boundaries</div>
             <div class="rpc-stat-value" id="stat-towns">—</div>
+          </div>
+          <div class="rpc-stat-card">
+            <div class="rpc-stat-label">Wastewater + Combined Length</div>
+            <div class="rpc-stat-value" id="stat-linear">—</div>
           </div>
         </div>
 
@@ -353,6 +360,11 @@
 
   <script>
     // ── Type code labels ──────────────────────────────────────────────
+    // Stormwater is filtered to Type 2 (Storm Sewer / Drain Pipe) only
+    function includeLinear(feat) {
+      return !(feat.properties.SystemType === 'Stormwater' && feat.properties.Type !== 2);
+    }
+
     const LINEAR_TYPES = {
       2: 'Storm Sewer / Drain Pipe', 3: 'Sanitary Sewer Pipe', 4: 'Culvert',
       5: 'Open Channel / Ditch', 6: 'Wet Swale', 7: 'Swale', 8: 'Grass-Lined Channel',
@@ -422,26 +434,33 @@
     fetch('data/Vermont_Point_Features.geojson')
       .then(r => r.json())
       .then(data => {
-        layers.points = L.geoJSON(data, {
-          pointToLayer(feat, latlng) {
-            return L.circleMarker(latlng, {
-              radius: 4, color: '#d35400', weight: 1,
-              fillColor: '#e67e22', fillOpacity: 0.8
-            });
-          },
-          onEachFeature(feat, layer) {
-            const p = feat.properties;
-            layer.bindPopup(
-              `<strong>${POINT_TYPES[p.Type] || 'Point Feature'}</strong><br>` +
-              `System: ${p.SystemType || '—'}<br>` +
-              `Status: ${p.Status || '—'}<br>` +
-              `Municipality: ${p.Municipal_Name || '—'}<br>` +
-              (p.Notes ? `Notes: ${p.Notes}` : '')
-            );
-          }
-        }); // not added to map — toggle starts off
+        const POINT_COLORS = { 4: { fill: '#c0392b', stroke: '#922b21' }, 8: { fill: '#2980b9', stroke: '#1a5276' } };
+        function makePointLayer(typeCode) {
+          return L.geoJSON(
+            { type: 'FeatureCollection', features: data.features.filter(f => f.properties.Type === typeCode) },
+            {
+              pointToLayer(feat, latlng) {
+                const c = POINT_COLORS[typeCode];
+                return L.circleMarker(latlng, { radius: 4, color: c.stroke, weight: 1, fillColor: c.fill, fillOpacity: 0.8 });
+              },
+              onEachFeature(feat, layer) {
+                const p = feat.properties;
+                layer.bindPopup(
+                  `<strong>${POINT_TYPES[p.Type] || 'Point Feature'}</strong><br>` +
+                  `System: ${p.SystemType || '—'}<br>` +
+                  `Status: ${p.Status || '—'}<br>` +
+                  `Municipality: ${p.Municipal_Name || '—'}<br>` +
+                  `Owner: ${p.Owner || '—'}<br>` +
+                  (p.Notes ? `Notes: ${p.Notes}` : '')
+                );
+              }
+            }
+          ); // not added to map — toggle starts off
+        }
+        layers.points4 = makePointLayer(4);
+        layers.points8 = makePointLayer(8);
       })
-      .catch(() => {}); // point data file not yet available
+      .catch(() => {});
 
     // Treatment facilities
     fetch('data/Vermont_Treatment_Facilities.geojson')
@@ -494,6 +513,31 @@
           </div>`;
         }).join('');
         document.getElementById('wwtf-rpc-loading').style.display = 'none';
+
+        // ── Text summary ──────────────────────────────────────────────
+        const totalFacilities = data.features.length;
+        const withRpc = data.features.filter(f => f.properties.RPC).length;
+        let totalCap = 0, capCount = 0, municipalCount = 0, industrialCount = 0, pretreatCount = 0, septageCount = 0;
+        const capByRpc = {};
+        Object.keys(RPC_LABELS).forEach(k => { capByRpc[k] = 0; });
+        data.features.forEach(feat => {
+          const p = feat.properties;
+          const cap = parseFloat(p.DesignHydraulicCapacityInMGD);
+          if (!isNaN(cap)) { totalCap += cap; capCount++; }
+          if (p.ProgramCategory === 'Municipal Discharge') municipalCount++;
+          if (p.ProgramCategory === 'Industrial Discharge') industrialCount++;
+          if (p.ProgramCategory === 'Pretreatment Discharge') pretreatCount++;
+          if (p.SeptageReceivedAtThisFacility === 'Y') septageCount++;
+          if (capByRpc[p.RPC] !== undefined && !isNaN(cap)) capByRpc[p.RPC] += cap;
+        });
+        const topRpcByCount = wwtfRpcOrder[0];
+        const topRpcByCap  = Object.keys(capByRpc).sort((a,b) => capByRpc[b] - capByRpc[a])[0];
+
+        document.getElementById('wwtf-summary-text').innerHTML = `
+          <p>Vermont's dataset includes <strong>${totalFacilities} mapped treatment facilities</strong>, of which <strong>${withRpc}</strong> are assigned to one of the 11 Regional Planning Commissions. The remaining ${totalFacilities - withRpc} facilities lack RPC attribution in the source data.</p>
+          <p>The combined design hydraulic capacity of the <strong>${capCount} facilities with capacity data</strong> is <strong>${totalCap.toFixed(1)} million gallons per day (MGD)</strong>. By facility count, <strong>${topRpcByCount}</strong> leads with ${wwtfByRpc[topRpcByCount]} facilities; by treatment capacity, <strong>${topRpcByCap}</strong> has the highest total at ${capByRpc[topRpcByCap].toFixed(1)} MGD — driven by large municipal systems in the greater Burlington area.</p>
+          <p>By facility type, <strong>${municipalCount} are municipal discharge</strong> facilities (publicly owned treatment works), <strong>${industrialCount} are industrial discharge</strong> facilities, and <strong>${pretreatCount} are pretreatment</strong> facilities. An additional <strong>${septageCount} facilities</strong> are permitted to receive septage.</p>
+        `;
       });
 
     // ── Linear features — load all RPCs at once ───────────────────────
@@ -510,6 +554,7 @@
       const byType = { Wastewater: [], Stormwater: [], Water: [], Combined: [] };
       datasets.forEach(data => {
         data.features.forEach(feat => {
+          if (!includeLinear(feat)) return;
           const st = feat.properties.SystemType;
           if (byType[st] !== undefined) byType[st].push(feat);
         });
@@ -542,6 +587,7 @@
       const statewideLen = { Wastewater: 0, Stormwater: 0, Water: 0, Combined: 0 };
       datasets.forEach(data => {
         data.features.forEach(feat => {
+          if (!includeLinear(feat)) return;
           const st = feat.properties.SystemType;
           if (statewideLen[st] !== undefined) statewideLen[st] += geomLength(feat.geometry);
         });
@@ -556,10 +602,20 @@
           <div class="chart-bar-track">
             <div class="chart-bar-fill" style="width:${pct}%;background:${systemColor(type)};"></div>
           </div>
-          <span class="chart-bar-value">${fmtKm(len)}</span>
+          <span class="chart-bar-value">${fmtMi(len)}</span>
         </div>`;
       }).join('');
       document.getElementById('statewide-loading').style.display = 'none';
+
+      // ── Statewide linear text summary ─────────────────────────────────
+      const totalFeatCount = Object.values(byType).reduce((n, arr) => n + arr.length, 0);
+      const totalLenMi = swOrder.reduce((n, t) => n + statewideLen[t], 0);
+      const longestType = swOrder.reduce((a, b) => statewideLen[a] >= statewideLen[b] ? a : b);
+      const longestLabel = longestType === 'Stormwater' ? 'stormwater pipe' : longestType.toLowerCase();
+      document.getElementById('statewide-linear-summary').innerHTML = `
+        <p>Vermont's mapped linear infrastructure dataset spans <strong>${fmtMi(totalLenMi)}</strong> across <strong>${totalFeatCount.toLocaleString()} individual segments</strong> collected from all 11 Regional Planning Commissions. ${longestType} features account for the largest share at <strong>${fmtMi(statewideLen[longestType])}</strong> (${(statewideLen[longestType] / totalLenMi * 100).toFixed(0)}%). Stormwater figures here reflect enclosed storm sewer pipe (Type 2) only, excluding open channels, culverts, swales, and ditches.</p>
+        <p>Wastewater (sanitary sewer) lines total <strong>${fmtMi(statewideLen.Wastewater)}</strong>, water supply lines <strong>${fmtMi(statewideLen.Water)}</strong>, and combined sewer lines — where stormwater and wastewater share a single pipe — account for <strong>${fmtMi(statewideLen.Combined)}</strong>. The small combined sewer total reflects Vermont's largely separate sewer systems, with legacy combined infrastructure concentrated in a few older urban centers.</p>
+      `;
     }).catch(() => {
       document.getElementById('linear-loading').style.display = 'none';
       document.getElementById('statewide-loading').style.display = 'none';
@@ -578,9 +634,11 @@
     bindToggle('toggle-wwtf',          'wwtf');
 
     document.getElementById('toggle-points').addEventListener('change', function () {
-      if (!layers.points) return;
-      if (this.checked) map.addLayer(layers.points);
-      else map.removeLayer(layers.points);
+      ['points4', 'points8'].forEach(key => {
+        if (!layers[key]) return;
+        if (this.checked) map.addLayer(layers[key]);
+        else map.removeLayer(layers[key]);
+      });
     });
 
     const LINEAR_TYPE_MAP = {
@@ -641,6 +699,7 @@
     }
 
     function fmtKm(m) { return (m / 1000).toFixed(1) + ' km'; }
+    function fmtMi(m) { return (m / 1000 * 0.621371).toFixed(1) + ' mi'; }
 
     function renderRpcChart(byType) {
       const order = ['Wastewater', 'Stormwater', 'Water', 'Combined'];
@@ -653,7 +712,7 @@
           <div class="chart-bar-track">
             <div class="chart-bar-fill" style="width:${pct}%;background:${systemColor(type)};"></div>
           </div>
-          <span class="chart-bar-value">${fmtKm(len)}</span>
+          <span class="chart-bar-value">${fmtMi(len)}</span>
         </div>`;
       }).join('');
     }
@@ -800,6 +859,7 @@
       // Linear features — split by system type for per-type toggling
       const linearByType = { Wastewater: [], Stormwater: [], Water: [], Combined: [] };
       linearData.features.forEach(feat => {
+        if (!includeLinear(feat)) return;
         const st = feat.properties.SystemType;
         if (linearByType[st] !== undefined) linearByType[st].push(feat);
       });
@@ -850,19 +910,20 @@
       // Delay invalidateSize so tiles load after the container is fully painted
       setTimeout(() => rpcMap.invalidateSize(), 150);
 
+      // ── Chart: length by system type ──────────────────────────────
+      const lengthByType = { Wastewater: 0, Stormwater: 0, Water: 0, Combined: 0 };
+      linearData.features.forEach(feat => {
+        if (!includeLinear(feat)) return;
+        const st = feat.properties.SystemType;
+        if (lengthByType[st] !== undefined) lengthByType[st] += geomLength(feat.geometry);
+      });
+
       // ── Stats ──────────────────────────────────────────────────────
       document.getElementById('stat-wwtf').textContent    = wwtfFeats.length;
       document.getElementById('stat-service').textContent = saFeats.length;
       document.getElementById('stat-towns').textContent   = townFeats.length;
       document.getElementById('stat-zoning').textContent  = zoningData.features.length;
-      document.getElementById('stat-linear').textContent  = linearData.features.length.toLocaleString();
-
-      // ── Chart: length by system type ──────────────────────────────
-      const lengthByType = { Wastewater: 0, Stormwater: 0, Water: 0, Combined: 0 };
-      linearData.features.forEach(feat => {
-        const st = feat.properties.SystemType;
-        if (lengthByType[st] !== undefined) lengthByType[st] += geomLength(feat.geometry);
-      });
+      document.getElementById('stat-linear').textContent  = fmtMi(lengthByType.Wastewater + lengthByType.Combined);
       renderRpcChart(lengthByType);
     }
 

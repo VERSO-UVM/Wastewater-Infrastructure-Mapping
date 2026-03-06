@@ -228,6 +228,22 @@ a:hover { text-decoration: underline; }
   border: 2px solid #1a3a4a;
 }
 
+.point-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-left: 1.5rem;
+  margin-top: 0.15rem;
+}
+
+.point-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
 .control-hint {
   font-size: 0.8rem;
   color: var(--text-muted);
@@ -543,6 +559,16 @@ pre code {
   font-weight: 700;
   color: var(--teal-dark);
   margin: 2.5rem 0 0.75rem;
+}
+
+.wwtf-summary-text {
+  margin-top: 1.5rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.wwtf-summary-text p {
+  margin: 0 0 0.75rem;
 }
 
 .rpc-explorer-section {
