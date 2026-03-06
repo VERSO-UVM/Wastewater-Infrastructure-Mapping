@@ -27,10 +27,6 @@
       <p>A statewide open dataset of wastewater and stormwater infrastructure — pipes, manholes, treatment facilities, and service areas — built by UVM students in partnership with the Vermont Agency of Natural Resources.</p>
       <div class="stat-row">
         <div class="stat-card">
-          <span class="stat-number">222,766</span>
-          <span class="stat-label">Linear Features</span>
-        </div>
-        <div class="stat-card">
           <span class="stat-number">179</span>
           <span class="stat-label">Treatment Facilities</span>
         </div>
@@ -143,13 +139,14 @@
   <section class="statewide-summary-section" id="statewide-summary">
     <div class="rpc-explorer-inner">
       <h2>Linear Feature Length by System Type — Vermont Statewide</h2>
-      <p>Total length of mapped linear infrastructure across all 11 regional planning commissions.</p>
+      <p>Total length of mapped linear infrastructure across all of Vermont. This data provides a overview of the state's wastewater and stormwater infrastructure but does not include all private infrastructure nor some towns may be missing data.</p>
       <div id="statewide-chart-wrap">
         <div class="rpc-loading-row" id="statewide-loading">
           <span class="spinner"></span> Loading statewide data…
         </div>
         <div id="statewide-chart"></div>
       </div>
+      <div id="statewide-linear-summary" class="wwtf-summary-text"></div>
 
       <h3 class="statewide-subheading">Treatment Facilities by Regional Planning Commission</h3>
       <div id="wwtf-rpc-chart-wrap">
@@ -158,6 +155,7 @@
         </div>
         <div id="wwtf-rpc-chart"></div>
       </div>
+      <div id="wwtf-summary-text" class="wwtf-summary-text"></div>
     </div>
   </section>
 
@@ -494,6 +492,31 @@
           </div>`;
         }).join('');
         document.getElementById('wwtf-rpc-loading').style.display = 'none';
+
+        // ── Text summary ──────────────────────────────────────────────
+        const totalFacilities = data.features.length;
+        const withRpc = data.features.filter(f => f.properties.RPC).length;
+        let totalCap = 0, capCount = 0, municipalCount = 0, industrialCount = 0, pretreatCount = 0, septageCount = 0;
+        const capByRpc = {};
+        Object.keys(RPC_LABELS).forEach(k => { capByRpc[k] = 0; });
+        data.features.forEach(feat => {
+          const p = feat.properties;
+          const cap = parseFloat(p.DesignHydraulicCapacityInMGD);
+          if (!isNaN(cap)) { totalCap += cap; capCount++; }
+          if (p.ProgramCategory === 'Municipal Discharge') municipalCount++;
+          if (p.ProgramCategory === 'Industrial Discharge') industrialCount++;
+          if (p.ProgramCategory === 'Pretreatment Discharge') pretreatCount++;
+          if (p.SeptageReceivedAtThisFacility === 'Y') septageCount++;
+          if (capByRpc[p.RPC] !== undefined && !isNaN(cap)) capByRpc[p.RPC] += cap;
+        });
+        const topRpcByCount = wwtfRpcOrder[0];
+        const topRpcByCap  = Object.keys(capByRpc).sort((a,b) => capByRpc[b] - capByRpc[a])[0];
+
+        document.getElementById('wwtf-summary-text').innerHTML = `
+          <p>Vermont's dataset includes <strong>${totalFacilities} mapped treatment facilities</strong>, of which <strong>${withRpc}</strong> are assigned to one of the 11 Regional Planning Commissions. The remaining ${totalFacilities - withRpc} facilities lack RPC attribution in the source data.</p>
+          <p>The combined design hydraulic capacity of the <strong>${capCount} facilities with capacity data</strong> is <strong>${totalCap.toFixed(1)} million gallons per day (MGD)</strong>. By facility count, <strong>${topRpcByCount}</strong> leads with ${wwtfByRpc[topRpcByCount]} facilities; by treatment capacity, <strong>${topRpcByCap}</strong> has the highest total at ${capByRpc[topRpcByCap].toFixed(1)} MGD — driven by large municipal systems in the greater Burlington area.</p>
+          <p>By facility type, <strong>${municipalCount} are municipal discharge</strong> facilities (publicly owned treatment works), <strong>${industrialCount} are industrial discharge</strong> facilities, and <strong>${pretreatCount} are pretreatment</strong> facilities. An additional <strong>${septageCount} facilities</strong> are permitted to receive septage.</p>
+        `;
       });
 
     // ── Linear features — load all RPCs at once ───────────────────────
@@ -556,10 +579,20 @@
           <div class="chart-bar-track">
             <div class="chart-bar-fill" style="width:${pct}%;background:${systemColor(type)};"></div>
           </div>
-          <span class="chart-bar-value">${fmtKm(len)}</span>
+          <span class="chart-bar-value">${fmtMi(len)}</span>
         </div>`;
       }).join('');
       document.getElementById('statewide-loading').style.display = 'none';
+
+      // ── Statewide linear text summary ─────────────────────────────────
+      const totalFeatCount = datasets.reduce((n, d) => n + d.features.length, 0);
+      const totalLenMi = swOrder.reduce((n, t) => n + statewideLen[t], 0);
+      const longestType = swOrder.reduce((a, b) => statewideLen[a] >= statewideLen[b] ? a : b);
+      const longestPct = (statewideLen[longestType] / (totalLenMi || 1) * 100).toFixed(0);
+      document.getElementById('statewide-linear-summary').innerHTML = `
+        <p>Vermont's mapped linear infrastructure dataset spans <strong>${fmtMi(totalLenMi)}</strong> across <strong>${totalFeatCount.toLocaleString()} individual segments</strong> collected from all 11 Regional Planning Commissions. Stormwater features account for the largest share — <strong>${fmtMi(statewideLen.Stormwater)}</strong> (${(statewideLen.Stormwater / totalLenMi * 100).toFixed(0)}%) — reflecting the extensive network of storm drains, culverts, and drainage ditches documented statewide.</p>
+        <p>Wastewater (sanitary sewer) lines total <strong>${fmtMi(statewideLen.Wastewater)}</strong>, water supply lines <strong>${fmtMi(statewideLen.Water)}</strong>, and combined sewer lines — where stormwater and wastewater share a single pipe — account for <strong>${fmtMi(statewideLen.Combined)}</strong>. The small combined sewer total reflects Vermont's largely separate sewer systems, with legacy combined infrastructure concentrated in a few older urban centers.</p>
+      `;
     }).catch(() => {
       document.getElementById('linear-loading').style.display = 'none';
       document.getElementById('statewide-loading').style.display = 'none';
@@ -641,6 +674,7 @@
     }
 
     function fmtKm(m) { return (m / 1000).toFixed(1) + ' km'; }
+    function fmtMi(m) { return (m / 1000 * 0.621371).toFixed(1) + ' mi'; }
 
     function renderRpcChart(byType) {
       const order = ['Wastewater', 'Stormwater', 'Water', 'Combined'];
@@ -653,7 +687,7 @@
           <div class="chart-bar-track">
             <div class="chart-bar-fill" style="width:${pct}%;background:${systemColor(type)};"></div>
           </div>
-          <span class="chart-bar-value">${fmtKm(len)}</span>
+          <span class="chart-bar-value">${fmtMi(len)}</span>
         </div>`;
       }).join('');
     }
