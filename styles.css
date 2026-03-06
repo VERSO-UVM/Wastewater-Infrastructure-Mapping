@@ -561,6 +561,33 @@ pre code {
   margin: 2.5rem 0 0.75rem;
 }
 
+.sewer-corridor-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 1.25rem 0 0.75rem;
+}
+
+.sewer-corridor-value {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--teal-dark);
+  line-height: 1;
+}
+
+.sewer-corridor-unit {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--teal-mid);
+}
+
+.sewer-corridor-note {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
 .pie-chart-wrap {
   display: flex;
   align-items: center;
