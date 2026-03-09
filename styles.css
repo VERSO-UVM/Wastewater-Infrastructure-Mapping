@@ -550,7 +550,7 @@ pre code {
 
 /* ── RPC Explorer Section ────────────────────────────────────────── */
 .statewide-summary-section {
-  background: var(--bg-light);
+  background: var(--bg);
   border-top: 3px solid var(--teal-light);
 }
 
@@ -634,7 +634,7 @@ pre code {
 .zoning-type-label {
   font-size: 0.88rem;
   font-weight: 700;
-  color: var(--text-main);
+  color: var(--text);
   margin-bottom: 0.35rem;
 }
 

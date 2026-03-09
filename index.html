@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/esri-leaflet@3.0.12/dist/esri-leaflet.js"></script>
 </head>
 <body>
 
@@ -126,8 +127,8 @@
     <div class="content-grid">
       <div>
         <h2>About the Project</h2>
-        <p>The Vermont Wastewater Infrastructure Mapping project was initiated by Chris Campany of the <a href="http://www.windhamregional.org/" target="_blank">Windham Regional Commission</a> and funded by the <a href="https://www.uvm.edu/ruralpartnerships" target="_blank">Leahy Institute for Rural Partnerships</a> at the University of Vermont.</p>
-        <p>From September 2024 to June 2025, 15 undergraduate students working through the <a href="https://verso.w3.uvm.edu/orca/" target="_blank">Open Research Community Accelerator (ORCA)</a> program contributed over 2,000 hours to create a comprehensive statewide dataset of wastewater and stormwater infrastructure, filling gaps in the Vermont ANR's existing atlas.</p>
+        <p>The Vermont Wastewater Infrastructure Mapping project was initiated by Chris Campany of the <a href="http://www.windhamregional.org/" target="_blank" rel="noopener noreferrer">Windham Regional Commission</a> and funded by the <a href="https://www.uvm.edu/ruralpartnerships" target="_blank" rel="noopener noreferrer">Leahy Institute for Rural Partnerships</a> at the University of Vermont.</p>
+        <p>From September 2024 to June 2025, 15 undergraduate students working through the <a href="https://verso.w3.uvm.edu/orca/" target="_blank" rel="noopener noreferrer">Open Research Community Accelerator (ORCA)</a> program contributed over 2,000 hours to create a comprehensive statewide dataset of wastewater and stormwater infrastructure, filling gaps in the Vermont ANR's existing atlas.</p>
         <a href="about.html" class="text-link">Full project history and contributors →</a>
       </div>
       <div>
@@ -601,19 +602,19 @@
     <div class="resources-inner">
       <h2>Related Resources</h2>
       <div class="resource-cards">
-        <a class="resource-card" href="https://vtanr.maps.arcgis.com/apps/mapviewer/index.html?webmap=de7e8f0627b5482a851b379e29200a74" target="_blank">
+        <a class="resource-card" href="https://vtanr.maps.arcgis.com/apps/mapviewer/index.html?webmap=de7e8f0627b5482a851b379e29200a74" target="_blank" rel="noopener noreferrer">
           <h4>ANR ArcGIS Webmap</h4>
           <p>Vermont Agency of Natural Resources — official water infrastructure viewer</p>
         </a>
-        <a class="resource-card" href="https://geodata.vermont.gov/maps/01210da4457d42a1bbcc43f7e54cbad6/about" target="_blank">
+        <a class="resource-card" href="https://geodata.vermont.gov/maps/01210da4457d42a1bbcc43f7e54cbad6/about" target="_blank" rel="noopener noreferrer">
           <h4>Vermont Geodata Portal</h4>
           <p>Official state geodata portal with current water infrastructure layers</p>
         </a>
-        <a class="resource-card" href="https://verso-uvm.github.io/Vermont-Zoning-Atlas/" target="_blank">
+        <a class="resource-card" href="https://verso-uvm.github.io/Vermont-Zoning-Atlas/" target="_blank" rel="noopener noreferrer">
           <h4>Vermont Zoning Atlas</h4>
           <p>Zoning regulations mapped across all 255 Vermont municipalities — related VERSO project</p>
         </a>
-        <a class="resource-card" href="https://github.com/VERSO-UVM/Wastewater-Infrastructure-Mapping" target="_blank">
+        <a class="resource-card" href="https://github.com/VERSO-UVM/Wastewater-Infrastructure-Mapping" target="_blank" rel="noopener noreferrer">
           <h4>GitHub Repository</h4>
           <p>Source data, scripts, and documentation — open for contributions</p>
         </a>
@@ -625,13 +626,13 @@
     <div class="footer-inner">
       <div>
         <strong>Vermont Wastewater Infrastructure Map</strong><br>
-        A project of the <a href="https://verso.w3.uvm.edu/" target="_blank">Vermont Research Open Source Program Office (VERSO)</a> at the University of Vermont, in partnership with the Windham Regional Commission and the Vermont Agency of Natural Resources.
+        A project of the <a href="https://verso.w3.uvm.edu/" target="_blank" rel="noopener noreferrer">Vermont Research Open Source Program Office (VERSO)</a> at the University of Vermont, in partnership with the Windham Regional Commission and the Vermont Agency of Natural Resources.
       </div>
       <div class="footer-links">
         <a href="about.html">About</a>
         <a href="data.html">Data</a>
         <a href="contribute.html">Contribute</a>
-        <a href="https://github.com/VERSO-UVM/Wastewater-Infrastructure-Mapping" target="_blank">GitHub</a>
+        <a href="https://github.com/VERSO-UVM/Wastewater-Infrastructure-Mapping" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </div>
   </footer>
@@ -1020,7 +1021,6 @@
       }, 0);
     }
 
-    function fmtKm(m) { return (m / 1000).toFixed(1) + ' km'; }
     function fmtMi(m) { return (m / 1000 * 0.621371).toFixed(1) + ' mi'; }
 
     function renderRpcChart(byType) {
@@ -1110,7 +1110,7 @@
       // Fetch linear + zoning in parallel
       const [linearData, zoningData] = await Promise.all([
         fetch(`data/linear_by_rpc/Vermont_Linear_${rpc}.geojson`).then(r => r.json()),
-        fetch(`data/Zoning Data/${rpc}.geojson`).then(r => r.json())
+        fetch(`data/Zoning%20Data/${rpc}.geojson`).then(r => r.json())
       ]);
 
       // Show body so map container exists in the DOM with dimensions
@@ -1225,22 +1225,17 @@
         }
       }).addTo(rpcMap);
 
-      // FEMA NFHL flood zones (WMS tile layer — loads only what's in viewport)
-      rpcMapLayers.flood = L.tileLayer.wms(
-        'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/WMSServer',
-        {
-          layers: '28',
-          format: 'image/png',
-          transparent: true,
-          version: '1.3.0',
-          opacity: 0.55,
-          attribution: 'FEMA NFHL'
-        }
-      ); // off by default — toggle starts unchecked
+      // FEMA NFHL flood zones (esri-leaflet dynamicMapLayer — uses ArcGIS export endpoint)
+      rpcMapLayers.flood = L.esri.dynamicMapLayer({
+        url: 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer',
+        layers: [28],
+        opacity: 0.55,
+        attribution: 'FEMA NFHL'
+      }); // off by default — toggle starts unchecked
 
       // Fit map to town bounds (most reliable extent)
       try {
-        const fitLayer = townFeats.length ? rpcMapLayers.towns : rpcMapLayers.linear;
+        const fitLayer = townFeats.length ? rpcMapLayers.towns : rpcMapLayers['linear_Wastewater'];
         rpcMap.fitBounds(fitLayer.getBounds(), { padding: [20, 20] });
       } catch(e) {}
 
