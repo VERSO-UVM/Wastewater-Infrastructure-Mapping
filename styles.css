@@ -561,24 +561,39 @@ pre code {
   margin: 2.5rem 0 0.75rem;
 }
 
-.sewer-corridor-stat {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
+.corridor-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg);
+  border: 2px solid var(--teal-mid);
+  border-radius: 14px;
+  padding: 1.5rem 2.5rem;
   margin: 1.25rem 0 0.75rem;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(26,122,154,0.10);
 }
 
-.sewer-corridor-value {
+.corridor-card-value {
   font-size: 3.5rem;
   font-weight: 800;
   color: var(--teal-dark);
   line-height: 1;
 }
 
-.sewer-corridor-unit {
+.corridor-card-unit {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--teal-mid);
+  margin-top: 0.15rem;
+}
+
+.corridor-card-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 0.4rem;
 }
 
 .sewer-corridor-note {
@@ -586,6 +601,49 @@ pre code {
   color: var(--text-muted);
   line-height: 1.6;
   margin-bottom: 2rem;
+}
+
+/* ── chart note (small helper text above charts) ─────── */
+.chart-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 0.75rem;
+}
+
+/* ── stacked bar seg — shared by all stacked charts ───── */
+.stacked-bar-seg {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.15s;
+}
+.stacked-bar-seg:hover { opacity: 0.82; cursor: default; }
+
+/* ── Zoning type chart (label above full-width bar) ───── */
+.zoning-type-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.zoning-type-group {}
+
+.zoning-type-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.35rem;
+}
+
+.zoning-seg-pct {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(0,0,0,0.6);
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 .pie-chart-wrap {
@@ -819,6 +877,40 @@ pre code {
   border-radius: 3px;
   min-width: 2px;
   transition: width 0.5s ease;
+}
+
+.stacked-bar-track {
+  display: flex;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--border);
+}
+
+/* zoning type chart bars are taller than the default 16px chart-bar-track */
+.zoning-type-chart .stacked-bar-track {
+  height: 28px;
+}
+
+.stacked-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+.stacked-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text);
+}
+
+.stacked-legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
 }
 
 .chart-bar-value {

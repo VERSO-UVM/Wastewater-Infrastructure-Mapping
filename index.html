@@ -27,7 +27,7 @@
       <p>A statewide open dataset of wastewater and stormwater infrastructure — pipes, manholes, treatment facilities, and service areas — built by UVM students in partnership with the Vermont Agency of Natural Resources.</p>
       <div class="stat-row">
         <div class="stat-card">
-          <span class="stat-number">179</span>
+          <span class="stat-number">160</span>
           <span class="stat-label">Treatment Facilities</span>
         </div>
         <div class="stat-card">
@@ -149,14 +149,15 @@
     <div class="rpc-explorer-inner">
       <h2>Estimated Sewer Service Corridor — Vermont Statewide</h2>
       <p>Applying a <strong>300-foot buffer</strong> on either side of every mapped wastewater and combined sewer line — representing the corridor most likely to have access to or be directly served by public sewer infrastructure — and intersecting that area with Vermont's town boundaries yields an estimated service footprint of:</p>
-      <div class="sewer-corridor-stat">
-        <span class="sewer-corridor-value">111.34</span>
-        <span class="sewer-corridor-unit">square miles</span>
+      <div class="corridor-card">
+        <span class="corridor-card-value">111.34</span>
+        <span class="corridor-card-unit">square miles</span>
+        <span class="corridor-card-label">estimated sewer service corridor</span>
       </div>
       <p class="sewer-corridor-note">This represents approximately <strong>1.2% of Vermont's total land area</strong> (~9,613 sq mi). The calculation is based on 62,660 mapped wastewater and combined sewer segments, buffered at 91.4 meters (300 ft) per side, unioned to eliminate overlap, and clipped to Vermont's municipal boundaries. Areas with unmapped private or on-site septic systems are not reflected in this figure.</p>
 
       <h3 class="statewide-subheading">Wastewater &amp; Combined Sewer Coverage by Town — Vermont Statewide</h3>
-      <p>Number of Vermont's 256 towns with at least some mapped wastewater or combined sewer linear features in this dataset.</p>
+      <p>Number of Vermont's 256 towns with at least some mapped wastewater or combined sewer linear features in this dataset. This does not mean there may not be additional infrastructure, just that it is not captured in this dataset.</p>
       <div id="town-coverage-chart-wrap">
         <div class="rpc-loading-row" id="town-coverage-loading">
           <span class="spinner"></span> Loading statewide data…
@@ -175,11 +176,107 @@
       <div id="statewide-linear-summary" class="wwtf-summary-text"></div>
 
       <h3 class="statewide-subheading">Treatment Facilities by Regional Planning Commission</h3>
-      <div id="wwtf-rpc-chart-wrap">
-        <div class="rpc-loading-row" id="wwtf-rpc-loading">
-          <span class="spinner"></span> Loading facility data…
+      <p class="chart-note">160 of 293 mapped facilities have a known permit category. The remaining 133 have no permit number or capacity data and cannot be reliably categorized — excluded from this chart but counted in the total.</p>
+      <div class="stacked-legend">
+        <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#1a7a9a;"></span>Municipal Discharge</span>
+        <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#e67e22;"></span>Industrial Discharge</span>
+        <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#8e44ad;"></span>Pretreatment Discharge</span>
+      </div>
+      <div id="wwtf-rpc-chart">
+        <div class="chart-bar-row">
+          <span class="chart-bar-label">CCRPC</span>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:46.15%;background:#1a7a9a;" title="Municipal Discharge: 12"></div>
+            <div class="stacked-bar-seg" style="width:38.46%;background:#e67e22;" title="Industrial Discharge: 10"></div>
+            <div class="stacked-bar-seg" style="width:15.38%;background:#8e44ad;" title="Pretreatment Discharge: 4"></div>
+          </div>
+          <span class="chart-bar-value">26</span>
         </div>
-        <div id="wwtf-rpc-chart"></div>
+        <div class="chart-bar-row">
+          <span class="chart-bar-label">NVDA</span>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:50.00%;background:#1a7a9a;" title="Municipal Discharge: 13"></div>
+            <div class="stacked-bar-seg" style="width:26.92%;background:#e67e22;" title="Industrial Discharge: 7"></div>
+            <div class="stacked-bar-seg" style="width:3.85%;background:#8e44ad;" title="Pretreatment Discharge: 1"></div>
+          </div>
+          <span class="chart-bar-value">21</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-bar-label">WRC</span>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:30.77%;background:#1a7a9a;" title="Municipal Discharge: 8"></div>
+            <div class="stacked-bar-seg" style="width:38.46%;background:#e67e22;" title="Industrial Discharge: 10"></div>
+            <div class="stacked-bar-seg" style="width:11.54%;background:#8e44ad;" title="Pretreatment Discharge: 3"></div>
+          </div>
+          <span class="chart-bar-value">21</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-bar-label">CVRPC</span>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:30.77%;background:#1a7a9a;" title="Municipal Discharge: 8"></div>
+            <div class="stacked-bar-seg" style="width:30.77%;background:#e67e22;" title="Industrial Discharge: 8"></div>
+            <div class="stacked-bar-seg" style="width:11.54%;background:#8e44ad;" title="Pretreatment Discharge: 3"></div>
+          </div>
+          <span class="chart-bar-value">19</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-bar-label">RRPC</span>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:42.31%;background:#1a7a9a;" title="Municipal Discharge: 11"></div>
+            <div class="stacked-bar-seg" style="width:15.38%;background:#e67e22;" title="Industrial Discharge: 4"></div>
+            <div class="stacked-bar-seg" style="width:7.69%;background:#8e44ad;" title="Pretreatment Discharge: 2"></div>
+          </div>
+          <span class="chart-bar-value">17</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-bar-label">TRORC</span>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:42.31%;background:#1a7a9a;" title="Municipal Discharge: 11"></div>
+            <div class="stacked-bar-seg" style="width:23.08%;background:#e67e22;" title="Industrial Discharge: 6"></div>
+          </div>
+          <span class="chart-bar-value">17</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-bar-label">NRPC</span>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:19.23%;background:#1a7a9a;" title="Municipal Discharge: 5"></div>
+            <div class="stacked-bar-seg" style="width:30.77%;background:#e67e22;" title="Industrial Discharge: 8"></div>
+          </div>
+          <span class="chart-bar-value">13</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-bar-label">ACRPC</span>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:11.54%;background:#1a7a9a;" title="Municipal Discharge: 3"></div>
+            <div class="stacked-bar-seg" style="width:19.23%;background:#e67e22;" title="Industrial Discharge: 5"></div>
+            <div class="stacked-bar-seg" style="width:3.85%;background:#8e44ad;" title="Pretreatment Discharge: 1"></div>
+          </div>
+          <span class="chart-bar-value">9</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-bar-label">MARC</span>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:15.38%;background:#1a7a9a;" title="Municipal Discharge: 4"></div>
+            <div class="stacked-bar-seg" style="width:11.54%;background:#e67e22;" title="Industrial Discharge: 3"></div>
+          </div>
+          <span class="chart-bar-value">7</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-bar-label">BCRC</span>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:7.69%;background:#1a7a9a;" title="Municipal Discharge: 2"></div>
+            <div class="stacked-bar-seg" style="width:15.38%;background:#e67e22;" title="Industrial Discharge: 4"></div>
+          </div>
+          <span class="chart-bar-value">6</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-bar-label">LCPC</span>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:7.69%;background:#1a7a9a;" title="Municipal Discharge: 2"></div>
+            <div class="stacked-bar-seg" style="width:7.69%;background:#8e44ad;" title="Pretreatment Discharge: 2"></div>
+          </div>
+          <span class="chart-bar-value">4</span>
+        </div>
       </div>
       <div id="wwtf-summary-text" class="wwtf-summary-text"></div>
     </div>
@@ -332,6 +429,67 @@
         </div>
 
       </div><!-- /rpc-explorer-body -->
+    </div>
+  </section>
+
+  <!-- ZONING CORRIDOR ANALYSIS -->
+  <section class="statewide-summary-section" id="zoning-corridor">
+    <div class="rpc-explorer-inner">
+      <h2>Housing Zoning Within the Sewer Service Corridor</h2>
+      <p>Using the 300-foot sewer service corridor (111.34 sq mi) as a study area, the chart below shows what share of that land falls in zoning districts that <strong>permit</strong>, require a <strong>public hearing</strong>, or <strong>prohibit</strong> each housing type — based on Vermont Zoning Atlas data. "No Data / Non-Residential" includes nonresidential and overlay districts plus unzoned parcels not covered by the atlas.</p>
+
+      <div class="stacked-legend">
+        <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#2ecc71;"></span>Permitted</span>
+        <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#f39c12;"></span>Public Hearing / Conditional</span>
+        <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#e74c3c;"></span>Prohibited</span>
+        <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#bdc3c7;"></span>No Data / Non-Residential</span>
+      </div>
+
+      <div class="zoning-type-chart">
+
+        <div class="zoning-type-group">
+          <div class="zoning-type-label">F1F — Single Family</div>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:58.1%;background:#2ecc71;" title="Permitted: 58.1%"><span class="zoning-seg-pct">58.1%</span></div>
+            <div class="stacked-bar-seg" style="width:14.8%;background:#f39c12;" title="Public Hearing: 14.8%"><span class="zoning-seg-pct">14.8%</span></div>
+            <div class="stacked-bar-seg" style="width:2.5%;background:#e74c3c;" title="Prohibited: 2.5%"></div>
+            <div class="stacked-bar-seg" style="width:24.7%;background:#bdc3c7;" title="No Data / Non-Residential: 24.7%"><span class="zoning-seg-pct">24.7%</span></div>
+          </div>
+        </div>
+
+        <div class="zoning-type-group">
+          <div class="zoning-type-label">F2F — Duplex</div>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:45.5%;background:#2ecc71;" title="Permitted: 45.5%"><span class="zoning-seg-pct">45.5%</span></div>
+            <div class="stacked-bar-seg" style="width:23.0%;background:#f39c12;" title="Public Hearing: 23.0%"><span class="zoning-seg-pct">23.0%</span></div>
+            <div class="stacked-bar-seg" style="width:6.8%;background:#e74c3c;" title="Prohibited: 6.8%"><span class="zoning-seg-pct">6.8%</span></div>
+            <div class="stacked-bar-seg" style="width:24.7%;background:#bdc3c7;" title="No Data / Non-Residential: 24.7%"><span class="zoning-seg-pct">24.7%</span></div>
+          </div>
+        </div>
+
+        <div class="zoning-type-group">
+          <div class="zoning-type-label">F3F — Triplex</div>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:16.0%;background:#2ecc71;" title="Permitted: 16.0%"><span class="zoning-seg-pct">16.0%</span></div>
+            <div class="stacked-bar-seg" style="width:38.9%;background:#f39c12;" title="Public Hearing: 38.9%"><span class="zoning-seg-pct">38.9%</span></div>
+            <div class="stacked-bar-seg" style="width:24.7%;background:#e74c3c;" title="Prohibited: 24.7%"><span class="zoning-seg-pct">24.7%</span></div>
+            <div class="stacked-bar-seg" style="width:20.4%;background:#bdc3c7;" title="No Data / Non-Residential: 20.4%"><span class="zoning-seg-pct">20.4%</span></div>
+          </div>
+        </div>
+
+        <div class="zoning-type-group">
+          <div class="zoning-type-label">F4F — Multi-Family (4+)</div>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:5.5%;background:#2ecc71;" title="Permitted: 5.5%"><span class="zoning-seg-pct">5.5%</span></div>
+            <div class="stacked-bar-seg" style="width:49.1%;background:#f39c12;" title="Public Hearing: 49.1%"><span class="zoning-seg-pct">49.1%</span></div>
+            <div class="stacked-bar-seg" style="width:25.1%;background:#e74c3c;" title="Prohibited: 25.1%"><span class="zoning-seg-pct">25.1%</span></div>
+            <div class="stacked-bar-seg" style="width:20.4%;background:#bdc3c7;" title="No Data / Non-Residential: 20.4%"><span class="zoning-seg-pct">20.4%</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="wwtf-summary-text" style="margin-top:1.5rem;">Within Vermont's mapped sewer service corridor, <strong>single-family housing (F1F) is permitted by right in 58%</strong> of the land area — making it the most widely allowed residential type. Access to sewer infrastructure drops sharply for denser housing: duplex (F2F) is permitted in 45%, triplex (F3F) in just 16%, and multi-family of 4+ units (F4F) by right in only <strong>5.5%</strong> of the corridor. Instead, nearly half the corridor (49%) allows multi-family only through a public hearing or conditional use process.</p>
     </div>
   </section>
 
@@ -504,39 +662,23 @@
           }
         }).addTo(map);
 
-        // ── WWTF by RPC chart ─────────────────────────────────────────
-        const RPC_LABELS = {
-          ACRPC: 'ACRPC', BCRC: 'BCRC', CCRPC: 'CCRPC', CVRPC: 'CVRPC',
-          LCPC: 'LCPC', MARC: 'MARC', NRPC: 'NRPC', NVDA: 'NVDA',
-          RRPC: 'RRPC', TRORC: 'TRORC', WRC: 'WRC'
-        };
-        const wwtfByRpc = {};
-        Object.keys(RPC_LABELS).forEach(k => { wwtfByRpc[k] = 0; });
+        // ── Text summary (chart is static HTML above) ─────────────────
+        const RPCS = ['ACRPC','BCRC','CCRPC','CVRPC','LCPC','MARC','NRPC','NVDA','RRPC','TRORC','WRC'];
+        const KNOWN_CATS = ['Municipal Discharge', 'Industrial Discharge', 'Pretreatment Discharge'];
+        const wwtfCats = {};
+        RPCS.forEach(rpc => { wwtfCats[rpc] = {}; KNOWN_CATS.forEach(k => { wwtfCats[rpc][k] = 0; }); });
         data.features.forEach(feat => {
           const rpc = feat.properties.RPC;
-          if (wwtfByRpc[rpc] !== undefined) wwtfByRpc[rpc]++;
+          const cat = feat.properties.ProgramCategory;
+          if (wwtfCats[rpc] && KNOWN_CATS.includes(cat)) wwtfCats[rpc][cat]++;
         });
-        const wwtfRpcOrder = Object.keys(RPC_LABELS).sort((a, b) => wwtfByRpc[b] - wwtfByRpc[a]);
-        const wwtfMax = Math.max(...wwtfRpcOrder.map(r => wwtfByRpc[r]), 1);
-        document.getElementById('wwtf-rpc-chart').innerHTML = wwtfRpcOrder.map(rpc => {
-          const count = wwtfByRpc[rpc];
-          const pct = (count / wwtfMax * 100).toFixed(1);
-          return `<div class="chart-bar-row">
-            <span class="chart-bar-label">${rpc}</span>
-            <div class="chart-bar-track">
-              <div class="chart-bar-fill" style="width:${pct}%;background:#f39c12;"></div>
-            </div>
-            <span class="chart-bar-value">${count}</span>
-          </div>`;
-        }).join('');
-        document.getElementById('wwtf-rpc-loading').style.display = 'none';
+        const totals = rpc => KNOWN_CATS.reduce((s, k) => s + wwtfCats[rpc][k], 0);
+        const wwtfRpcOrder = [...RPCS].sort((a, b) => totals(b) - totals(a));
 
-        // ── Text summary ──────────────────────────────────────────────
         const totalFacilities = data.features.length;
-        const withRpc = data.features.filter(f => f.properties.RPC).length;
         let totalCap = 0, capCount = 0, municipalCount = 0, industrialCount = 0, pretreatCount = 0, septageCount = 0;
         const capByRpc = {};
-        Object.keys(RPC_LABELS).forEach(k => { capByRpc[k] = 0; });
+        RPCS.forEach(k => { capByRpc[k] = 0; });
         data.features.forEach(feat => {
           const p = feat.properties;
           const cap = parseFloat(p.DesignHydraulicCapacityInMGD);
@@ -551,9 +693,9 @@
         const topRpcByCap  = Object.keys(capByRpc).sort((a,b) => capByRpc[b] - capByRpc[a])[0];
 
         document.getElementById('wwtf-summary-text').innerHTML = `
-          <p>Vermont's dataset includes <strong>${totalFacilities} mapped treatment facilities</strong>, of which <strong>${withRpc}</strong> are assigned to one of the 11 Regional Planning Commissions. The remaining ${totalFacilities - withRpc} facilities lack RPC attribution in the source data.</p>
-          <p>The combined design hydraulic capacity of the <strong>${capCount} facilities with capacity data</strong> is <strong>${totalCap.toFixed(1)} million gallons per day (MGD)</strong>. By facility count, <strong>${topRpcByCount}</strong> leads with ${wwtfByRpc[topRpcByCount]} facilities; by treatment capacity, <strong>${topRpcByCap}</strong> has the highest total at ${capByRpc[topRpcByCap].toFixed(1)} MGD — driven by large municipal systems in the greater Burlington area.</p>
-          <p>By facility type, <strong>${municipalCount} are municipal discharge</strong> facilities (publicly owned treatment works), <strong>${industrialCount} are industrial discharge</strong> facilities, and <strong>${pretreatCount} are pretreatment</strong> facilities. An additional <strong>${septageCount} facilities</strong> are permitted to receive septage.</p>
+          <p>Vermont's dataset includes <strong>${totalFacilities} mapped treatment facilities</strong> across all 11 Regional Planning Commissions. The chart above shows the <strong>160 facilities with a known permit category</strong> — municipal discharge (publicly owned treatment works), industrial discharge, and pretreatment. The remaining 133 facilities have no permit number or capacity data on file and are excluded from the category chart.</p>
+          <p>The combined design hydraulic capacity of the <strong>${capCount} facilities with capacity data</strong> is <strong>${totalCap.toFixed(1)} million gallons per day (MGD)</strong>. By characterized facility count, <strong>${topRpcByCount}</strong> leads with ${totals(topRpcByCount)} permitted facilities; by treatment capacity, <strong>${topRpcByCap}</strong> has the highest total at ${capByRpc[topRpcByCap].toFixed(1)} MGD — driven by large municipal and industrial systems in the greater Burlington area.</p>
+          <p>Statewide, <strong>${municipalCount} facilities hold municipal discharge permits</strong>, <strong>${industrialCount} are industrial discharge</strong> facilities, and <strong>${pretreatCount} are pretreatment</strong> facilities. An additional <strong>${septageCount} facilities</strong> are permitted to receive septage.</p>
         `;
       });
 
