@@ -148,23 +148,83 @@
   <!-- STATEWIDE LINEAR SUMMARY -->
   <section class="statewide-summary-section" id="statewide-summary">
     <div class="rpc-explorer-inner">
-      <h2>Estimated Sewer Service Corridor — Vermont Statewide</h2>
-      <p>Applying a <strong>300-foot buffer</strong> on either side of every mapped wastewater and combined sewer line — representing the corridor most likely to have access to or be directly served by public sewer infrastructure — and intersecting that area with Vermont's town boundaries yields an estimated service footprint of:</p>
-      <div class="corridor-card">
-        <span class="corridor-card-value">111.34</span>
-        <span class="corridor-card-unit">square miles</span>
-        <span class="corridor-card-label">estimated sewer service corridor</span>
-      </div>
-      <p class="sewer-corridor-note">This represents approximately <strong>1.2% of Vermont's total land area</strong> (~9,613 sq mi). The calculation is based on 62,660 mapped wastewater and combined sewer segments, buffered at 91.4 meters (300 ft) per side, unioned to eliminate overlap, and clipped to Vermont's municipal boundaries. Areas with unmapped private or on-site septic systems are not reflected in this figure.</p>
-
-      <h3 class="statewide-subheading">Wastewater &amp; Combined Sewer Coverage by Town — Vermont Statewide</h3>
-      <p>Number of Vermont's 256 towns with at least some mapped wastewater or combined sewer linear features in this dataset. This does not mean there may not be additional infrastructure, just that it is not captured in this dataset.</p>
+      <div class="statewide-highlight-block">
+      <h2>Wastewater Data Coverage</h2>
+      <p>Number of Vermont's 256 towns have at least some mapped wastewater or combined sewer linear features in this dataset, but not all. This does not mean there may not be additional infrastructure, just that it is not captured in this dataset and may still need to be digitized from physical maps. Notable missing data include <strong>Burlington</strong>, <strong>South Burlington</strong>, <strong>Colchester</strong> and <strong>Williston</strong>.</p>
       <div id="town-coverage-chart-wrap">
         <div class="rpc-loading-row" id="town-coverage-loading">
           <span class="spinner"></span> Loading statewide data…
         </div>
         <div id="town-coverage-chart"></div>
       </div>
+
+      <h3 class="statewide-subheading">Estimated Sewer Service Corridor — Vermont Statewide</h3>
+      <p>Applying a <strong>300-foot buffer</strong> on either side of every mapped wastewater and combined sewer line — representing the corridor most likely to have access to or be directly served by public sewer infrastructure — and intersecting that area with Vermont's town boundaries yields an estimated service footprint of:</p>
+      <div class="corridor-card">
+        <span class="corridor-card-value">111</span>
+        <span class="corridor-card-unit">square miles</span>
+        <span class="corridor-card-label">estimated sewer service corridor</span>
+      </div>
+      <p class="sewer-corridor-note">This represents approximately <strong>1.2% of Vermont's total land area</strong> (~9,613 sq mi). The calculation is based on 62,660 mapped wastewater and combined sewer segments, buffered at 91.4 meters (300 ft) per side, unioned to eliminate overlap, and clipped to Vermont's municipal boundaries. Areas with unmapped private or on-site septic systems are not reflected in this figure.</p>
+
+      <h3 class="statewide-subheading" id="zoning-corridor">Housing Zoning Within the Sewer Service Corridor</h3>
+      <p>Using the 300-foot sewer service corridor (111.34 sq mi) as a study area, the chart below shows what share of that land falls in zoning districts that <strong>permit</strong>, require a <strong>public hearing</strong>, or <strong>prohibit</strong> each housing type — based on Vermont Zoning Atlas data. "No Data / Non-Residential" includes nonresidential and overlay districts plus unzoned parcels not covered by the atlas.</p>
+
+      <div class="stacked-legend">
+        <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#2ecc71;"></span>Permitted</span>
+        <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#f39c12;"></span>Public Hearing / Conditional</span>
+        <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#e74c3c;"></span>Prohibited</span>
+        <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#bdc3c7;"></span>No Data / Non-Residential</span>
+      </div>
+
+      <div class="zoning-type-chart">
+
+        <div class="zoning-type-group">
+          <div class="zoning-type-label">F1F — Single Family</div>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:58.1%;background:#2ecc71;" title="Permitted: 58.1%"><span class="zoning-seg-pct">58.1%</span></div>
+            <div class="stacked-bar-seg" style="width:14.8%;background:#f39c12;" title="Public Hearing: 14.8%"><span class="zoning-seg-pct">14.8%</span></div>
+            <div class="stacked-bar-seg" style="width:2.5%;background:#e74c3c;" title="Prohibited: 2.5%"></div>
+            <div class="stacked-bar-seg" style="width:24.7%;background:#bdc3c7;" title="No Data / Non-Residential: 24.7%"><span class="zoning-seg-pct">24.7%</span></div>
+          </div>
+        </div>
+
+        <div class="zoning-type-group">
+          <div class="zoning-type-label">F2F — Duplex</div>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:45.5%;background:#2ecc71;" title="Permitted: 45.5%"><span class="zoning-seg-pct">45.5%</span></div>
+            <div class="stacked-bar-seg" style="width:23.0%;background:#f39c12;" title="Public Hearing: 23.0%"><span class="zoning-seg-pct">23.0%</span></div>
+            <div class="stacked-bar-seg" style="width:6.8%;background:#e74c3c;" title="Prohibited: 6.8%"><span class="zoning-seg-pct">6.8%</span></div>
+            <div class="stacked-bar-seg" style="width:24.7%;background:#bdc3c7;" title="No Data / Non-Residential: 24.7%"><span class="zoning-seg-pct">24.7%</span></div>
+          </div>
+        </div>
+
+        <div class="zoning-type-group">
+          <div class="zoning-type-label">F3F — Triplex</div>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:16.0%;background:#2ecc71;" title="Permitted: 16.0%"><span class="zoning-seg-pct">16.0%</span></div>
+            <div class="stacked-bar-seg" style="width:38.9%;background:#f39c12;" title="Public Hearing: 38.9%"><span class="zoning-seg-pct">38.9%</span></div>
+            <div class="stacked-bar-seg" style="width:24.7%;background:#e74c3c;" title="Prohibited: 24.7%"><span class="zoning-seg-pct">24.7%</span></div>
+            <div class="stacked-bar-seg" style="width:20.4%;background:#bdc3c7;" title="No Data / Non-Residential: 20.4%"><span class="zoning-seg-pct">20.4%</span></div>
+          </div>
+        </div>
+
+        <div class="zoning-type-group">
+          <div class="zoning-type-label">F4F — Multi-Family (4+)</div>
+          <div class="chart-bar-track stacked-bar-track">
+            <div class="stacked-bar-seg" style="width:5.5%;background:#2ecc71;" title="Permitted: 5.5%"><span class="zoning-seg-pct">5.5%</span></div>
+            <div class="stacked-bar-seg" style="width:49.1%;background:#f39c12;" title="Public Hearing: 49.1%"><span class="zoning-seg-pct">49.1%</span></div>
+            <div class="stacked-bar-seg" style="width:25.1%;background:#e74c3c;" title="Prohibited: 25.1%"><span class="zoning-seg-pct">25.1%</span></div>
+            <div class="stacked-bar-seg" style="width:20.4%;background:#bdc3c7;" title="No Data / Non-Residential: 20.4%"><span class="zoning-seg-pct">20.4%</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="wwtf-summary-text" style="margin-top:1.5rem;">Within Vermont's mapped sewer service corridor, <strong>single-family housing (F1F) is permitted by right in 58%</strong> of the land area — making it the most widely allowed residential type. Access to sewer infrastructure drops sharply for denser housing: duplex (F2F) is permitted in 45%, triplex (F3F) in just 16%, and multi-family of 4+ units (F4F) by right in only <strong>5.5%</strong> of the corridor. Instead, nearly half the corridor (49%) allows multi-family only through a public hearing or conditional use process.</p>
+      </div><!-- /.statewide-highlight-block -->
+
+      <hr class="section-divider">
 
       <h3 class="statewide-subheading">Linear Feature Length by System Type — Vermont Statewide</h3>
       <p>Total length of mapped linear infrastructure across all of Vermont. This data provides an overview of the state's wastewater and stormwater infrastructure but does not include all private infrastructure and some towns may be missing data.</p>
@@ -177,7 +237,7 @@
       <div id="statewide-linear-summary" class="wwtf-summary-text"></div>
 
       <h3 class="statewide-subheading">Treatment Facilities by Regional Planning Commission</h3>
-      <p class="chart-note">160 of 293 mapped facilities have a known permit category. The remaining 133 have no permit number or capacity data and cannot be reliably categorized — excluded from this chart but counted in the total.</p>
+      <p class="chart-note">Vermont's dataset includes 293 mapped treatment facilities across all 11 Regional Planning Commissions. However, there are only <strong>160 facilities with a known permit category</strong> — municipal discharge (publicly owned treatment works), industrial discharge, and pretreatment. The remaining 133 facilities have no permit number or capacity data on file and are excluded from the category chart below.</p>
       <div class="stacked-legend">
         <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#1a7a9a;"></span>Municipal Discharge</span>
         <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#e67e22;"></span>Industrial Discharge</span>
@@ -385,8 +445,12 @@
   <section class="rpc-explorer-section" id="rpc-explorer">
     <div class="rpc-explorer-inner">
       <h2>Regional Planning Commission Explorer</h2>
-      <p>Select a regional planning commission to view infrastructure and zoning data for that region alongside summary statistics.</p>
-
+        <p><strong>Select a regional planning commission to view infrastructure and zoning data for that region alongside summary statistics.</strong></p>
+  <!-- DATA NOTICE -->
+  <div class="data-notice">    
+    <strong>Note:</strong> Select a Regional Planning Commission (RPC) to view detailed infrastructure and zoning data for that region. Data completeness and accuracy may vary by RPC, and some areas may have more comprehensive mapping than others. Always verify with local authorities for planning decisions.
+  </div>
+    <br>
       <select id="rpc-explorer-select">
         <option value="">— Select an RPC —</option>
         <option value="ACRPC">Addison County Regional Planning Commission — ACRPC (21 towns)</option>
@@ -536,67 +600,6 @@
     </div>
   </section>
 
-  <!-- ZONING CORRIDOR ANALYSIS -->
-  <section class="statewide-summary-section" id="zoning-corridor">
-    <div class="rpc-explorer-inner">
-      <h2>Housing Zoning Within the Sewer Service Corridor</h2>
-      <p>Using the 300-foot sewer service corridor (111.34 sq mi) as a study area, the chart below shows what share of that land falls in zoning districts that <strong>permit</strong>, require a <strong>public hearing</strong>, or <strong>prohibit</strong> each housing type — based on Vermont Zoning Atlas data. "No Data / Non-Residential" includes nonresidential and overlay districts plus unzoned parcels not covered by the atlas.</p>
-
-      <div class="stacked-legend">
-        <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#2ecc71;"></span>Permitted</span>
-        <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#f39c12;"></span>Public Hearing / Conditional</span>
-        <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#e74c3c;"></span>Prohibited</span>
-        <span class="stacked-legend-item"><span class="stacked-legend-swatch" style="background:#bdc3c7;"></span>No Data / Non-Residential</span>
-      </div>
-
-      <div class="zoning-type-chart">
-
-        <div class="zoning-type-group">
-          <div class="zoning-type-label">F1F — Single Family</div>
-          <div class="chart-bar-track stacked-bar-track">
-            <div class="stacked-bar-seg" style="width:58.1%;background:#2ecc71;" title="Permitted: 58.1%"><span class="zoning-seg-pct">58.1%</span></div>
-            <div class="stacked-bar-seg" style="width:14.8%;background:#f39c12;" title="Public Hearing: 14.8%"><span class="zoning-seg-pct">14.8%</span></div>
-            <div class="stacked-bar-seg" style="width:2.5%;background:#e74c3c;" title="Prohibited: 2.5%"></div>
-            <div class="stacked-bar-seg" style="width:24.7%;background:#bdc3c7;" title="No Data / Non-Residential: 24.7%"><span class="zoning-seg-pct">24.7%</span></div>
-          </div>
-        </div>
-
-        <div class="zoning-type-group">
-          <div class="zoning-type-label">F2F — Duplex</div>
-          <div class="chart-bar-track stacked-bar-track">
-            <div class="stacked-bar-seg" style="width:45.5%;background:#2ecc71;" title="Permitted: 45.5%"><span class="zoning-seg-pct">45.5%</span></div>
-            <div class="stacked-bar-seg" style="width:23.0%;background:#f39c12;" title="Public Hearing: 23.0%"><span class="zoning-seg-pct">23.0%</span></div>
-            <div class="stacked-bar-seg" style="width:6.8%;background:#e74c3c;" title="Prohibited: 6.8%"><span class="zoning-seg-pct">6.8%</span></div>
-            <div class="stacked-bar-seg" style="width:24.7%;background:#bdc3c7;" title="No Data / Non-Residential: 24.7%"><span class="zoning-seg-pct">24.7%</span></div>
-          </div>
-        </div>
-
-        <div class="zoning-type-group">
-          <div class="zoning-type-label">F3F — Triplex</div>
-          <div class="chart-bar-track stacked-bar-track">
-            <div class="stacked-bar-seg" style="width:16.0%;background:#2ecc71;" title="Permitted: 16.0%"><span class="zoning-seg-pct">16.0%</span></div>
-            <div class="stacked-bar-seg" style="width:38.9%;background:#f39c12;" title="Public Hearing: 38.9%"><span class="zoning-seg-pct">38.9%</span></div>
-            <div class="stacked-bar-seg" style="width:24.7%;background:#e74c3c;" title="Prohibited: 24.7%"><span class="zoning-seg-pct">24.7%</span></div>
-            <div class="stacked-bar-seg" style="width:20.4%;background:#bdc3c7;" title="No Data / Non-Residential: 20.4%"><span class="zoning-seg-pct">20.4%</span></div>
-          </div>
-        </div>
-
-        <div class="zoning-type-group">
-          <div class="zoning-type-label">F4F — Multi-Family (4+)</div>
-          <div class="chart-bar-track stacked-bar-track">
-            <div class="stacked-bar-seg" style="width:5.5%;background:#2ecc71;" title="Permitted: 5.5%"><span class="zoning-seg-pct">5.5%</span></div>
-            <div class="stacked-bar-seg" style="width:49.1%;background:#f39c12;" title="Public Hearing: 49.1%"><span class="zoning-seg-pct">49.1%</span></div>
-            <div class="stacked-bar-seg" style="width:25.1%;background:#e74c3c;" title="Prohibited: 25.1%"><span class="zoning-seg-pct">25.1%</span></div>
-            <div class="stacked-bar-seg" style="width:20.4%;background:#bdc3c7;" title="No Data / Non-Residential: 20.4%"><span class="zoning-seg-pct">20.4%</span></div>
-          </div>
-        </div>
-
-      </div>
-
-      <p class="wwtf-summary-text" style="margin-top:1.5rem;">Within Vermont's mapped sewer service corridor, <strong>single-family housing (F1F) is permitted by right in 58%</strong> of the land area — making it the most widely allowed residential type. Access to sewer infrastructure drops sharply for denser housing: duplex (F2F) is permitted in 45%, triplex (F3F) in just 16%, and multi-family of 4+ units (F4F) by right in only <strong>5.5%</strong> of the corridor. Instead, nearly half the corridor (49%) allows multi-family only through a public hearing or conditional use process.</p>
-    </div>
-  </section>
-
   <!-- EXTERNAL RESOURCES -->
   <section class="resources-section">
     <div class="resources-inner">
@@ -669,7 +672,13 @@
     function systemColor(st) { return SYSTEM_COLORS[st] || '#95a5a6'; }
 
     // ── Map init ──────────────────────────────────────────────────────
-    const map = L.map('map', { zoomControl: true }).setView([44.0, -72.7], 8);
+    const vtBounds = L.latLngBounds([[42.72, -73.44], [45.02, -71.47]]);
+    const map = L.map('map', {
+      zoomControl: true,
+      maxBounds: vtBounds,
+      maxBoundsViscosity: 1.0,
+      minZoom: 7
+    }).setView([44.0, -72.7], 8);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
@@ -797,7 +806,6 @@
         const topRpcByCap  = Object.keys(capByRpc).sort((a,b) => capByRpc[b] - capByRpc[a])[0];
 
         document.getElementById('wwtf-summary-text').innerHTML = `
-          <p>Vermont's dataset includes <strong>${totalFacilities} mapped treatment facilities</strong> across all 11 Regional Planning Commissions. The chart above shows the <strong>160 facilities with a known permit category</strong> — municipal discharge (publicly owned treatment works), industrial discharge, and pretreatment. The remaining 133 facilities have no permit number or capacity data on file and are excluded from the category chart.</p>
           <p>The combined design hydraulic capacity of the <strong>${capCount} facilities with capacity data</strong> is <strong>${totalCap.toFixed(1)} million gallons per day (MGD)</strong>. By characterized facility count, <strong>${topRpcByCount}</strong> leads with ${totals(topRpcByCount)} permitted facilities; by treatment capacity, <strong>${topRpcByCap}</strong> has the highest total at ${capByRpc[topRpcByCap].toFixed(1)} MGD — driven by large municipal and industrial systems in the greater Burlington area.</p>
           <p>Statewide, <strong>${municipalCount} facilities hold municipal discharge permits</strong>, <strong>${industrialCount} are industrial discharge</strong> facilities, and <strong>${pretreatCount} are pretreatment</strong> facilities. An additional <strong>${septageCount} facilities</strong> are permitted to receive septage.</p>
         `;
@@ -1259,12 +1267,20 @@
       renderRpcChart(lengthByType);
     }
 
-    document.getElementById('rpc-explorer-select').addEventListener('change', function () {
+    const rpcSelect = document.getElementById('rpc-explorer-select');
+    rpcSelect.addEventListener('change', function () {
       if (!this.value) return;
       loadRpcExplorer(this.value).catch(err => {
         document.getElementById('rpc-explorer-loading').style.display = 'none';
         console.error('RPC Explorer load error:', err);
       });
+    });
+
+    // Auto-load CCRPC on page load
+    rpcSelect.value = 'CCRPC';
+    loadRpcExplorer('CCRPC').catch(err => {
+      document.getElementById('rpc-explorer-loading').style.display = 'none';
+      console.error('RPC Explorer load error:', err);
     });
 
     // ── Smooth scroll for hero CTA ────────────────────────────────────
