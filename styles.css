@@ -554,19 +554,6 @@ pre code {
   border-top: 3px solid var(--teal-light);
 }
 
-.statewide-highlight-block {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 1.75rem 2rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 1px 6px rgba(26,122,154,0.08);
-}
-
-.section-divider {
-  border: none;
-  border-top: 2px solid var(--border);
-  margin: 0.5rem 0 2rem;
-}
 
 .statewide-subheading {
   font-size: 1.15rem;

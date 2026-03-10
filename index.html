@@ -145,10 +145,9 @@
     </div>
   </section>
 
-  <!-- STATEWIDE LINEAR SUMMARY -->
-  <section class="statewide-summary-section" id="statewide-summary">
+  <!-- STATEWIDE COVERAGE + CORRIDOR + ZONING -->
+  <section class="rpc-explorer-section" id="statewide-summary">
     <div class="rpc-explorer-inner">
-      <div class="statewide-highlight-block">
       <h2>Wastewater Data Coverage</h2>
       <p>Number of Vermont's 256 towns have at least some mapped wastewater or combined sewer linear features in this dataset, but not all. This does not mean there may not be additional infrastructure, just that it is not captured in this dataset and may still need to be digitized from physical maps. Notable missing data include <strong>Burlington</strong>, <strong>South Burlington</strong>, <strong>Colchester</strong> and <strong>Williston</strong>.</p>
       <div id="town-coverage-chart-wrap">
@@ -158,7 +157,7 @@
         <div id="town-coverage-chart"></div>
       </div>
 
-      <h3 class="statewide-subheading">Estimated Sewer Service Corridor — Vermont Statewide</h3>
+      <h2 class="statewide-subheading">Estimated Sewer Service Corridor</h2>
       <p>Applying a <strong>300-foot buffer</strong> on either side of every mapped wastewater and combined sewer line — representing the corridor most likely to have access to or be directly served by public sewer infrastructure — and intersecting that area with Vermont's town boundaries yields an estimated service footprint of:</p>
       <div class="corridor-card">
         <span class="corridor-card-value">111</span>
@@ -222,10 +221,13 @@
       </div>
 
       <p class="wwtf-summary-text" style="margin-top:1.5rem;">Within Vermont's mapped sewer service corridor, <strong>single-family housing (F1F) is permitted by right in 58%</strong> of the land area — making it the most widely allowed residential type. Access to sewer infrastructure drops sharply for denser housing: duplex (F2F) is permitted in 45%, triplex (F3F) in just 16%, and multi-family of 4+ units (F4F) by right in only <strong>5.5%</strong> of the corridor. Instead, nearly half the corridor (49%) allows multi-family only through a public hearing or conditional use process.</p>
-      </div><!-- /.statewide-highlight-block -->
+    </div>
+  </section>
 
-      <hr class="section-divider">
-
+  <!-- STATEWIDE LINEAR + TREATMENT SUMMARY -->
+  <section class="statewide-summary-section">
+    <div class="rpc-explorer-inner">
+      <h2>Statewide Infrastructure Summary</h2>
       <h3 class="statewide-subheading">Linear Feature Length by System Type — Vermont Statewide</h3>
       <p>Total length of mapped linear infrastructure across all of Vermont. This data provides an overview of the state's wastewater and stormwater infrastructure but does not include all private infrastructure and some towns may be missing data.</p>
       <div id="statewide-chart-wrap">
