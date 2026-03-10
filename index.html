@@ -683,8 +683,9 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/esri-leaflet@3.0.12/dist/esri-leaflet.js"></script>
   <script>
-    // ── Type code labels ──────────────────────────────────────────────
-    // Stormwater is filtered to Type 2 (Storm Sewer / Drain Pipe) only
+    // ── Lookup tables + filter helpers ───────────────────────────────
+    // Stormwater is filtered to Type 2 (Storm Sewer / Drain Pipe) only;
+    // open channels, culverts, swales, and ditches are excluded.
     function includeLinear(feat) {
       return !(feat.properties.SystemType === 'Stormwater' && feat.properties.Type !== 2);
     }

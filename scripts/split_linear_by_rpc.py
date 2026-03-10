@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
-"""Split Vermont_Linear_Features.geojson into per-RPC files."""
+"""
+split_linear_by_rpc.py
+----------------------
+Split Vermont_Linear_Features.geojson into one file per Regional Planning
+Commission (RPC). The per-RPC files are used by the mapping site for
+performance — loading one RPC at a time instead of the full statewide file.
+
+Run from the repo root:
+    python scripts/split_linear_by_rpc.py
+
+Input:   data/Vermont_Linear_Features.geojson
+Output:  data/linear_by_rpc/Vermont_Linear_<RPC>.geojson  (one per RPC)
+"""
 
 import json
 import os
@@ -25,6 +37,7 @@ for feat in gj["features"]:
         null_count += 1
         by_rpc["UNKNOWN"].append(feat)
 
+# Preserve top-level GeoJSON metadata (crs, name, etc.) without the features list
 template = {k: v for k, v in gj.items() if k != "features"}
 
 for rpc, features in sorted(by_rpc.items()):

@@ -263,7 +263,6 @@ linear_chart_html = "\n".join(bar_rows)
 longest_type = max(SW_ORDER, key=lambda t: by_type[t])
 longest_pct = by_type[longest_type] / total_len * 100
 ww = fmt_mi(by_type["Wastewater"])
-sw = fmt_mi(by_type["Stormwater"])
 wa = fmt_mi(by_type["Water"])
 co = fmt_mi(by_type["Combined"])
 tot = fmt_mi(total_len)
@@ -294,9 +293,6 @@ summary_html = (
 
 
 # ── Step 4: patch index.html ───────────────────────────────────────────
-
-START = "<!-- [AUTO] {key} START -->"
-END = "<!-- [AUTO] {key} END -->"
 
 BLOCKS = {
     "town-coverage-chart": town_chart_html,
